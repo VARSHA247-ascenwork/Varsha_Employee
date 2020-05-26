@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Varsha", "Varsha\Varsha.csproj", "{FA8B70F3-D875-4C94-BC5C-21A52DF65CF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VarshaWeb", "VarshaWeb\VarshaWeb.csproj", "{FCA0638A-C17A-49FB-B06F-FF77556110FB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA8B70F3-D875-4C94-BC5C-21A52DF65CF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA8B70F3-D875-4C94-BC5C-21A52DF65CF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA8B70F3-D875-4C94-BC5C-21A52DF65CF7}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{FA8B70F3-D875-4C94-BC5C-21A52DF65CF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA8B70F3-D875-4C94-BC5C-21A52DF65CF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA8B70F3-D875-4C94-BC5C-21A52DF65CF7}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{FCA0638A-C17A-49FB-B06F-FF77556110FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCA0638A-C17A-49FB-B06F-FF77556110FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCA0638A-C17A-49FB-B06F-FF77556110FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCA0638A-C17A-49FB-B06F-FF77556110FB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5C0B318C-86C2-4676-86E6-C45D4808DD0D}
+	EndGlobalSection
+EndGlobal
