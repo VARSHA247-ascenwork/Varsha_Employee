@@ -9184,6 +9184,7 @@
     <Content Include="Scripts\version.json" />
     <Content Include="Views\VendorDashboard\VendorDashboard.cshtml" />
     <Content Include="Views\EmployeeDashboard\EmployeeDashboard.cshtml" />
+    <Content Include="Views\EmployeeDashboard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -35,43 +35,44 @@
                     <!--<p class="tx-12 tx-gray-500 mb-2">Example of Valex Bordered Table.. <a href="">Learn more</a></p>-->
                 </div>
                 <div class="card-body">
-                    <div class="row-sm text-center">
-                        <div class="col-sm-6 col-md-2 mg-b-20 float-right">
-                            <button class="btn btn-info btn-block" href="../">Add Employee</button>
+                    <div class="col-xl-12 col-lg-12">
+                        <div class="row-sm text-center">
+                          <!----  <div class="col-sm-6 col-md-2 mg-b-20 float-right">
+                                <button class="btn btn-info btn-block" href="../">Add Employee</button>
+                            </div> -->
+                        </div>
+                        <div class="table-responsive">
+                            <table id="Employeetable" class="table key-buttons text-md-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>Employee Name</th>
+                                        <th>Company</th>
+                                        <th>Designation</th>
+                                        <th>Department</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @if (ViewBag.EmpList != null)
+                                    {
+                                        foreach (Emp_BasicInfoModels empinfo in (List<Emp_BasicInfoModels>)ViewBag.EmpList)
+                                        {
+                                            <tr>
+                                                <td>@empinfo.FirstName</td>
+                                                <td>@empinfo.Company</td>
+                                                <td>@empinfo.Designation</td>
+                                                <td>@empinfo.Department</td>
+                                            </tr>
+
+                                        }
+                                    }
+
+                                </tbody>
+                            </table>
+                            </div>
                         </div>
                     </div>
-                    <div class="table-responsive">
-                        <table id="Employeetable" class="table key-buttons text-md-nowrap">
-                            <thead>
-                                <tr>
-                                    <th>Employee Name</th>
-                                    <th>Company</th>
-                                    <th>Designation</th>
-                                    <th>Department</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                @if (ViewBag.EmpList != null)
-                                {
-                                    foreach (Emp_BasicInfoModels empinfo in (List<Emp_BasicInfoModels>)ViewBag.WFHList)
-                                    {
-                                        <tr>
-                                            <td>@empinfo.FirstName</td>
-                                            <td>@empinfo.Company</td>
-                                            <td>@empinfo.Designation</td>
-                                            <td>@empinfo.Department</td>
-                                        </tr>
-
-                                    }
-                                }
-
-                            </tbody>
-                        </table>
-
-                    </div>
                 </div>
-            </div>
         </div>
 
     </div>
