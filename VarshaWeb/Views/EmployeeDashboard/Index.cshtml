@@ -59,12 +59,18 @@
                             {
                                 foreach (Emp_BasicInfoModels empinfo in (List<Emp_BasicInfoModels>)ViewBag.EmpList)
                                 {
-                                    <tr>
-                                        <td>@empinfo.FirstName</td>
-                                        <td>@empinfo.EmpCode</td>
-                                        <td>@empinfo.Designation</td>
-                                        <td>@empinfo.Company</td>
-                                    </tr>
+                            <tr>
+                                <td>@empinfo.FirstName</td>
+                                <td>@empinfo.EmpCode</td>
+                                <td>@empinfo.Designation</td>
+                                <td>@empinfo.Company</td>
+                                <td>
+                                    <div class="btn-icon-list">
+                                        <button class="btn btn-primary btn-icon" onclick="edit(@empinfo.ID)"><i class="far fa-edit"></i></button>
+                           
+                                    </div>
+                                </td>
+                            </tr>
 
                                 }
                             }
@@ -110,7 +116,7 @@
 
             responsive: true,
             language: {
-                searchPlaceholder: 'Search~.',
+                searchPlaceholder: 'Search',
                 sSearch: '',
                 lengthMenu: '_MENU_ ',
             }

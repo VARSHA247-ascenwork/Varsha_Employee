@@ -14,7 +14,7 @@ using VarshaWeb.Models;
 
 namespace VarshaWeb.BAL.EmployeeManagement
 {
-    public class EmployeeDashboard
+    public class EmployeeDashboardBal
     {
             public string saveEmp(ClientContext clientContext, string ItemData)
             {
@@ -49,22 +49,35 @@ namespace VarshaWeb.BAL.EmployeeManagement
                     Designation = j["Designation"]["Designation"].ToString(),
                     Department = j["Department"].ToString(),
                     //  Department = j["Department"].ToString(),
+                });
+            }
+            return EmpBasicinfo;
+
+        }
 
 
+        public List<Emp_BasicInfoModels> GeEmployeeById(ClientContext clientContext, string id)
+        {
+            List<Emp_BasicInfoModels> empdetails = new List<Emp_BasicInfoModels>();
+            var filter = "ID eq " + id;
+            JArray jArray = RESTGet(clientContext, filter);
 
-
+            foreach (JObject j in jArray)
+            {
+                empdetails.Add(new Emp_BasicInfoModels
+                {
+                    ID = Convert.ToInt32(j["ID"]),
+                    FirstName = j["FirstName"].ToString(),
+                    MiddleName = j["MiddleName"].ToString(),
+                    LastName = j["LastName"].ToString(),
+                    Company = Convert.ToString(j["Company"]["CompanyName"]).Trim(),
                 });
             }
 
 
-
-
-            return EmpBasicinfo;
-
-
+            return empdetails;
 
         }
-
 
         private JArray RESTGet(ClientContext clientContext, string filter)
             {

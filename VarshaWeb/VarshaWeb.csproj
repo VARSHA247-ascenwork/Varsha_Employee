@@ -181,7 +181,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="BAL\EmployeeManagement\EmployeeDashboard.cs" />
+    <Compile Include="BAL\EmployeeManagement\BranchMasterBal.cs" />
+    <Compile Include="BAL\EmployeeManagement\CompanyMasterBal.cs" />
+    <Compile Include="BAL\EmployeeManagement\DepartmentMasterBal.cs" />
+    <Compile Include="BAL\EmployeeManagement\DesignationMasterBal.cs" />
+    <Compile Include="BAL\EmployeeManagement\DivisionMasterBal.cs" />
+    <Compile Include="BAL\EmployeeManagement\EmployeeDashboardBal.cs" />
+    <Compile Include="BAL\EmployeeManagement\RegionMasterBal.cs" />
     <Compile Include="BAL\NavigationBal.cs" />
     <Compile Include="BAL\UsersGroup.cs" />
     <Compile Include="Controllers\EmployeeManagement\EmployeeDashboardController.cs" />
@@ -8192,7 +8198,10 @@
     <Content Include="Scripts\Angular\EmployeeManagement\DAL\CommonJs.js" />
     <Content Include="Scripts\Angular\EmployeeManagement\DAL\DAL.js" />
     <Content Include="Scripts\Angular\EmployeeManagement\DAL\Navigation.js" />
+    <Content Include="Scripts\Angular\EmployeeManagement\JS\NewEmployee.js" />
     <Content Include="Scripts\Angular\EmployeeManagement\JS\ViewEmployee.js" />
+    <Content Include="Scripts\Angular\EmployeeManagement\Services\NewEmployeeServices.js" />
+    <Content Include="Scripts\Angular\EmployeeManagement\Services\ViewEmployeeDetailService.js" />
     <Content Include="Scripts\Angular\EmployeeManagement\Services\ViewEmployeeServices.js" />
     <Content Include="Scripts\Angular\Navigation.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -9183,8 +9192,9 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Scripts\version.json" />
     <Content Include="Views\VendorDashboard\VendorDashboard.cshtml" />
-    <Content Include="Views\EmployeeDashboard\EmployeeDashboard.cshtml" />
+    <Content Include="Views\EmployeeDashboard\AddEmployeeBasicInfo.cshtml" />
     <Content Include="Views\EmployeeDashboard\Index.cshtml" />
+    <Content Include="Views\EmployeeDashboard\EmployeeDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
