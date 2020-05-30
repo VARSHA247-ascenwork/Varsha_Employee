@@ -14,7 +14,7 @@ using VarshaWeb.Models;
 
 namespace VarshaWeb.BAL.EmployeeManagement
 {
-    public class DepartmentMasterBal
+    public class Emp_DepartmentBal
     {
         public List<Emp_DepartmentModels> GetAllDepartment(ClientContext clientContext)
         {

@@ -238,13 +238,13 @@
         <div class="container">
 
             <!-- breadcrumb -->
-            <div class="breadcrumb-header justify-content-between">
+            <!--  <div class="breadcrumb-header justify-content-between">
                 <div class="my-auto">
                     <div class="d-flex">
                         <h4 class="content-title mb-0 my-auto">Pages</h4><span class="text-muted mt-1 tx-13 ml-2 mb-0">/ Empty</span>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- breadcrumb -->
             <!-- row -->
             @RenderBody()
@@ -901,6 +901,7 @@
     <!-- JQuery min js -->
     <script src="~/assets/plugins/jquery/jquery.min.js"></script>
 
+
     <!-- Bootstrap Bundle js -->
     <script src="~/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -924,6 +925,7 @@
     <script src="~/assets/plugins/rating/jquery.rating-stars.js"></script>
     <script src="~/assets/plugins/rating/jquery.barrating.js"></script>
 
+
     <!-- Custom Scroll bar Js-->
     <script src="~/assets/plugins/mscrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
 
@@ -934,12 +936,17 @@
     <script src="~/assets/plugins/sidebar/sidebar.js"></script>
     <script src="~/assets/plugins/sidebar/sidebar-custom.js"></script>
 
-    <!-- custom js -->
+
+
+    <!-- custom js-->
     <script src="~/assets/js/custom.js"></script>
+
+    <script src="~/Scripts/angular.min.js"></script>
+
+    @RenderSection("scripts", required: false)
 
     <script src="~/Scripts/Angular/DAL/CommonJs.js"></script>
     <script src="~/Scripts/Angular/DAL/DAL.js"></script>
-    @RenderSection("scripts", required: false)
 
 </body>
 </html>

@@ -20,314 +20,308 @@
 <!-- breadcrumb -->
 <!-- row -->
 
-    <div class="breadcrumb-header justify-content-between">
-        <div class="my-auto">
-            <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Employee Managment</h4><span class="text-muted mt-1 tx-13 ml-2 mb-0">/ Employee Master Dashboard</span>
-            </div>
+<div class="breadcrumb-header justify-content-between">
+    <div class="my-auto">
+        <div class="d-flex">
+            <h4 class="content-title mb-0 my-auto">Employee Managment</h4><span class="text-muted mt-1 tx-13 ml-2 mb-0">/ Employee Master Dashboard</span>
         </div>
     </div>
-    <!-- breadcrumb -->
-    <!-- row -->
+</div>
+<!-- breadcrumb -->
+<!-- row -->
 
-    <div class="row">
-        <div class="col-xl-12 col-lg-12">
-            <!--Dashboard Code start-->
-            <div class="card mg-b-20">
-                <div class="row" ng-app="NewEmployeeapp" ng-controller="NewRequestController">
-                    <div class="card-body">
-                        <!--<div>
-                <h6 class="card-title mb-1">Entry Page</h6>
-                <p class="text-muted card-sub-title">Entry Page</p>
-            </div> -->
-                        <div class="card-body pt-0">
-                            <div class="">
-                                <div class="row row-sm">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="First_Name">First Name</label>
-                                            <input type="text" class="form-control" ng-model="ngtxtfirstname" id="First_Name" placeholder="Enter First_Name">
-                                        </div>
+<div class="row">
+    <div class="col-xl-12 col-lg-12">
+        <!--Dashboard Code start-->
+        <div class="card mg-b-20">
+            <div class="row" ng-app="EmployeeApp" ng-controller="EmployeeController">
+                <div class="card-body">
+                    <!--<div>
+                        <h6 class="card-title mb-1">Entry Page</h6>
+                        <p class="text-muted card-sub-title">Entry Page</p>
+                    </div> -->
+                    <div class="card-body pt-0">
+                        <div class="">
+                            <div class="row row-sm">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="First_Name">First Name</label>
+                                        <input type="text" class="form-control" ng-model="ngtxtfirstname" id="First_Name" placeholder="Enter First_Name">
+                                    </div>
 
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="Middle_Name">Middle Name</label>
-                                            <input type="text" class="form-control" ng-model="ngtxtMiddlename" id="Middle_Name" placeholder="Enter Middle_Name">
-                                        </div>
-                                    </div>
                                 </div>
-                                <div class="row row-sm">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="First_Name">Last Name</label>
-                                            <input type="text" class="form-control" ng-model="ngtxtlastname" id="Last_Name" placeholder="Enter Last_Name">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="Middle_Name">Emp Code</label>
-                                            <input type="text" class="form-control" id="Middle_Name" placeholder="Enter Emp_Code">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row row-sm">
-                                    <div class="col-lg-6">
-                                        <label for="exampleInputPassword1">Joining Date</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
-                                                </div>
-                                            </div><input class="form-control" id="datetimepicker" type="text" value="2018-12-20 21:05">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Date Of Birth</label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
-                                                    </div>
-                                                </div><input class="form-control" id="datetimepicker1" type="text" value="2018-12-20 21:05">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row row-sm">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Gender</label>
-                                            <select class="form-control select2">
-                                                <option label="Choose one">
-                                                </option>
-                                                <option value="Firefox">
-                                                    Male
-                                                </option>
-                                                <option value="Chrome">
-                                                    Female
-                                                </option>
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-g<div class="form-group">
-                                            <label for="exampleInputPassword1">Marial Status</label>
-                                            <select class="form-control select2">
-                                                <option label="Choose one">
-                                                </option>
-                                                <option value="Firefox">
-                                                    Married
-                                                </option>
-                                                <option value="Chrome">
-                                                    UnMarried
-                                                </option>
-
-                                            </select>
-                                        </div>
-
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="Middle_Name">Middle Name</label>
+                                        <input type="text" class="form-control" ng-model="ngtxtMiddlename" id="Middle_Name" placeholder="Enter Middle_Name">
                                     </div>
                                 </div>
                             </div>
                             <div class="row row-sm">
                                 <div class="col-lg-6">
-                                    <label for="exampleInputPassword1">OnProbationTill</label>
+                                    <div class="form-group">
+                                        <label for="First_Name">Last Name</label>
+                                        <input type="text" class="form-control" ng-model="ngtxtlastname" id="Last_Name" placeholder="Enter Last_Name">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="Middle_Name">Emp Code</label>
+                                        <input type="text" class="form-control" ng-model="ngtxtEmpcode" id="Middle_Name" placeholder="Enter Emp_Code">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row row-sm">
+                                <div class="col-lg-6">
+                                    <label for="exampleInputPassword1">Joining Date</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
                                             </div>
-                                        </div><input class="form-control" id="datetimepicker" type="text" value="2018-12-20 21:05">
+                                        </div><input class="form-control" ng-model="ngtxtJoiningdate" id="datetimepicker" type="text" value="2018-12-20 21:05">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Probation Status</label>
-                                        <select class="form-control select2">
-                                            <option label="Choose one">
-                                            </option>
-                                            <option value="Firefox">
-                                                Probation
-                                            </option>
-                                            <option value="Chrome">
-                                                Confirmed
-                                            </option>
-
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row row-sm">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Manager</label>
-                                        <select class="form-control select2">
-                                            <option label="Choose one">
-                                            </option>
-                                            <option value="Firefox">
-                                                Vishal Pise
-                                            </option>
-                                            <option value="Chrome">
-                                                Shripal shah
-                                            </option>
-
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label for="Middle_Name">Office Mail</label>
-                                        <input type="text" class="form-control" id="Middle_Name" placeholder="Enter Office_Mail">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row row-sm">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Mobile Number</label>
+                                        <label for="exampleInputPassword1">Date Of Birth</label>
                                         <div class="input-group">
-                                            <input class="form-control" id="phone" name="phone" type="tel">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+                                                </div>
+                                            </div><input class="form-control" ng-model="ngtxtDOB" id="datetimepicker1" type="text" value="2018-12-20 21:05">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label for="Telephone_Number">Telephone Number</label>
-                                        <input type="text" class="form-control" id="Telephone_Number" placeholder="Enter Telephone_Number">
-                                    </div>
-                                </div>
                             </div>
                             <div class="row row-sm">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Company</label>
-                                        <select class="form-control select2">
-                                            <option label="Choose company">
+                                        <label for="exampleInputPassword1">Gender</label>
+                                        <select class="form-control select2  ng-model="ngddlGender"">
+                                            <option label="Choose one">
                                             </option>
-                                            @foreach (VarshaWeb.Models.EmployeeManagement.Emp_CompanyMasterModels company in (List<VarshaWeb.Models.EmployeeManagement.Emp_CompanyMasterModels>)ViewBag.company)
-                                            {
-                                                <option value="@company.ID">
-                                                    @company.CompanyName
-                                                </option>
-                                            }
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Designation</label>
-                                        <select class="form-control select2">
-                                            <option label="Choose Designation">
+                                            <option value="Firefox">
+                                                Male
                                             </option>
-                                            @foreach (VarshaWeb.Models.EmployeeManagement.Emp_DesignationModels designation in (List<VarshaWeb.Models.EmployeeManagement.Emp_DesignationModels>)ViewBag.designation)
-                                            {
-                                                <option value="@designation.ID">
-                                                    @designation.Designation
-                                                </option>
-                                            }
-                                        </select>
-                                    </div>
+                                            <option value="Chrome">
+                                                Female
+                                            </option>
 
-                                </div>
-                            </div>
-                            <div class="row row-sm">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Department</label>
-                                        <select class="form-control select2">
-                                            <option label="Choose Department">
-                                            </option>
-                                            @foreach (VarshaWeb.Models.EmployeeManagement.Emp_DepartmentModels department in (List<VarshaWeb.Models.EmployeeManagement.Emp_DepartmentModels>)ViewBag.department)
-                                            {
-                                                <option value="@department.ID">
-                                                    @department.DepartmentName
-                                                </option>
-                                            }
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Division</label>
-                                        <select class="form-control select2">
-                                            <option label="Choose Division">
+                                        <label for="exampleInputPassword1">Marial Status</label>
+                                        <select class="form-control select2" ng-model="ngdddlMarialstatus">
+                                            <option label="Choose one">
                                             </option>
-                                            @foreach (VarshaWeb.Models.EmployeeManagement.Emp_DivisionModels division in (List<VarshaWeb.Models.EmployeeManagement.Emp_DivisionModels>)ViewBag.division)
-                                            {
-                                                <option value="@division.ID">
-                                                    @division.Division
-                                                </option>
-                                            }
-                                        </select>
-                                    </div>
+                                            <option value="Firefox">
+                                                Married
+                                            </option>
+                                            <option value="Chrome">
+                                                UnMarried
+                                            </option>
 
-                                </div>
-                            </div>
-                            <div class="row row-sm">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Region</label>
-                                        <select class="form-control select2">
-                                            <option label="Choose company">
-                                            </option>
-                                            @foreach (VarshaWeb.Models.EmployeeManagement.Emp_RegionModels Region in (List<VarshaWeb.Models.EmployeeManagement.Emp_RegionModels>)ViewBag.Region)
-                                            {
-                                                <option value="@Region.ID">
-                                                    @Region.Region
-                                                </option>
-                                            }
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Branch</label>
-                                        <select class="form-control select2">
-                                            <option label="Choose Branch">
-                                            </option>
-                                            @foreach (VarshaWeb.Models.EmployeeManagement.Emp_BranchModels Branch in (List<VarshaWeb.Models.EmployeeManagement.Emp_BranchModels>)ViewBag.Branch)
-                                            {
-                                                <option value="@Branch.ID">
-                                                    @Branch.Branch
-                                                </option>
-                                            }
                                         </select>
                                     </div>
 
                                 </div>
                             </div>
                         </div>
-                        <div class="row row-sm text-center">
-                            <div class="col-sm-6 col-md-3 mg-t-10">
-                                <button class="btn btn-primary btn-block" ng-click="Save()">Submit</button>
+                        <div class="row row-sm">
+                            <div class="col-lg-6">
+                                <label for="exampleInputPassword1">OnProbationTill</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+                                        </div>
+                                    </div><input class="form-control" id="datetimepicker2" ng-model="ngtxtProbationtill" type="text" value="2018-12-20 21:05">
+                                </div>
                             </div>
-                            <div class="col-sm-6 col-md-3 mg-t-10">
-                                <button class="btn btn-secondary btn-block">Cancel</button>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Probation Status</label>
+                                    <select class="form-control select2" ng-model="ngddlProbationstatus">
+                                        <option label="Choose one">
+                                        </option>
+                                        <option value="Firefox">
+                                            Probation
+                                        </option>
+                                        <option value="Chrome">
+                                            Confirmed
+                                        </option>
+
+                                    </select>
+                                </div>
                             </div>
+                        </div>
+                        <div class="row row-sm">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Manager</label>
+                                   
+                                 <select class="form-control select2" name="Manager" ng-model="ngddlManager">
+                                        <option value="">
+                                            Choose one
+                                        </option>
+                                        
+                                        @foreach (VarshaWeb.Models.EmployeeManagement.Emp_BasicInfoModels emp in (List<VarshaWeb.Models.EmployeeManagement.Emp_BasicInfoModels>)ViewBag.emp)
+                                        {
+                                            <option value="@emp.ID">
+                                                @emp.FirstName
+                                            </option>
+                                        } 
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="Middle_Name">Office Mail</label>
+                                    <input type="text" class="form-control" ng-model="ngtxtOfficemail" id="Middle_Name" placeholder="Enter Office_Mail">
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="row row-sm">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Mobile Number</label>
+                                    <div class="input-group">
+                                        <input class="form-control" ng-model="ngtxtmobileno" id="phone" name="phone" type="tel">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="Telephone_Number">Telephone Number</label>
+                                    <input type="text" class="form-control" ng-model="ngtxtmobileno" id="Telephone_Number" placeholder="Enter Telephone_Number">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-sm">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Company</label>
+                                    <select class="form-control select2" ng-model="ngddlCompany">
+                                        <option label="Choose company">
+                                        </option>
+                                        @foreach (VarshaWeb.Models.EmployeeManagement.Emp_CompanyMasterModels company in (List<VarshaWeb.Models.EmployeeManagement.Emp_CompanyMasterModels>)ViewBag.company)
+                                        {
+                                            <option value="@company.ID">
+                                                @company.CompanyName
+                                            </option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Designation</label>
+                                    <select class="form-control select2" ng-model="ngddlDesignation">
+                                        <option label="Choose Designation">
+                                        </option>
+                                        @foreach (VarshaWeb.Models.EmployeeManagement.Emp_DesignationModels designation in (List<VarshaWeb.Models.EmployeeManagement.Emp_DesignationModels>)ViewBag.designation)
+                                        {
+                                            <option value="@designation.ID">
+                                                @designation.Designation
+                                            </option>
+                                        }
+                                    </select>
+                                </div>
 
+                            </div>
+                        </div>
+                        <div class="row row-sm">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Department</label>
+                                    <select class="form-control select2" ng-model="ngddlDepartment">
+                                        <option label="Choose Department">
+                                        </option>
+                                        @foreach (VarshaWeb.Models.EmployeeManagement.Emp_DepartmentModels department in (List<VarshaWeb.Models.EmployeeManagement.Emp_DepartmentModels>)ViewBag.department)
+                                        {
+                                            <option value="@department.ID">
+                                                @department.DepartmentName
+                                            </option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Division</label>
+                                    <select class="form-control select2" ng-model="ngddlDivision">
+                                        <option label="Choose Division">
+                                        </option>
+                                        @foreach (VarshaWeb.Models.EmployeeManagement.Emp_DivisionModels division in (List<VarshaWeb.Models.EmployeeManagement.Emp_DivisionModels>)ViewBag.division)
+                                        {
+                                            <option value="@division.ID">
+                                                @division.Division
+                                            </option>
+                                        }
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row row-sm">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Region</label>
+                                    <select class="form-control select2" ng-model="ngddlRegion">
+                                        <option label="Choose company">
+                                        </option>
+                                        @foreach (VarshaWeb.Models.EmployeeManagement.Emp_RegionModels Region in (List<VarshaWeb.Models.EmployeeManagement.Emp_RegionModels>)ViewBag.Region)
+                                        {
+                                            <option value="@Region.ID">
+                                                @Region.Region
+                                            </option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Branch</label>
+                                    <select class="form-control select2" ng-model="ngddlBranch">
+                                        <option label="Choose Branch">
+                                        </option>
+                                        @foreach (VarshaWeb.Models.EmployeeManagement.Emp_BranchModels Branch in (List<VarshaWeb.Models.EmployeeManagement.Emp_BranchModels>)ViewBag.Branch)
+                                        {
+                                            <option value="@Branch.ID">
+                                                @Branch.Branch
+                                            </option>
+                                        }
+                                    </select>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
+                    <div class="row row-sm text-center">
+                        <div class="col-sm-6 col-md-3 mg-t-10">
+                            <button class="btn btn-primary btn-block" ng-click="Save()">Submit</button>
+                        </div>
+                        <div class="col-sm-6 col-md-3 mg-t-10">
+                            <button class="btn btn-secondary btn-block">Cancel</button>
+                        </div>
 
 
-
+                    </div>
                 </div>
-                <!--Dashboard Code End-->
+
+
+
             </div>
+            <!--Dashboard Code End-->
+        </div>
     </div>
 </div>
 @section scripts {
-    <script src="~/Scripts/angular.min.js"></script>
-    <script src="~/Scripts/angular-resource.min.js"></script>
-    <script src="~/Scripts/Angular/DAL/DAL.js"></script>
-    <script src="~/Scripts/Angular/Services/NewEmployeeServices.js"></script>
-    <script src="~/Scripts/Angular/JS/NewEmployee.js"></script>
-
-    <!-- Moment js -->
-    <script src="../assets/plugins/moment/moment.js"></script>
 
     <!-- Internal Select2.min js -->
     <script src="../assets/plugins/select2/js/select2.min.js"></script>
@@ -347,5 +341,15 @@
             format: 'dd-mm-yyyy',
             autoclose: true
         });
+        $('#datetimepicker2').datetimepicker({
+            minView: 2,
+            format: 'dd-mm-yyyy',
+            autoclose: true
+        });
     </script>
+    <script src="~/Scripts/Angular/EmployeeManagement/Services/EmployeeRequestServices.js"></script>
+    <script src="~/Scripts/Angular/EmployeeManagement/JS/EmployeeRequest.js"></script>
+
+
+
 }

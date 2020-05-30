@@ -14,7 +14,7 @@ using VarshaWeb.Models;
 
 namespace VarshaWeb.BAL.EmployeeManagement
 {
-    public class EmployeeDashboardBal
+    public class Emp_BasicInfoBal
     {
             public string saveEmp(ClientContext clientContext, string ItemData)
             {
@@ -38,7 +38,7 @@ namespace VarshaWeb.BAL.EmployeeManagement
             {
                 EmpBasicinfo.Add(new Emp_BasicInfoModels
                 {
-                         //  ID= Convert.ToInt32(j["ID"]),
+                     ID= Convert.ToInt32(j["ID"]),
                   
                     FirstName = j["FirstName"].ToString(),
                     MiddleName = j["MiddleName"].ToString(),
@@ -48,18 +48,34 @@ namespace VarshaWeb.BAL.EmployeeManagement
                     EmpCode = j["EmpCode"].ToString(),
                     Designation = j["Designation"]["Designation"].ToString(),
                     Department = j["Department"].ToString(),
-                    //  Department = j["Department"].ToString(),
+                  //   Manager= j["Manager"]["FirstName"].ToString()
                 });
             }
             return EmpBasicinfo;
 
         }
 
+        public List<Emp_BasicInfoModels> GetManager(ClientContext clientContext)
+        {
+            List<Emp_BasicInfoModels> EmpManager = new List<Emp_BasicInfoModels>();
+            JArray jArray = RESTGet(clientContext, null);
+            foreach (JObject j in jArray)
+            {
+                EmpManager.Add(new Emp_BasicInfoModels
+                {
+                    ID = Convert.ToInt32(j["ID"]),
+                    Manager= j["Manager"]["FirstName"].ToString(),
+                });
+            }
+            return EmpManager;
+        }
 
-        public List<Emp_BasicInfoModels> GeEmployeeById(ClientContext clientContext, string id)
+
+
+        public List<Emp_BasicInfoModels> GeEmployeeById(ClientContext clientContext, string empid)
         {
             List<Emp_BasicInfoModels> empdetails = new List<Emp_BasicInfoModels>();
-            var filter = "ID eq " + id;
+            string filter = "ID eq " + empid;
             JArray jArray = RESTGet(clientContext, filter);
 
             foreach (JObject j in jArray)
@@ -67,10 +83,28 @@ namespace VarshaWeb.BAL.EmployeeManagement
                 empdetails.Add(new Emp_BasicInfoModels
                 {
                     ID = Convert.ToInt32(j["ID"]),
-                    FirstName = j["FirstName"].ToString(),
-                    MiddleName = j["MiddleName"].ToString(),
-                    LastName = j["LastName"].ToString(),
-                    Company = Convert.ToString(j["Company"]["CompanyName"]).Trim(),
+                    FirstName = j["FirstName"] == null ? "" : j["FirstName"].ToString(),
+                    MiddleName = j["MiddleName"] == null ? "" : j["MiddleName"].ToString(),
+                    LastName = j["LastName"] == null ? "" : j["LastName"].ToString(),
+                    EmpCode = j["EmpCode"] == null ? "" : j["EmpCode"].ToString(),
+                    JoiningDate = j["JoiningDate"] == null ? "" : Convert.ToString(j["JoiningDate"]).Trim(),
+                    DOB = j["DOB"] == null ? "" : Convert.ToString(j["DOB"]).Trim(),
+                    Gender = j["Gender"] == null ? "" : j["Gender"].ToString(),
+                    MaritalStatus = j["MaritalStatus"] == null ? "" : j["MaritalStatus"].ToString(),
+                    OnProbationTill = j["OnProbationTill"] == null ? "" : Convert.ToString(j["OnProbationTill"]).Trim(),
+                    ProbationStatus = j["ProbationStatus"] == null ? "" : j["ProbationStatus"].ToString(),
+                    Manager = j["Manager"]["FirstName"] == null ? "" : j["Manager"]["FirstName"].ToString(),
+                    OfficeEmail = j["OfficeEmail"] == null ? "" : j["OfficeEmail"].ToString(),
+                    ContactNumber = j["ContactNumber"] == null ? "" : j["ContactNumber"].ToString(),
+                    EmpStatus = j["EmpStatus"] == null ? "" : j["EmpStatus"].ToString(),
+                    Company = j["Company"]["CompanyName"] == null ? "" : j["Company"]["CompanyName"].ToString(),
+                    Designation = j["Designation"]["Designation"] == null ? "" : j["Designation"]["Designation"].ToString(),
+                    Department = j["Department"]["DepartmentName"] == null ? "" : j["Department"]["DepartmentName"].ToString(),
+                    Division = j["Division"]["Division"] == null ? "" : j["Division"]["Division"].ToString(),
+                    Region = j["Region"]["Region"] == null ? "" : j["Region"]["Region"].ToString(),
+                    Branch = j["Branch"]["Branch"] == null ? "" : j["Branch"]["Branch"].ToString(),
+                    User_Name = j["User_Name"] ["Title"] == null ? "" : j["User_Name"]["Title"].ToString(),
+                   // Manager_Code = j["Manager_Code"] == null ? "" : j["Manager_Code"].ToString()
                 });
             }
 
@@ -85,7 +119,7 @@ namespace VarshaWeb.BAL.EmployeeManagement
                 JArray jArray = new JArray();
                 RESTOption rESTOption = new RESTOption();
                 rESTOption.filter = filter;
-            rESTOption.select = "ID,FirstName,MiddleName,LastName,EmpCode,Gender,MaritalStatus,DOB,JoiningDate,OnProbationTill,ProbationStatus,OfficeEmail,ContactNumber,EmpStatus,Designation/Id,Designation/Designation,Department/Id,Department/DepartmentName,Division/Id,Division/Division,Region/Id,Region/Region,Branch/Id,Branch/Branch,Company/Id,Company/CompanyName,Manager/Id,User_Name/Id,User_Name/Title";
+            rESTOption.select = "ID,FirstName,MiddleName,LastName,EmpCode,Gender,MaritalStatus,DOB,JoiningDate,OnProbationTill,ProbationStatus,OfficeEmail,ContactNumber,EmpStatus,Designation/Id,Designation/Designation,Department/Id,Department/DepartmentName,Division/Id,Division/Division,Region/Id,Region/Region,Branch/Id,Branch/Branch,Company/Id,Company/CompanyName,Manager/Id,Manager/FirstName,User_Name/Id,User_Name/Title,Profile_Pic_Url,Facebook,Google,LinkedIn,Twitter,Instagram,Tiktok";
             rESTOption.expand = "Company,Designation,Department,Division,Region,Branch,User_Name,Manager";
             rESTOption.top = "5000";
 

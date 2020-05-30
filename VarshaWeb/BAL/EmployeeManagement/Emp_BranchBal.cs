@@ -14,7 +14,7 @@ using VarshaWeb.Models;
 
 namespace VarshaWeb.BAL.EmployeeManagement
 {
-    public class BranchMasterBal
+    public class Emp_BranchBal
     {
         public List<Emp_BranchModels> GetBranch(ClientContext clientContext)
         {

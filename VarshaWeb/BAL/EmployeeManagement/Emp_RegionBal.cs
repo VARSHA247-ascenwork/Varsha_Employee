@@ -14,25 +14,25 @@ using VarshaWeb.Models;
 
 namespace VarshaWeb.BAL.EmployeeManagement
 {
-    public class DivisionMasterBal
+    public class Emp_RegionBal
     {
-        public List<Emp_DivisionModels> GetDivision(ClientContext clientContext)
+        public List<Emp_RegionModels> GetRegion(ClientContext clientContext)
         {
-            List<Emp_DivisionModels> emp_division = new List<Emp_DivisionModels>();
+            List<Emp_RegionModels> emp_Region = new List<Emp_RegionModels>();
 
             JArray jArray = RESTGet(clientContext, null);
 
             foreach (JObject j in jArray)
             {
-                emp_division.Add(new Emp_DivisionModels
+                emp_Region.Add(new Emp_RegionModels
                 {
                     ID = Convert.ToInt32(j["ID"]),
-                    Division = j["Division"].ToString(),
+                    Region = j["Region"].ToString(),
                 });
             }
 
 
-            return emp_division;
+            return emp_Region;
 
         }
 
@@ -43,8 +43,9 @@ namespace VarshaWeb.BAL.EmployeeManagement
             RESTOption rESTOption = new RESTOption();
 
             rESTOption.filter = filter;
-            rESTOption.select = "ID,Division,HeadOfDivision,Description";
-            jArray = restService.GetAllItemFromList(clientContext, "Emp_Division", rESTOption);
+            rESTOption.select = "ID,Region,HeadOfRegion,Description";
+            rESTOption.top = "5000";
+            jArray = restService.GetAllItemFromList(clientContext, "Emp_Region", rESTOption);
 
             return jArray;
         }
