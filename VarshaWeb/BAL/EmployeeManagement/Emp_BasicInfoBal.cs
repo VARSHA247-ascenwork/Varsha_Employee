@@ -24,9 +24,11 @@ namespace VarshaWeb.BAL.EmployeeManagement
                 return response;
             }
 
-        public List<Emp_BasicInfoModels> GetAllEmployee(ClientContext clientContext)
+       
+              
+        public List<Emp_BasicInfoModel> GetAllEmployee(ClientContext clientContext)
         {
-            List<Emp_BasicInfoModels> EmpBasicinfo = new List<Emp_BasicInfoModels>();
+            List<Emp_BasicInfoModel> EmpBasicinfo = new List<Emp_BasicInfoModel>();
 
 
 
@@ -36,51 +38,38 @@ namespace VarshaWeb.BAL.EmployeeManagement
 
             foreach (JObject j in jArray)
             {
-                EmpBasicinfo.Add(new Emp_BasicInfoModels
+                EmpBasicinfo.Add(new Emp_BasicInfoModel
                 {
                      ID= Convert.ToInt32(j["ID"]),
                   
-                    FirstName = j["FirstName"].ToString(),
-                    MiddleName = j["MiddleName"].ToString(),
-                    LastName = j["LastName"].ToString(),
-                    Company = j["Company"]["CompanyName"].ToString(),
-                    // EmpCode = j["EmpCode"].ToString(),
-                    EmpCode = j["EmpCode"].ToString(),
-                    Designation = j["Designation"]["Designation"].ToString(),
-                    Department = j["Department"].ToString(),
-                  //   Manager= j["Manager"]["FirstName"].ToString()
+                    FirstName = j["FirstName"] == null ? "" : j["FirstName"].ToString(),
+                    Company = j["Company"]["CompanyName"] == null ? "" : j["Company"]["CompanyName"].ToString(),
+                    EmpCode = j["EmpCode"] == null ? "" : j["EmpCode"].ToString(),
+                    Designation = j["Designation"]["Designation"] == null ? "" : j["Designation"]["Designation"].ToString(),
+                    Department =j["Department"] == null ? "" : j["Department"].ToString(),
+                     // Manager = j["Manager"]["FirstName"] == null ? "" : j["Manager"]["FirstName"].ToString(),
+                    //  ManagerCode = j["Manager"]["EmpCode"] == null ? "" : j["Manager"]["EmpCode"].ToString(),
+                    UserNameId = j["User_Name"]["Id"] == null ? "" : Convert.ToString(j["User_Name"]["Id"]),
+                    //  User_Name = j["User_Name"]["Title"] == null ? "" : Convert.ToString(j["User_Name"]["Title"]).Trim(),
+                    User_Name = j["User_Name"]["Title"] == null ? "" : j["User_Name"]["Title"].ToString(),
                 });
             }
             return EmpBasicinfo;
 
         }
 
-        public List<Emp_BasicInfoModels> GetManager(ClientContext clientContext)
+
+       
+
+        public List<Emp_BasicInfoModel> GeEmployeeById(ClientContext clientContext, string empid)
         {
-            List<Emp_BasicInfoModels> EmpManager = new List<Emp_BasicInfoModels>();
-            JArray jArray = RESTGet(clientContext, null);
-            foreach (JObject j in jArray)
-            {
-                EmpManager.Add(new Emp_BasicInfoModels
-                {
-                    ID = Convert.ToInt32(j["ID"]),
-                    Manager= j["Manager"]["FirstName"].ToString(),
-                });
-            }
-            return EmpManager;
-        }
-
-
-
-        public List<Emp_BasicInfoModels> GeEmployeeById(ClientContext clientContext, string empid)
-        {
-            List<Emp_BasicInfoModels> empdetails = new List<Emp_BasicInfoModels>();
+            List<Emp_BasicInfoModel> empdetails = new List<Emp_BasicInfoModel>();
             string filter = "ID eq " + empid;
             JArray jArray = RESTGet(clientContext, filter);
 
             foreach (JObject j in jArray)
             {
-                empdetails.Add(new Emp_BasicInfoModels
+                empdetails.Add(new Emp_BasicInfoModel
                 {
                     ID = Convert.ToInt32(j["ID"]),
                     FirstName = j["FirstName"] == null ? "" : j["FirstName"].ToString(),
@@ -104,7 +93,7 @@ namespace VarshaWeb.BAL.EmployeeManagement
                     Region = j["Region"]["Region"] == null ? "" : j["Region"]["Region"].ToString(),
                     Branch = j["Branch"]["Branch"] == null ? "" : j["Branch"]["Branch"].ToString(),
                     User_Name = j["User_Name"] ["Title"] == null ? "" : j["User_Name"]["Title"].ToString(),
-                   // Manager_Code = j["Manager_Code"] == null ? "" : j["Manager_Code"].ToString()
+                   //Manager_Code = j["Manager_Code"] == null ? "" : j["Manager_Code"].ToString()
                 });
             }
 
@@ -119,7 +108,7 @@ namespace VarshaWeb.BAL.EmployeeManagement
                 JArray jArray = new JArray();
                 RESTOption rESTOption = new RESTOption();
                 rESTOption.filter = filter;
-            rESTOption.select = "ID,FirstName,MiddleName,LastName,EmpCode,Gender,MaritalStatus,DOB,JoiningDate,OnProbationTill,ProbationStatus,OfficeEmail,ContactNumber,EmpStatus,Designation/Id,Designation/Designation,Department/Id,Department/DepartmentName,Division/Id,Division/Division,Region/Id,Region/Region,Branch/Id,Branch/Branch,Company/Id,Company/CompanyName,Manager/Id,Manager/FirstName,User_Name/Id,User_Name/Title,Profile_Pic_Url,Facebook,Google,LinkedIn,Twitter,Instagram,Tiktok";
+            rESTOption.select = "ID,FirstName,MiddleName,LastName,EmpCode,Gender,MaritalStatus,DOB,JoiningDate,OnProbationTill,ProbationStatus,OfficeEmail,ContactNumber,EmpStatus,Designation/Id,Designation/Designation,Department/Id,Department/DepartmentName,Division/Id,Division/Division,Region/Id,Region/Region,Branch/Id,Branch/Branch,Company/Id,Company/CompanyName,Manager/Id,User_Name/Id,User_Name/Title,Profile_Pic_Url,Facebook,Google,LinkedIn,Twitter,Instagram,Tiktok,DOB_Months,ManagerCode,JoiningDate_Month";
             rESTOption.expand = "Company,Designation,Department,Division,Region,Branch,User_Name,Manager";
             rESTOption.top = "5000";
 

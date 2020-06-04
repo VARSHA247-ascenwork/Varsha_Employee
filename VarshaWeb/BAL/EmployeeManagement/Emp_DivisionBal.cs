@@ -16,15 +16,15 @@ namespace VarshaWeb.BAL.EmployeeManagement
 {
     public class Emp_DivisionBal
     {
-        public List<Emp_DivisionModels> GetDivision(ClientContext clientContext)
+        public List<Emp_DivisionModel> GetDivision(ClientContext clientContext)
         {
-            List<Emp_DivisionModels> emp_division = new List<Emp_DivisionModels>();
+            List<Emp_DivisionModel> emp_division = new List<Emp_DivisionModel>();
 
             JArray jArray = RESTGet(clientContext, null);
 
             foreach (JObject j in jArray)
             {
-                emp_division.Add(new Emp_DivisionModels
+                emp_division.Add(new Emp_DivisionModel
                 {
                     ID = Convert.ToInt32(j["ID"]),
                     Division = j["Division"].ToString(),

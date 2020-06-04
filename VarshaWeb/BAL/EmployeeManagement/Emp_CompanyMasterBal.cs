@@ -17,15 +17,15 @@ namespace VarshaWeb.BAL.EmployeeManagement
 {
     public class Emp_CompanyMasterBal
     {
-        public List<Emp_CompanyMasterModels> GetAllCompany(ClientContext clientContext)
+        public List<Emp_CompanyMasterModel> GetAllCompany(ClientContext clientContext)
         {
-            List<Emp_CompanyMasterModels> emp_Company = new List<Emp_CompanyMasterModels>();
+            List<Emp_CompanyMasterModel> emp_Company = new List<Emp_CompanyMasterModel>();
 
             JArray jArray = RESTGet(clientContext, null);
 
             foreach (JObject j in jArray)
             {
-                emp_Company.Add(new Emp_CompanyMasterModels
+                emp_Company.Add(new Emp_CompanyMasterModel
                 {
                     ID = Convert.ToInt32(j["ID"]),
                     CompanyName = j["CompanyName"].ToString(),

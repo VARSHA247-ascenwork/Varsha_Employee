@@ -16,15 +16,15 @@ namespace VarshaWeb.BAL.EmployeeManagement
 {
     public class Emp_BranchBal
     {
-        public List<Emp_BranchModels> GetBranch(ClientContext clientContext)
+        public List<Emp_BranchModel> GetBranch(ClientContext clientContext)
         {
-            List<Emp_BranchModels> emp_branch = new List<Emp_BranchModels>();
+            List<Emp_BranchModel> emp_branch = new List<Emp_BranchModel>();
 
             JArray jArray = RESTGet(clientContext, null);
 
             foreach (JObject j in jArray)
             {
-                emp_branch.Add(new Emp_BranchModels
+                emp_branch.Add(new Emp_BranchModel
                 {
                     ID = Convert.ToInt32(j["ID"]),
                     Branch= j["Branch"].ToString(),

@@ -4,6 +4,9 @@
 
 EmployeeApp.controller('EmployeeController', function ($scope, EmployeeService) {
 
+
+    
+
     $scope.Save = function () {
         var Items = {
             FirstName: $scope.ngtxtfirstname,
@@ -16,10 +19,11 @@ EmployeeApp.controller('EmployeeController', function ($scope, EmployeeService) 
             MaritalStatus: $scope.ngdddlMarialstatus,
             OnProbationTill: moment($scope.ngtxtProbationtill, 'DD-MM-YYYY').format("MM/DD/YYYY"),
             ProbationStatus: $scope.ngddlProbationstatus,
-           // Manager: $scope.ngddlManager,
+            Manager: $scope.ngddlManager,
+          //  Manager_Code: $scope.managerempcode,
             OfficeEmail: $scope.ngtxtOfficemail,
             ContactNumber: $scope.ngtxtmobileno,
-            EmpStatus: $scope.ngEmpStatus,
+           // EmpStatus: $scope.ngEmpStatus,
 
             Company: $scope.ngddlCompany,
             Designation: $scope.ngddlDesignation,
@@ -27,7 +31,7 @@ EmployeeApp.controller('EmployeeController', function ($scope, EmployeeService) 
             Division: $scope.ngddlDivision,
             Region: $scope.ngddlRegion,
             Branch: $scope.ngddlBranch,
-            User_Name: $scope.ngUser_Name
+            User_Name: $scope.ngddluser,
             
         }
         EmployeeService.Postdata(Items).then(function (response) {
@@ -36,6 +40,22 @@ EmployeeApp.controller('EmployeeController', function ($scope, EmployeeService) 
         });
     }
 
+   
+
+  /* $scope.EditEmployee = function (id) {
+       
+        var data = {
+            'ID': id,
+        }
+
+        CommonAppUtilityService.CreateItem("/EmployeeDashboard/getEmployeeEditId", data).then(function (response) {
+            Pageredirect("/EmployeeDashboard/EmployeeEdit");
+        });
+
+    }  */
+
+
+  
 
     
 });

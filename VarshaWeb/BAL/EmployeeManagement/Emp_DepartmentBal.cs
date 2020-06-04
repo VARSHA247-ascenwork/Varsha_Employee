@@ -16,15 +16,15 @@ namespace VarshaWeb.BAL.EmployeeManagement
 {
     public class Emp_DepartmentBal
     {
-        public List<Emp_DepartmentModels> GetAllDepartment(ClientContext clientContext)
+        public List<Emp_DepartmentModel> GetAllDepartment(ClientContext clientContext)
         {
-            List<Emp_DepartmentModels> emp_department = new List<Emp_DepartmentModels>();
+            List<Emp_DepartmentModel> emp_department = new List<Emp_DepartmentModel>();
 
             JArray jArray = RESTGet(clientContext, null);
 
             foreach (JObject j in jArray)
             {
-                emp_department.Add(new Emp_DepartmentModels
+                emp_department.Add(new Emp_DepartmentModel
                 {
                     ID = Convert.ToInt32(j["ID"]),
                     DepartmentName = j["DepartmentName"].ToString(),
@@ -43,7 +43,8 @@ namespace VarshaWeb.BAL.EmployeeManagement
             RESTOption rESTOption = new RESTOption();
 
             rESTOption.filter = filter;
-            rESTOption.select = "ID,DepartmentName,HeadOfDepartment,Description";
+            rESTOption.select = "ID,DepartmentName,HeadOfDepartment/Id,Description";
+            rESTOption.expand = "HeadOfDepartment";
              rESTOption.top = "5000";
             jArray = restService.GetAllItemFromList(clientContext, "Emp_Department", rESTOption);
 

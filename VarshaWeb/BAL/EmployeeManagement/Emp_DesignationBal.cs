@@ -16,15 +16,15 @@ namespace VarshaWeb.BAL.EmployeeManagement
 {
     public class Emp_DesignationBal
     {
-        public List<Emp_DesignationModels> GetDesignation(ClientContext clientContext)
+        public List<Emp_DesignationModel> GetDesignation(ClientContext clientContext)
         {
-            List<Emp_DesignationModels> emp_designation = new List<Emp_DesignationModels>();
+            List<Emp_DesignationModel> emp_designation = new List<Emp_DesignationModel>();
 
             JArray jArray = RESTGet(clientContext, null);
 
             foreach (JObject j in jArray)
             {
-                emp_designation.Add(new Emp_DesignationModels
+                emp_designation.Add(new Emp_DesignationModel
                 {
                     ID = Convert.ToInt32(j["ID"]),
                     Designation = j["Designation"].ToString(),

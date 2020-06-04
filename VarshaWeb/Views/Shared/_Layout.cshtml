@@ -20,6 +20,8 @@
     <!--  Custom Scroll bar-->
     <link href="~/assets/plugins/mscrollbar/jquery.mCustomScrollbar.css" rel="stylesheet" />
 
+    @* @RenderSection("style", required:false)*@
+
     <!--- Style css -->
     <link href="~/assets/css/style.css" rel="stylesheet">
     <link href="~/assets/css/style-dark.css" rel="stylesheet">
@@ -901,6 +903,7 @@
     <!-- JQuery min js -->
     <script src="~/assets/plugins/jquery/jquery.min.js"></script>
 
+    <script src="~/Scripts/angular.min.js"></script>
 
     <!-- Bootstrap Bundle js -->
     <script src="~/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -941,7 +944,7 @@
     <!-- custom js-->
     <script src="~/assets/js/custom.js"></script>
 
-    <script src="~/Scripts/angular.min.js"></script>
+
 
     @RenderSection("scripts", required: false)
 

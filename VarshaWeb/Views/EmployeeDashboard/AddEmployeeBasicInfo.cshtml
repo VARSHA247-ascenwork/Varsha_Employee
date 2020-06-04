@@ -1,5 +1,6 @@
 ﻿@using VarshaWeb.Models.EmployeeManagement;
 
+
 @{
     ViewBag.Title = "EmployeeDashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -99,13 +100,13 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Gender</label>
-                                        <select class="form-control select2  ng-model="ngddlGender"">
+                                        <select class="form-control select2" ng-model="ngddlGender">
                                             <option label="Choose one">
                                             </option>
-                                            <option value="Firefox">
+                                            <option value="Male">
                                                 Male
                                             </option>
-                                            <option value="Chrome">
+                                            <option value="Female">
                                                 Female
                                             </option>
 
@@ -118,10 +119,10 @@
                                         <select class="form-control select2" ng-model="ngdddlMarialstatus">
                                             <option label="Choose one">
                                             </option>
-                                            <option value="Firefox">
+                                            <option value="Married">
                                                 Married
                                             </option>
-                                            <option value="Chrome">
+                                            <option value="UnMarried">
                                                 UnMarried
                                             </option>
 
@@ -148,10 +149,10 @@
                                     <select class="form-control select2" ng-model="ngddlProbationstatus">
                                         <option label="Choose one">
                                         </option>
-                                        <option value="Firefox">
+                                        <option value="Probation">
                                             Probation
                                         </option>
-                                        <option value="Chrome">
+                                        <option value="Confirmed">
                                             Confirmed
                                         </option>
 
@@ -163,19 +164,21 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Manager</label>
-                                   
-                                 <select class="form-control select2" name="Manager" ng-model="ngddlManager">
+                                    <select required="" class="form-control select2" name="EmployeeName" ng-model="ngddlManager">
                                         <option value="">
+
                                             Choose one
                                         </option>
-                                        
-                                        @foreach (VarshaWeb.Models.EmployeeManagement.Emp_BasicInfoModels emp in (List<VarshaWeb.Models.EmployeeManagement.Emp_BasicInfoModels>)ViewBag.emp)
+                                        @foreach (var obj in ViewBag.emp)
                                         {
-                                            <option value="@emp.ID">
-                                                @emp.FirstName
+                                            <option value="@obj.UserNameId">
+                                                @obj.User_Name
                                             </option>
-                                        } 
+                                        }
                                     </select>
+
+
+
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -191,7 +194,7 @@
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Mobile Number</label>
                                     <div class="input-group">
-                                        <input class="form-control" ng-model="ngtxtmobileno" id="phone" name="phone" type="tel">
+                                        <input class="form-control" ng-model="ngtxtmobile" id="phone" name="phone" type="tel">
                                     </div>
                                 </div>
                             </div>
@@ -209,7 +212,7 @@
                                     <select class="form-control select2" ng-model="ngddlCompany">
                                         <option label="Choose company">
                                         </option>
-                                        @foreach (VarshaWeb.Models.EmployeeManagement.Emp_CompanyMasterModels company in (List<VarshaWeb.Models.EmployeeManagement.Emp_CompanyMasterModels>)ViewBag.company)
+                                        @foreach (VarshaWeb.Models.EmployeeManagement.Emp_CompanyMasterModel company in (List<VarshaWeb.Models.EmployeeManagement.Emp_CompanyMasterModel>)ViewBag.company)
                                         {
                                             <option value="@company.ID">
                                                 @company.CompanyName
@@ -224,7 +227,7 @@
                                     <select class="form-control select2" ng-model="ngddlDesignation">
                                         <option label="Choose Designation">
                                         </option>
-                                        @foreach (VarshaWeb.Models.EmployeeManagement.Emp_DesignationModels designation in (List<VarshaWeb.Models.EmployeeManagement.Emp_DesignationModels>)ViewBag.designation)
+                                        @foreach (VarshaWeb.Models.EmployeeManagement.Emp_DesignationModel designation in (List<VarshaWeb.Models.EmployeeManagement.Emp_DesignationModel>)ViewBag.designation)
                                         {
                                             <option value="@designation.ID">
                                                 @designation.Designation
@@ -242,7 +245,7 @@
                                     <select class="form-control select2" ng-model="ngddlDepartment">
                                         <option label="Choose Department">
                                         </option>
-                                        @foreach (VarshaWeb.Models.EmployeeManagement.Emp_DepartmentModels department in (List<VarshaWeb.Models.EmployeeManagement.Emp_DepartmentModels>)ViewBag.department)
+                                        @foreach (VarshaWeb.Models.EmployeeManagement.Emp_DepartmentModel department in (List<VarshaWeb.Models.EmployeeManagement.Emp_DepartmentModel>)ViewBag.department)
                                         {
                                             <option value="@department.ID">
                                                 @department.DepartmentName
@@ -257,7 +260,7 @@
                                     <select class="form-control select2" ng-model="ngddlDivision">
                                         <option label="Choose Division">
                                         </option>
-                                        @foreach (VarshaWeb.Models.EmployeeManagement.Emp_DivisionModels division in (List<VarshaWeb.Models.EmployeeManagement.Emp_DivisionModels>)ViewBag.division)
+                                        @foreach (VarshaWeb.Models.EmployeeManagement.Emp_DivisionModel division in (List<VarshaWeb.Models.EmployeeManagement.Emp_DivisionModel>)ViewBag.division)
                                         {
                                             <option value="@division.ID">
                                                 @division.Division
@@ -275,7 +278,7 @@
                                     <select class="form-control select2" ng-model="ngddlRegion">
                                         <option label="Choose company">
                                         </option>
-                                        @foreach (VarshaWeb.Models.EmployeeManagement.Emp_RegionModels Region in (List<VarshaWeb.Models.EmployeeManagement.Emp_RegionModels>)ViewBag.Region)
+                                        @foreach (VarshaWeb.Models.EmployeeManagement.Emp_RegionModel Region in (List<VarshaWeb.Models.EmployeeManagement.Emp_RegionModel>)ViewBag.Region)
                                         {
                                             <option value="@Region.ID">
                                                 @Region.Region
@@ -290,7 +293,7 @@
                                     <select class="form-control select2" ng-model="ngddlBranch">
                                         <option label="Choose Branch">
                                         </option>
-                                        @foreach (VarshaWeb.Models.EmployeeManagement.Emp_BranchModels Branch in (List<VarshaWeb.Models.EmployeeManagement.Emp_BranchModels>)ViewBag.Branch)
+                                        @foreach (VarshaWeb.Models.EmployeeManagement.Emp_BranchModel Branch in (List<VarshaWeb.Models.EmployeeManagement.Emp_BranchModel>)ViewBag.Branch)
                                         {
                                             <option value="@Branch.ID">
                                                 @Branch.Branch
@@ -301,6 +304,28 @@
 
                             </div>
                         </div>
+
+                         <div class="row row-sm">
+            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">User Name</label>
+                                    <select required="" class="form-control select2" name="username" ng-model="ngddluser">
+                                        <option value="">
+                                        </option>
+                                        @foreach (VarshaWeb.Models.UserGroupModel user in (List<VarshaWeb.Models.UserGroupModel>)ViewBag.username)
+                                        {
+                                            <option value="@user.ID">
+                                                @user.Title
+                                            </option>
+                                        }
+                                    </select>
+
+
+
+                                </div>
+                            </div>
+
+        </div> 
                     </div>
                     <div class="row row-sm text-center">
                         <div class="col-sm-6 col-md-3 mg-t-10">

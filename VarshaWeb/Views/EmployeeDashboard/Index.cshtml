@@ -60,17 +60,20 @@
 
                             @if (ViewBag.EmpList != null)
                             {
-                                foreach (Emp_BasicInfoModels empinfo in (List<Emp_BasicInfoModels>)ViewBag.EmpList)
+                                foreach (Emp_BasicInfoModel empinfo in (List<Emp_BasicInfoModel>)ViewBag.EmpList)
                                 {
                                     <tr>
                                         <td>@empinfo.FirstName</td>
                                         <td>@empinfo.EmpCode</td>
                                         <td>@empinfo.Designation</td>
                                         <td>@empinfo.Company</td>
+
                                         <td>
 
                                             <div class="btn-icon-list">
+                                                <button class="btn btn-primary btn-icon" onclick="EditEmployee(@empinfo.ID)"><i class="far fa-edit"></i></button>
                                                 <button class="btn btn-info btn-icon" onclick="ViewEmployee(@empinfo.ID)"><i class="far fa-eye"></i></button>
+
 
                                             </div>
                                         </td>
@@ -90,14 +93,9 @@
 </div>
 @section scripts {
 
-    <!--  <script src="~/Scripts/angular.min.js"></script>
-       <script src="~/Scripts/angular-resource.min.js"></script>
-       <script src="~/Scripts/Angular/EmployeeManagement/DAL/CommonJs.js"></script>
-       <script src="~/Scripts/Angular/EmployeeManagement/DAL/DAL.js"></script>
-       <script src="~/Scripts/Angular/EmployeeManagement/JS/ViewEmployee.js"></script>
 
 
-       <!--Dashboard Code End-->
+    <!--Dashboard Code End-->
     <!-- Internal Data tables -->
 
     <script src="~/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
@@ -118,8 +116,10 @@
     <script src="~/assets/plugins/datatable/js/buttons.colVis.min.js"></script>
     <script src="~/assets/plugins/datatable/js/dataTables.responsive.min.js"></script>
     <script src="~/assets/plugins/datatable/js/responsive.bootstrap4.min.js"></script>
-    <script src="~/Scripts/Angular/EmployeeManagement/DAL/CommonJs.js"></script>
-    <script>
+   
+
+    <script type="text/javascript">
+
         function ViewEmployee(CurrentID) {
 
             document.cookie = "ViewEmployeeID=" + CurrentID;
@@ -127,9 +127,14 @@
             Pageredirect("/EmployeeDashboard/EmployeeDetails");
 
         }
-    </script>
 
-    <script>
+         function EditEmployee(empid) {
+              
+              document.cookie = "EditEmployeeID=" + empid;
+
+              Pageredirect("/EmployeeDashboard/EmployeeEdit");
+
+          }
         $('#Employeetable').DataTable({
 
             responsive: true,
@@ -141,4 +146,6 @@
         });
 
     </script>
+
+
 }

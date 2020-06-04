@@ -16,15 +16,15 @@ namespace VarshaWeb.BAL.EmployeeManagement
 {
     public class Emp_RegionBal
     {
-        public List<Emp_RegionModels> GetRegion(ClientContext clientContext)
+        public List<Emp_RegionModel> GetRegion(ClientContext clientContext)
         {
-            List<Emp_RegionModels> emp_Region = new List<Emp_RegionModels>();
+            List<Emp_RegionModel> emp_Region = new List<Emp_RegionModel>();
 
             JArray jArray = RESTGet(clientContext, null);
 
             foreach (JObject j in jArray)
             {
-                emp_Region.Add(new Emp_RegionModels
+                emp_Region.Add(new Emp_RegionModel
                 {
                     ID = Convert.ToInt32(j["ID"]),
                     Region = j["Region"].ToString(),

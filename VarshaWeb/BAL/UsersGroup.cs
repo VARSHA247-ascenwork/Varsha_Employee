@@ -31,6 +31,25 @@ namespace VarshaWeb.BAL
             return userGroup;
         }
 
+        public List<UserGroupModel> Getusergroup(ClientContext clientContext)
+        {
+            List<UserGroupModel> userGroup = new List<UserGroupModel>();
+            JArray jArray = new JArray();
+            jArray = RESTGetAllUser(clientContext);
+            foreach (JObject j in jArray)
+            {
+                //string ass = j["ID"].ToString();
+                //string Title = j["Title"].ToString();
+                userGroup.Add(new UserGroupModel
+                {
+                    ID = j["Id"].ToString(),
+                    Title = j["Title"].ToString(),
+                    LoginName = j["LoginName"].ToString()
+                });
+            }
+            return userGroup;
+        }
+
 
 
         private JArray RESTGetGroup(ClientContext clientContext, string ID)
@@ -41,6 +60,7 @@ namespace VarshaWeb.BAL
 
             return jArray;
         }
+
 
 
         private JArray RESTGetAllUser(ClientContext clientContext)

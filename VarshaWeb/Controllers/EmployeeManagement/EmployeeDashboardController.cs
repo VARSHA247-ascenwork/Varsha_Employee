@@ -6,39 +6,47 @@ using System.Web.Mvc;
 using VarshaWeb.BAL.EmployeeManagement;
 using VarshaWeb.Models.EmployeeManagement;
 using VarshaWeb.DAL;
-
+using VarshaWeb.Models;
+using VarshaWeb.BAL;
 
 namespace VarshaWeb.Controllers.EmployeeManagement
 {
     public class EmployeeDashboardController : Controller
     {
-        List<Emp_BasicInfoModels> empBasicinfo = new List<Emp_BasicInfoModels>();
+      
+
+       List<Emp_BasicInfoModel> emp_manager = new List<Emp_BasicInfoModel>();
+       Emp_BasicInfoBal empmanager = new Emp_BasicInfoBal();
+
+        List<Emp_BasicInfoModel> empBasicinfo = new List<Emp_BasicInfoModel>();
         Emp_BasicInfoBal emp = new Emp_BasicInfoBal();
+
+        //get user
+        List<UserGroupModel> user = new List<UserGroupModel>();
+        UsersGroup username = new UsersGroup();
+
         //get company
-        List<Emp_CompanyMasterModels> emp_Company = new List<Emp_CompanyMasterModels>();
+        List<Emp_CompanyMasterModel> emp_Company = new List<Emp_CompanyMasterModel>();
         Emp_CompanyMasterBal company = new Emp_CompanyMasterBal();
         //get designation
-        List<Emp_DesignationModels> emp_designation = new List<Emp_DesignationModels>();
+        List<Emp_DesignationModel> emp_designation = new List<Emp_DesignationModel>();
         Emp_DesignationBal designation = new Emp_DesignationBal();
         //get Department
-        List<Emp_DepartmentModels> emp_department = new List<Emp_DepartmentModels>();
+        List<Emp_DepartmentModel> emp_department = new List<Emp_DepartmentModel>();
         Emp_DepartmentBal department = new Emp_DepartmentBal();
         //get Division
-        List<Emp_DivisionModels> emp_division = new List<Emp_DivisionModels>();
+        List<Emp_DivisionModel> emp_division = new List<Emp_DivisionModel>();
         Emp_DivisionBal division = new Emp_DivisionBal();
         //get Branch
-        List<Emp_BranchModels> emp_Branch = new List<Emp_BranchModels>();
+        List<Emp_BranchModel> emp_Branch = new List<Emp_BranchModel>();
         Emp_BranchBal Branch = new Emp_BranchBal();
         //get Region
-        List<Emp_RegionModels> emp_Region = new List<Emp_RegionModels>();
+        List<Emp_RegionModel> emp_Region = new List<Emp_RegionModel>();
         Emp_RegionBal Region = new Emp_RegionBal();
 
         // GET: EmployeeDashboard
         public ActionResult Index()
         {
-
-
-
             var spContext = SharePointContextProvider.Current.GetSharePointContext(HttpContext);
             using (var clientContext = spContext.CreateUserClientContextForSPHost())
             {
@@ -49,6 +57,8 @@ namespace VarshaWeb.Controllers.EmployeeManagement
             ViewBag.EmpList = empBasicinfo;
             return View();
         }
+
+
         [HttpGet]
       
         [ActionName("EmployeeDetails")]
@@ -57,7 +67,7 @@ namespace VarshaWeb.Controllers.EmployeeManagement
             string ViewEmployeeID = Request.Cookies["ViewEmployeeID"].Value;
             Emp_BasicInfoBal EmpDashBal = new Emp_BasicInfoBal();
           
-            List<Emp_BasicInfoModels> empview = new List<Emp_BasicInfoModels>();
+            List<Emp_BasicInfoModel> empview = new List<Emp_BasicInfoModel>();
             var spContext = SharePointContextProvider.Current.GetSharePointContext(HttpContext);
             using (var clientContext = spContext.CreateUserClientContextForSPHost())
             {
@@ -75,12 +85,11 @@ namespace VarshaWeb.Controllers.EmployeeManagement
         [HttpGet]
         public ActionResult AddEmployeeBasicInfo()
         {
-            List<Emp_BasicInfoModels> empmanager = new List<Emp_BasicInfoModels>();
-            Emp_BasicInfoBal manager = new Emp_BasicInfoBal();
-
+           
             var spContext = SharePointContextProvider.Current.GetSharePointContext(HttpContext);
             using (var clientContext = spContext.CreateUserClientContextForSPHost())
             {
+               
 
                 emp_Company = company.GetAllCompany(clientContext);
                 emp_designation = designation.GetDesignation(clientContext);
@@ -88,7 +97,11 @@ namespace VarshaWeb.Controllers.EmployeeManagement
                 emp_division = division.GetDivision(clientContext);
                 emp_Branch = Branch.GetBranch(clientContext);
                 emp_Region = Region.GetRegion(clientContext);
-                empmanager = manager.GetManager(clientContext);
+
+                empBasicinfo = emp.GetAllEmployee(clientContext);
+                user = username.Getusergroup(clientContext);
+                
+                //emp_manager = empmanager.GetManager(clientContext);
             }
             ViewBag.company = emp_Company;
             ViewBag.designation = emp_designation;
@@ -96,45 +109,121 @@ namespace VarshaWeb.Controllers.EmployeeManagement
             ViewBag.division = emp_division;
             ViewBag.Branch = emp_Branch;
             ViewBag.Region = emp_Region;
-            ViewBag.manager = empmanager;
+            ViewBag.emp = empBasicinfo;
+            ViewBag.username = user;
+             Session["managercode"] = empBasicinfo;
+            // ViewBag.empmanager = emp_manager;
             return View();
         }
         [HttpPost]
-        
-        public ActionResult SaveInfo(Emp_BasicInfoModels EmpInfo)
-        {
-                var spContext = SharePointContextProvider.Current.GetSharePointContext(HttpContext);
-                using (var clientContext = spContext.CreateUserClientContextForSPHost())
+      
 
+        public ActionResult SaveInfo(Emp_BasicInfoModel EmpInfo)
+        {
+           string returnID = "0";
+            //   string ID = Request.Cookies["ID"].Value.ToString();
+            List<Emp_BasicInfoModel> empBasicinfo = (List<Emp_BasicInfoModel>)Session["managercode"];
+
+         //   Emp_BasicInfoBal emp = new Emp_BasicInfoBal();
+
+            var spContext = SharePointContextProvider.Current.GetSharePointContext(HttpContext);
+
+            using (var clientContext = spContext.CreateUserClientContextForSPHost())
+            {
+                foreach(Emp_BasicInfoModel emparr in empBasicinfo)
                 {
+                    if (emparr.UserNameId == EmpInfo.Manager)
+                    {
+                        EmpInfo.Manager = (emparr.ID).ToString();
+                      
+                        EmpInfo.ManagerCode = emparr.EmpCode;
+                    }
+                    }
+
+                    
+                    
+
+                    {
+
                         string itemdata = " 'FirstName' : '" + EmpInfo.FirstName + "',";
                         itemdata += "'MiddleName': '" + EmpInfo.MiddleName + "',";
                         itemdata += "'LastName': '" + EmpInfo.LastName + "',";
                         itemdata += "'EmpCode': '" + EmpInfo.EmpCode + "',";
                         itemdata += "'JoiningDate': '" + EmpInfo.JoiningDate + "',";
                         itemdata += "'DOB': '" + EmpInfo.DOB + "',";
-                        itemdata += "'Gender': '" + EmpInfo.MiddleName + "',";
+                        itemdata += "'Gender': '" + EmpInfo.Gender + "',";
                         itemdata += "'MaritalStatus': '" + EmpInfo.MaritalStatus + "',";
                         itemdata += "'OnProbationTill': '" + EmpInfo.OnProbationTill + "',";
                         itemdata += "'ProbationStatus': '" + EmpInfo.ProbationStatus + "',";
-                       // itemdata += "'ManagerId': '" + EmpInfo.Manager + "',";
+                           itemdata += "'ManagerId': " + EmpInfo.Manager + ",";
+                    //itemdata += "'ManagerId': '" + EmpInfo.Manager + "',";
+                        itemdata += "'ManagerCode':  '" + EmpInfo.ManagerCode + "',";
+
                         itemdata += "'OfficeEmail': '" + EmpInfo.OfficeEmail + "',";
                         itemdata += "'ContactNumber': '" + EmpInfo.ContactNumber + "',";
-                        itemdata += "'EmpStatus': '" + EmpInfo.EmpStatus + "',";
+                       // itemdata += "'EmpStatus': '" + EmpInfo.EmpStatus + "',";
                         itemdata += "'CompanyId': '" + EmpInfo.Company + "',";
                         itemdata += "'DesignationId': '" + EmpInfo.Designation + "',";
                         itemdata += "'DepartmentId': '" + EmpInfo.Department + "',";
                         itemdata += "'DivisionId': '" + EmpInfo.Division + "',";
                         itemdata += "'RegionId': '" + EmpInfo.Region + "',";
-                        itemdata += "'BranchId': '" + EmpInfo.Branch + "'";
-                      //  itemdata += "'User_Name': '" + EmpInfo.User_Name + "'";
-                       
-                emp.saveEmp(clientContext, itemdata);
-                }
-                return View();
+                        itemdata += "'BranchId': '" + EmpInfo.Branch + "',";
+                    itemdata += "'User_NameId': " + EmpInfo.User_Name + "";
+                   
+                        emp.saveEmp(clientContext, itemdata);
+                    }
+            }
+            return Json(returnID, JsonRequestBehavior.AllowGet);
+        }
 
+
+        //update Employee data
+        /*  public ActionResult UpdateInfo(Emp_BasicInfoModel EmpInfo)
+          {
+          }  */
           
-        } 
+       /*     public ActionResult EmployeeEdit(Emp_BasicInfoModel empinfoedit)
+        {
+            int ID = Convert.ToInt32(TempData["mytempdata"]);
+            return View();
+
+        } */
+       [HttpGet]
+        public ActionResult EmployeeEdit()
+        {
+
+
+            //   TempData.Add("mytempdata", ID);
+            //  return Json(ID, JsonRequestBehavior.AllowGet);
+
+             string EditEmployeeID = Request.Cookies["EditEmployeeID"].Value;
+              Emp_BasicInfoBal EmpDashBal = new Emp_BasicInfoBal();
+
+              List<Emp_BasicInfoModel> empEdit = new List<Emp_BasicInfoModel>();
+              var spContext = SharePointContextProvider.Current.GetSharePointContext(HttpContext);
+              using (var clientContext = spContext.CreateUserClientContextForSPHost())
+              {
+                  empEdit = EmpDashBal.GeEmployeeById(clientContext, EditEmployeeID);
+
+              }
+              ViewBag.Empdata = empEdit;
+
+              return View(); 
+
+           /* string empid = Request.Cookies["ID"].Value.ToString();
+            
+            var spContext = SharePointContextProvider.Current.GetSharePointContext(HttpContext);
+            using (var clientContext = spContext.CreateUserClientContextForSPHost())
+            {
+                empBasicinfo = emp.GeEmployeeById(clientContext, empid.ToString());
+            }
+            var empdata = empBasicinfo.Where(s => s.ID == Convert.ToInt32(empid)).FirstOrDefault();
+            return View(empdata); */
+
+        }
+
+
+
     }
 
 }
