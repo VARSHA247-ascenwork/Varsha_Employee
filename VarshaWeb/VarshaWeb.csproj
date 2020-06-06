@@ -240,6 +240,8 @@
     <Compile Include="Models\EmployeeManagement\Emp_VendorMasterDetailsModel.cs" />
     <Compile Include="Models\EmployeeManagement\Emp_VisaInformationModel.cs" />
     <Compile Include="Models\EmployeeManagement\Emp_WorkExperienceModel.cs" />
+    <Compile Include="Models\EmployeeManagement\ViewModels\ViewEmp_BasicInfoModel.cs" />
+    <Compile Include="Models\EmployeeManagement\ViewModels\ViewEmp_CompanyMasterModel.cs" />
     <Compile Include="Models\NavigationModel.cs" />
     <Compile Include="Models\RESTOption.cs" />
     <Compile Include="Models\UserGroupModel.cs" />
@@ -9193,6 +9195,7 @@
     <Content Include="Views\EmployeeDashboard\Index.cshtml" />
     <Content Include="Views\EmployeeDashboard\EmployeeDetails.cshtml" />
     <Content Include="Views\EmployeeDashboard\EmployeeEdit.cshtml" />
+    <Content Include="Views\EmployeeDashboard\EmployeeBasicEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -9,6 +9,10 @@ EmployeeServiceModule.service('EmployeeService', function ($http, CommonAppUtili
 
         return CommonAppUtilityService.CreateItem("/EmployeeDashboard/SaveInfo", option);
     }
+    this.EmpPostdata = function (option) {
+
+        return CommonAppUtilityService.CreateItem("/EmployeeDashboard/UpdateInfo", option);
+    }
 });
 
 

@@ -20,5 +20,6 @@ namespace VarshaWeb.Models.EmployeeManagement
         public string City { get; set; }
         public string State { get; set; }
         public string Country { get; set; }
+        // public IEnumerable<Emp_CompanyMasterModel> CompanyName { get; set; }
     }
 }

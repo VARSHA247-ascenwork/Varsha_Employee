@@ -20,22 +20,22 @@
 <link href="~/assets/css/style-dark.css" rel="stylesheet">
 <!-- breadcrumb -->
 <!-- row -->
-
-<div class="breadcrumb-header justify-content-between">
-    <div class="my-auto">
-        <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">Employee Managment</h4><span class="text-muted mt-1 tx-13 ml-2 mb-0">/ Employee Master Dashboard</span>
+<form id="AddEmployeeDetailForm" ng-app="EmployeeApp" ng-controller="EmployeeController">
+    <div class="breadcrumb-header justify-content-between">
+        <div class="my-auto">
+            <div class="d-flex">
+                <h4 class="content-title mb-0 my-auto">Employee Managment</h4><span class="text-muted mt-1 tx-13 ml-2 mb-0">/ Employee Master Dashboard</span>
+            </div>
         </div>
     </div>
-</div>
-<!-- breadcrumb -->
-<!-- row -->
+    <!-- breadcrumb -->
+    <!-- row -->
 
-<div class="row">
-    <div class="col-xl-12 col-lg-12">
-        <!--Dashboard Code start-->
-        <div class="card mg-b-20">
-            <div class="row" ng-app="EmployeeApp" ng-controller="EmployeeController">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12">
+            <!--Dashboard Code start-->
+            <div class="card mg-b-20">
+
                 <div class="card-body">
                     <!--<div>
                         <h6 class="card-title mb-1">Entry Page</h6>
@@ -47,89 +47,98 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="First_Name">First Name</label>
-                                        <input type="text" class="form-control" ng-model="ngtxtfirstname" id="First_Name" placeholder="Enter First_Name">
+                                        <input required="" type="text" class="form-control" ng-model="ngtxtfirstname" id="First_Name" placeholder="Enter First_Name">
                                     </div>
 
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="Middle_Name">Middle Name</label>
-                                        <input type="text" class="form-control" ng-model="ngtxtMiddlename" id="Middle_Name" placeholder="Enter Middle_Name">
+                                        <input required="" type="text" class="form-control" ng-model="ngtxtMiddlename" id="Middle_Name" placeholder="Enter Middle_Name">
                                     </div>
                                 </div>
                             </div>
                             <div class="row row-sm">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="First_Name">Last Name</label>
-                                        <input type="text" class="form-control" ng-model="ngtxtlastname" id="Last_Name" placeholder="Enter Last_Name">
+                                        <label for="Last_Name">Last Name</label>
+                                        <input required="" type="text" class="form-control" ng-model="ngtxtlastname" id="Last_Name" placeholder="Enter Last_Name">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="Middle_Name">Emp Code</label>
-                                        <input type="text" class="form-control" ng-model="ngtxtEmpcode" id="Middle_Name" placeholder="Enter Emp_Code">
+                                        <label for="Empcode">Emp Code</label>
+                                        <input required="" type="text" class="form-control" ng-model="ngtxtEmpcode" id="Middle_Name" placeholder="Enter Emp_Code">
                                     </div>
                                 </div>
                             </div>
                             <div class="row row-sm">
                                 <div class="col-lg-6">
-                                    <label for="exampleInputPassword1">Joining Date</label>
+                                    <label for="Joiningdate">Joining Date</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
                                             </div>
-                                        </div><input class="form-control" ng-model="ngtxtJoiningdate" id="datetimepicker" type="text" value="2018-12-20 21:05">
+                                        </div><input required="" class="form-control" ng-model="ngtxtJoiningdate" id="datetimepicker" type="text" value="2018-12-20 21:05">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Date Of Birth</label>
+                                        <label for="DateOfBirth">Date Of Birth</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
                                                     <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
                                                 </div>
-                                            </div><input class="form-control" ng-model="ngtxtDOB" id="datetimepicker1" type="text" value="2018-12-20 21:05">
+                                            </div><input required="" class="form-control" ng-model="ngtxtDOB" id="datetimepicker1" type="text" value="2018-12-20 21:05">
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row row-sm">
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Gender</label>
-                                        <select class="form-control select2" ng-model="ngddlGender">
-                                            <option label="Choose one">
-                                            </option>
-                                            <option value="Male">
-                                                Male
-                                            </option>
-                                            <option value="Female">
-                                                Female
-                                            </option>
+                                        <div id="slWrapper" class="parsley-select">
+                                            <select required="" class="form-control select2" ng-model="ngddlGender" data-parsley-class-handler="#slWrapper" data-parsley-errors-container="#slErrorContainer">
+                                                <option value="">
+                                                    Choose one
+                                                </option>
+                                                <option value="Male">
+                                                    Male
+                                                </option>
+                                                <option value="Female">
+                                                    Female
+                                                </option>
 
-                                        </select>
+                                            </select>
+                                        </div>
+                                        <div id="slErrorContainer"></div>
                                     </div>
-                                </div>
+                                    </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Marial Status</label>
-                                        <select class="form-control select2" ng-model="ngdddlMarialstatus">
-                                            <option label="Choose one">
-                                            </option>
-                                            <option value="Married">
-                                                Married
-                                            </option>
-                                            <option value="UnMarried">
-                                                UnMarried
-                                            </option>
+                                        <div id="slWrapperMarrial" class="parsley-select">
+                                            <select required="" class="form-control select2" ng-model="ngdddlMarialstatus" data-parsley-class-handler="#slWrapperMarrial" data-parsley-errors-container="#slErrorContainermarrial">
+                                                <option value="">
+                                                    Choose one
+                                                </option>
+                                                <option value="Married">
+                                                    Married
+                                                </option>
+                                                <option value="UnMarried">
+                                                    UnMarried
+                                                </option>
 
-                                        </select>
+                                            </select>
+                                        </div>
+                                        <div id="slErrorContainermarrial"></div>
                                     </div>
 
-                                </div>
+                                    </div>
                             </div>
                         </div>
                         <div class="row row-sm">
@@ -140,51 +149,57 @@
                                         <div class="input-group-text">
                                             <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
                                         </div>
-                                    </div><input class="form-control" id="datetimepicker2" ng-model="ngtxtProbationtill" type="text" value="2018-12-20 21:05">
+                                    </div><input required="" class="form-control" id="datetimepicker2" ng-model="ngtxtProbationtill" type="text" value="2018-12-20 21:05">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Probation Status</label>
-                                    <select class="form-control select2" ng-model="ngddlProbationstatus">
-                                        <option label="Choose one">
-                                        </option>
-                                        <option value="Probation">
-                                            Probation
-                                        </option>
-                                        <option value="Confirmed">
-                                            Confirmed
-                                        </option>
+                                    <div id="slWrapperProbation" class="parsley-select">
+                                        <select required="" class="form-control select2" ng-model="ngddlProbationstatus" data-parsley-class-handler="#slWrapperProbation" data-parsley-errors-container="#slErrorContainerProbation">
+                                            <option value="">
+                                                Choose one
+                                            </option>
+                                            <option value="Probation">
+                                                Probation
+                                            </option>
+                                            <option value="Confirmed">
+                                                Confirmed
+                                            </option>
 
-                                    </select>
+                                        </select>
+                                    </div>
+                                    <div id="slErrorContainerProbation"></div>
                                 </div>
-                            </div>
+                                </div>
                         </div>
                         <div class="row row-sm">
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Manager</label>
-                                    <select required="" class="form-control select2" name="EmployeeName" ng-model="ngddlManager">
-                                        <option value="">
+                                    <div id="slWrapperManager" class="parsley-select">
+                                        <select required="" class="form-control select2" name="EmployeeName" ng-model="ngddlManager" data-parsley-class-handler="#slWrapperManager" data-parsley-errors-container="#slErrorContainermanager">
+                                            <option value="">
 
-                                            Choose one
-                                        </option>
-                                        @foreach (var obj in ViewBag.emp)
-                                        {
-                                            <option value="@obj.UserNameId">
-                                                @obj.User_Name
+                                                Choose one
                                             </option>
-                                        }
-                                    </select>
+                                            @foreach (var obj in ViewBag.emp)
+                                            {
+                                                <option value="@obj.UserNameId">
+                                                    @obj.User_Name
+                                                </option>
+                                            }
+                                        </select>
 
-
+                                    </div>
+                                    <div id="slErrorContainermanager"></div>
 
                                 </div>
-                            </div>
+                                </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="Middle_Name">Office Mail</label>
-                                    <input type="text" class="form-control" ng-model="ngtxtOfficemail" id="Middle_Name" placeholder="Enter Office_Mail">
+                                    <input required="" type="text" class="form-control" ng-model="ngtxtOfficemail" id="Middle_Name" placeholder="Enter Office_Mail">
                                 </div>
                             </div>
                         </div>
@@ -201,7 +216,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="Telephone_Number">Telephone Number</label>
-                                    <input type="text" class="form-control" ng-model="ngtxtmobileno" id="Telephone_Number" placeholder="Enter Telephone_Number">
+                                    <input type="text" required="" class="form-control" ng-model="ngtxtmobileno" id="Telephone_Number" placeholder="Enter Telephone_Number">
                                 </div>
                             </div>
                         </div>
@@ -209,127 +224,156 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Company</label>
-                                    <select class="form-control select2" ng-model="ngddlCompany">
-                                        <option label="Choose company">
-                                        </option>
-                                        @foreach (VarshaWeb.Models.EmployeeManagement.Emp_CompanyMasterModel company in (List<VarshaWeb.Models.EmployeeManagement.Emp_CompanyMasterModel>)ViewBag.company)
-                                        {
-                                            <option value="@company.ID">
-                                                @company.CompanyName
+                                    <div id="slWrapperComapany" class="parsley-select">
+                                        <select required="" class="form-control select2" ng-model="ngddlCompany" data-parsley-class-handler="#slWrapperComapany" data-parsley-errors-container="#slErrorContainerCompany">
+                                            <option value="">
+                                                Choose one
                                             </option>
-                                        }
-                                    </select>
+                                            @foreach (VarshaWeb.Models.EmployeeManagement.Emp_CompanyMasterModel company in (List<VarshaWeb.Models.EmployeeManagement.Emp_CompanyMasterModel>)ViewBag.company)
+                                            {
+                                                <option value="@company.ID">
+                                                    @company.CompanyName
+                                                </option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div id="slErrorContainerCompany"></div>
                                 </div>
-                            </div>
+                                </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Designation</label>
-                                    <select class="form-control select2" ng-model="ngddlDesignation">
-                                        <option label="Choose Designation">
-                                        </option>
-                                        @foreach (VarshaWeb.Models.EmployeeManagement.Emp_DesignationModel designation in (List<VarshaWeb.Models.EmployeeManagement.Emp_DesignationModel>)ViewBag.designation)
-                                        {
-                                            <option value="@designation.ID">
-                                                @designation.Designation
+                                    <div id="slWrapperDesignation" class="parsley-select">
+                                        <select required="" class="form-control select2" ng-model="ngddlDesignation" data-parsley-class-handler="#slWrapperDesignation" data-parsley-errors-container="#slErrorContainerDesignation">
+                                            <option value="">
+                                                Choose one
                                             </option>
-                                        }
-                                    </select>
+                                            @foreach (VarshaWeb.Models.EmployeeManagement.Emp_DesignationModel designation in (List<VarshaWeb.Models.EmployeeManagement.Emp_DesignationModel>)ViewBag.designation)
+                                            {
+                                                <option value="@designation.ID">
+                                                    @designation.Designation
+                                                </option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div id="slErrorContainerDesignation"></div>
                                 </div>
 
-                            </div>
+                                </div>
                         </div>
                         <div class="row row-sm">
                             <div class="col-lg-6">
                                 <div class="form-group">
+
                                     <label for="exampleInputPassword1">Department</label>
-                                    <select class="form-control select2" ng-model="ngddlDepartment">
-                                        <option label="Choose Department">
-                                        </option>
-                                        @foreach (VarshaWeb.Models.EmployeeManagement.Emp_DepartmentModel department in (List<VarshaWeb.Models.EmployeeManagement.Emp_DepartmentModel>)ViewBag.department)
-                                        {
-                                            <option value="@department.ID">
-                                                @department.DepartmentName
+                                    <div id="slWrapperDepartment" class="parsley-select">
+                                        <select required="" class="form-control select2" ng-model="ngddlDepartment" data-parsley-class-handler="#slWrapperDepartment" data-parsley-errors-container="#slErrorContainerDepartment">
+                                            <option value="">
+                                                Choose one
                                             </option>
-                                        }
-                                    </select>
+                                            @foreach (VarshaWeb.Models.EmployeeManagement.Emp_DepartmentModel department in (List<VarshaWeb.Models.EmployeeManagement.Emp_DepartmentModel>)ViewBag.department)
+                                            {
+                                                <option value="@department.ID">
+                                                    @department.DepartmentName
+                                                </option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div id="slErrorContainerDepartment"></div>
                                 </div>
-                            </div>
+                                </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Division</label>
-                                    <select class="form-control select2" ng-model="ngddlDivision">
-                                        <option label="Choose Division">
-                                        </option>
-                                        @foreach (VarshaWeb.Models.EmployeeManagement.Emp_DivisionModel division in (List<VarshaWeb.Models.EmployeeManagement.Emp_DivisionModel>)ViewBag.division)
-                                        {
-                                            <option value="@division.ID">
-                                                @division.Division
+                                    <div id="slWrapperDivision" class="parsley-select">
+                                        <select required="" class="form-control select2" ng-model="ngddlDivision" data-parsley-class-handler="#slWrapperDivision" data-parsley-errors-container="#slErrorContainerDivision">
+                                            <option value="">
+                                                Choose one
                                             </option>
-                                        }
-                                    </select>
+                                            @foreach (VarshaWeb.Models.EmployeeManagement.Emp_DivisionModel division in (List<VarshaWeb.Models.EmployeeManagement.Emp_DivisionModel>)ViewBag.division)
+                                            {
+                                                <option value="@division.ID">
+                                                    @division.Division
+                                                </option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div id="slErrorContainerDivision"></div>
                                 </div>
 
-                            </div>
+                                </div>
                         </div>
                         <div class="row row-sm">
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Region</label>
-                                    <select class="form-control select2" ng-model="ngddlRegion">
-                                        <option label="Choose company">
-                                        </option>
-                                        @foreach (VarshaWeb.Models.EmployeeManagement.Emp_RegionModel Region in (List<VarshaWeb.Models.EmployeeManagement.Emp_RegionModel>)ViewBag.Region)
-                                        {
-                                            <option value="@Region.ID">
-                                                @Region.Region
+                                    <div id="slWrapperRegion" class="parsley-select">
+                                        <select required="" class="form-control select2" ng-model="ngddlRegion" data-parsley-class-handler="#slWrapperRegion" data-parsley-errors-container="#slErrorContainerRegion">
+                                            <option value="">
+                                                Choose one
                                             </option>
-                                        }
-                                    </select>
+                                            @foreach (VarshaWeb.Models.EmployeeManagement.Emp_RegionModel Region in (List<VarshaWeb.Models.EmployeeManagement.Emp_RegionModel>)ViewBag.Region)
+                                            {
+                                                <option value="@Region.ID">
+                                                    @Region.Region
+                                                </option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div id="slErrorContainerRegion"></div>
                                 </div>
-                            </div>
+                                </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Branch</label>
-                                    <select class="form-control select2" ng-model="ngddlBranch">
-                                        <option label="Choose Branch">
-                                        </option>
-                                        @foreach (VarshaWeb.Models.EmployeeManagement.Emp_BranchModel Branch in (List<VarshaWeb.Models.EmployeeManagement.Emp_BranchModel>)ViewBag.Branch)
-                                        {
-                                            <option value="@Branch.ID">
-                                                @Branch.Branch
+                                    <div id="slWrapperBranch" class="parsley-select">
+                                        <select required="" class="form-control select2" ng-model="ngddlBranch" data-parsley-class-handler="#slWrapperBranch" data-parsley-errors-container="#slErrorContainerBranch">
+                                            <option value="">
+                                                Choose one
                                             </option>
-                                        }
-                                    </select>
+                                            @foreach (VarshaWeb.Models.EmployeeManagement.Emp_BranchModel Branch in (List<VarshaWeb.Models.EmployeeManagement.Emp_BranchModel>)ViewBag.Branch)
+                                            {
+                                                <option value="@Branch.ID">
+                                                    @Branch.Branch
+                                                </option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div id="slErrorContainerBranch"></div>
                                 </div>
 
-                            </div>
+                                </div>
                         </div>
 
-                         <div class="row row-sm">
-            <div class="col-lg-6">
+                        <div class="row row-sm">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">User Name</label>
-                                    <select required="" class="form-control select2" name="username" ng-model="ngddluser">
-                                        <option value="">
-                                        </option>
-                                        @foreach (VarshaWeb.Models.UserGroupModel user in (List<VarshaWeb.Models.UserGroupModel>)ViewBag.username)
-                                        {
-                                            <option value="@user.ID">
-                                                @user.Title
-                                            </option>
-                                        }
-                                    </select>
+                                    <div id="slWrapper" class="parsley-select">
+                                        <div id="slWrapperUsername" class="parsley-select">
+                                            <select required="" class="form-control select2" name="username" ng-model="ngddluser" data-parsley-class-handler="#slWrapperUsername" data-parsley-errors-container="#slErrorContainerUsername">
+                                                <option value="">
+                                                    Choose One
+                                                </option>
+                                                @foreach (VarshaWeb.Models.UserGroupModel user in (List<VarshaWeb.Models.UserGroupModel>)ViewBag.username)
+                                                {
+                                                    <option value="@user.ID">
+                                                        @user.Title
+                                                    </option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <div id="slErrorContainerUsername"></div>
+                                    </div>
 
-
-
+                                    </div>
                                 </div>
-                            </div>
 
-        </div> 
+                        </div>
                     </div>
-                    <div class="row row-sm text-center">
+                    <div class="row row-sm text-center justify-content-center">
                         <div class="col-sm-6 col-md-3 mg-t-10">
-                            <button class="btn btn-primary btn-block" ng-click="Save()">Submit</button>
+                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
                         </div>
                         <div class="col-sm-6 col-md-3 mg-t-10">
                             <button class="btn btn-secondary btn-block">Cancel</button>
@@ -340,41 +384,42 @@
                 </div>
 
 
-
             </div>
-            <!--Dashboard Code End-->
         </div>
     </div>
-</div>
-@section scripts {
+</form>
+    @section scripts {
 
-    <!-- Internal Select2.min js -->
-    <script src="../assets/plugins/select2/js/select2.min.js"></script>
-    <script src="../assets/js/select2.js"></script>
+        <!-- Internal Select2.min js -->
+        <script src="../assets/plugins/select2/js/select2.min.js"></script>
+        <script src="../assets/js/select2.js"></script>
 
-    <!-- Internal TelephoneInput js-->
-    <script src="../assets/plugins/telephoneinput/telephoneinput.js"></script>
-    <script src="../assets/plugins/telephoneinput/inttelephoneinput.js"></script>
+        <!--Internal  Parsley.min js -->
+        <script src="../assets/plugins/parsleyjs/parsley.min.js"></script>
 
-    <!--Internal  jquery-simple-datetimepicker js -->
-    <script src="../assets/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js"></script>
-    <script src="../assets/js/datePicker.js"></script>
+        <!-- Internal TelephoneInput js-->
+        <script src="../assets/plugins/telephoneinput/telephoneinput.js"></script>
+        <script src="../assets/plugins/telephoneinput/inttelephoneinput.js"></script>
 
-    <script>
-        $('#datetimepicker1').datetimepicker({
-            minView: 2,
-            format: 'dd-mm-yyyy',
-            autoclose: true
-        });
-        $('#datetimepicker2').datetimepicker({
-            minView: 2,
-            format: 'dd-mm-yyyy',
-            autoclose: true
-        });
-    </script>
-    <script src="~/Scripts/Angular/EmployeeManagement/Services/EmployeeRequestServices.js"></script>
-    <script src="~/Scripts/Angular/EmployeeManagement/JS/EmployeeRequest.js"></script>
+        <!--Internal  jquery-simple-datetimepicker js -->
+        <script src="../assets/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js"></script>
+        <script src="../assets/js/datePicker.js"></script>
+
+        <script>
+            $('#datetimepicker1').datetimepicker({
+                minView: 2,
+                format: 'dd-mm-yyyy',
+                autoclose: true
+            });
+            $('#datetimepicker2').datetimepicker({
+                minView: 2,
+                format: 'dd-mm-yyyy',
+                autoclose: true
+            });
+        </script>
+        <script src="~/Scripts/Angular/EmployeeManagement/Services/EmployeeRequestServices.js"></script>
+        <script src="~/Scripts/Angular/EmployeeManagement/JS/EmployeeRequest.js"></script>
 
 
 
-}
+    }

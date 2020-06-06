@@ -11,6 +11,7 @@ using Newtonsoft.Json.Linq;
 using VarshaWeb.Models.EmployeeManagement;
 using VarshaWeb.DAL;
 using VarshaWeb.Models;
+using System.Collections;
 
 namespace VarshaWeb.BAL.EmployeeManagement
 {
@@ -50,5 +51,7 @@ namespace VarshaWeb.BAL.EmployeeManagement
 
             return jArray;
         }
+
+        
     }
 }

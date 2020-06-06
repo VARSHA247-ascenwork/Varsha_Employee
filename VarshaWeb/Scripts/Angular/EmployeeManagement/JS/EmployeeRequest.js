@@ -5,7 +5,21 @@
 EmployeeApp.controller('EmployeeController', function ($scope, EmployeeService) {
 
 
-    
+    // validate function
+    $(function () {
+        'use strict'
+        //validation
+        $('#AddEmployeeDetailForm').parsley().on('field:validated', function () {
+            var ok = $('.parsley-error').length === 0;
+            $('.bs-callout-info').toggleClass('hidden', !ok);
+            $('.bs-callout-warning').toggleClass('hidden', ok);
+        })
+            .on('form:submit', function () {
+                $scope.Save();
+               // $scope.updateEmp();
+                return false;
+            });
+    });
 
     $scope.Save = function () {
         var Items = {
@@ -40,7 +54,26 @@ EmployeeApp.controller('EmployeeController', function ($scope, EmployeeService) 
         });
     }
 
+
+  /*  $scope.updateEmp = function () {
+        var Items = {
+            ID: $scope.ID,
+            FirstName: $scope.ngtxtfirstname,
+            MiddleName: $scope.ngtxtMiddlename,
+            LastName: $scope.ngtxtlastname,
+            EmpCode: $scope.ngtxtEmpcode,
+            
+
+        }
+        EmployeeService.EmpPostdata(Items, ID).then(function (response) {
+
+
+        });
+    }*/
    
+    $scope.addEmployee = function () {
+        Pageredirect("/EmployeeDashboard/AddEmployeeBasicInfo");
+    }
 
   /* $scope.EditEmployee = function (id) {
        

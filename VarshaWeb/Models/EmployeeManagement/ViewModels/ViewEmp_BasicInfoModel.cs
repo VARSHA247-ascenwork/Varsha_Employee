@@ -5,9 +5,10 @@ using System.Web;
 
 namespace VarshaWeb.Models.EmployeeManagement
 {
-    public class Emp_BasicInfoModel
+    public class ViewEmp_BasicInfoModel
     {
-        public int ID { get; set; }
+        public int SelectedCompanyID { get; set; }
+      
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
@@ -21,21 +22,16 @@ namespace VarshaWeb.Models.EmployeeManagement
         public string OfficeEmail { get; set; }
         public string ContactNumber { get; set; }
         public string EmpStatus { get; set; }
-         public int CompanyId { get; set; }
-        public string Company { get; set; }
-        public int DesignationId { get; set; }
-        public string Designation { get; set; }
-        public int DepartmentId { get; set; }
-        public string Department { get; set; }
-        public int DivisionId { get; set; }
-        public string Division { get; set; }
-        public int RegionId { get; set; }
-        public string Region { get; set; }
-        public int BranchId { get; set; }
-        public string Branch { get; set; }
+        public IEnumerable<Emp_CompanyMasterModel> company { get; set; }
+        public IEnumerable<Emp_DesignationModel> Designation { get; set; }
+        public IEnumerable<Emp_DepartmentModel> Department { get; set; }
+        public IEnumerable<Emp_DivisionModel> Division { get; set; }
+        public IEnumerable<Emp_RegionModel> Region { get; set; }
+        public IEnumerable<Emp_BranchModel> Branch { get; set; }
+        public IEnumerable<UserGroupModel> User_Name { get; set; }
         public string ManagerCode { get; set; }
-        public string User_Name { get; set; }
-       public string UserNameId { get; set; }
+        
+        public string UserNameId { get; set; }
         public string Manager { get; set; }
         public int ManagerId { get; set; }
         public string Profile_pic_url { get; set; }
@@ -48,5 +44,7 @@ namespace VarshaWeb.Models.EmployeeManagement
         public string DOB_Months { get; set; }
         public string JoiningDate_Month { get; set; }
 
+      
+        // public IEnumerable<Emp_CompanyMasterModel> CompanyName { get; set; }
     }
 }
