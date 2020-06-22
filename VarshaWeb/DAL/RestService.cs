@@ -168,12 +168,9 @@ namespace VarshaWeb.DAL
             {
                 RetrieveAccessToken(ctx);
 
-                XmlNamespaceManager xmlnspm = AddXmlNameSpaces();
                 string listUrl = RestUrlList(ListName);
-
+                XmlNamespaceManager xmlnspm = AddXmlNameSpaces();
                 string Metadata = GetEntityTypeName(ctx.Url, listUrl, xmlnspm);
-
-                //string Metadata = String.Format("SP.Data.{0}ListItem", ListName);
 
                 string listname = "'__metadata':{ 'type': '" + Metadata + "'}";
 
@@ -213,6 +210,159 @@ namespace VarshaWeb.DAL
             }
         }
 
+
+        public string DeleteItem(ClientContext ctx, string ListName, string ID)
+        {
+            var responseText = "";
+            try
+            {
+
+                RetrieveAccessToken(ctx);
+                XmlNamespaceManager xmlnspm = AddXmlNameSpaces();
+                var formDigestNode = GetFormDigest(ctx.Url, xmlnspm);
+                string formDigest = formDigestNode.InnerXml;
+
+                string listUrl = RestUrlList(ListName);
+
+                var Url = ctx.Url + "/_api/web/lists/getByTitle('" + ListName + "')/items(" + ID + ")";
+                HttpWebRequest ItemRequest;
+                ItemRequest = (HttpWebRequest)HttpWebRequest.Create(Url);
+                ItemRequest.Method = "POST";
+                ItemRequest.Headers.Add("X-HTTP-Method", "DELETE");
+                ItemRequest.Headers.Add("IF-MATCH", "*");
+                ItemRequest.Headers.Add("Authorization", accessToken);
+                ItemRequest.Headers.Add("X-RequestDigest", formDigest);
+                using (Stream itemRequestStream = ItemRequest.GetRequestStream())
+                {
+                    itemRequestStream.Close();
+                }
+                using (HttpWebResponse itemResponse = (HttpWebResponse)ItemRequest.GetResponse()) ;
+
+                return responseText;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(string.Format("An error occured while reading data. GUID: {0}", ex.ToString()));
+            }
+        }
+
+        public int UploadDocument(ClientContext ctx, string ListName, HttpPostedFileBase files, string ItemData)
+        {
+            RetrieveAccessToken(ctx);
+            int fileId = 0;
+            XmlNamespaceManager xmlnspm = AddXmlNameSpaces();
+            var formDigestNode = GetFormDigest(ctx.Url, xmlnspm);
+            string formDigest = formDigestNode.InnerXml;
+            var postedFile = files;
+
+            byte[] fileData = null;
+            using (var binaryReader = new BinaryReader(postedFile.InputStream))
+            {
+                fileData = binaryReader.ReadBytes(postedFile.ContentLength);
+            }
+
+            string NewFileWithExtention = string.Empty;
+            var FileName = new FileInfo(postedFile.FileName).Name;
+
+            string filename = string.Concat(FileName.Substring(0, FileName.Length - Path.GetExtension(FileName).Length), "_", DateTime.Now.ToString("yyyyMMddHHmmss"));
+            NewFileWithExtention = string.Concat(filename, Path.GetExtension(FileName));
+
+            string url = ctx.Url + "/_api/Web/Lists/getByTitle('" + ListName + "')/RootFolder/Files/Add(url='" + NewFileWithExtention + "', overwrite=false)?$expand=ListItemAllFields";
+
+            HttpWebRequest endpointRequest = (HttpWebRequest)HttpWebRequest.Create(url);
+            endpointRequest.Method = "POST";
+            endpointRequest.Accept = "application/json;odata=verbose";
+            endpointRequest.ContentType = "application/json;odata=verbose";
+            endpointRequest.Headers.Add("binaryStringRequestBody", "true");
+            endpointRequest.Headers.Add("Authorization", accessToken);
+            endpointRequest.Headers.Add("X-RequestDigest", formDigest);
+            endpointRequest.Credentials = System.Net.CredentialCache.DefaultCredentials;
+            endpointRequest.GetRequestStream().Write(fileData, 0, fileData.Length);
+            try
+            {
+                HttpWebResponse endpointresponse = (HttpWebResponse)endpointRequest.GetResponse();
+                using (StreamReader reader = new StreamReader(endpointresponse.GetResponseStream()))
+                {
+                    string response = reader.ReadToEnd();
+                    JObject jobj = JObject.Parse(response);
+                    if (!string.IsNullOrEmpty(Convert.ToString(jobj)))
+                        fileId = Convert.ToInt32(Convert.ToString(jobj["d"]["ListItemAllFields"]["ID"]));
+                    if (ItemData != "" && ItemData != null)
+                    {
+                        UpdateItem(ctx, ListName, ItemData, fileId.ToString());
+                    }
+
+                }
+
+            }
+            catch (WebException ex)
+            {
+
+
+            }
+
+            return fileId;
+        }
+
+        public string UploadDocumentIntranet(ClientContext ctx, string ListName, HttpPostedFileBase files, string ItemData)
+        {
+            RetrieveAccessToken(ctx);
+            //int fileId = 0;
+            string fileId = "";
+            XmlNamespaceManager xmlnspm = AddXmlNameSpaces();
+            var formDigestNode = GetFormDigest(ctx.Url, xmlnspm);
+            string formDigest = formDigestNode.InnerXml;
+            var postedFile = files;
+
+            byte[] fileData = null;
+            using (var binaryReader = new BinaryReader(postedFile.InputStream))
+            {
+                fileData = binaryReader.ReadBytes(postedFile.ContentLength);
+            }
+
+            string NewFileWithExtention = string.Empty;
+            var FileName = new FileInfo(postedFile.FileName).Name;
+
+            string filename = string.Concat(FileName.Substring(0, FileName.Length - Path.GetExtension(FileName).Length), "_", DateTime.Now.ToString("yyyyMMddHHmmss"));
+            NewFileWithExtention = string.Concat(filename, Path.GetExtension(FileName));
+
+            string url = ctx.Url + "/_api/Web/Lists/getByTitle('" + ListName + "')/RootFolder/Files/Add(url='" + NewFileWithExtention + "', overwrite=false)?$expand=ListItemAllFields";
+
+            HttpWebRequest endpointRequest = (HttpWebRequest)HttpWebRequest.Create(url);
+            endpointRequest.Method = "POST";
+            endpointRequest.Accept = "application/json;odata=verbose";
+            endpointRequest.ContentType = "application/json;odata=verbose";
+            endpointRequest.Headers.Add("binaryStringRequestBody", "true");
+            endpointRequest.Headers.Add("Authorization", accessToken);
+            endpointRequest.Headers.Add("X-RequestDigest", formDigest);
+            endpointRequest.Credentials = System.Net.CredentialCache.DefaultCredentials;
+            endpointRequest.GetRequestStream().Write(fileData, 0, fileData.Length);
+            try
+            {
+                HttpWebResponse endpointresponse = (HttpWebResponse)endpointRequest.GetResponse();
+                using (StreamReader reader = new StreamReader(endpointresponse.GetResponseStream()))
+                {
+                    string response = reader.ReadToEnd();
+                    JObject jobj = JObject.Parse(response);
+                    if (!string.IsNullOrEmpty(Convert.ToString(jobj)))
+                        //fileId = Convert.ToInt32(Convert.ToString(jobj["d"]["ListItemAllFields"]["ID"]));
+                        fileId = Convert.ToString(jobj["d"]["ServerRelativeUrl"]);
+                    if (ItemData != "" && ItemData != null)
+                    {
+                        UpdateItem(ctx, ListName, ItemData, fileId.ToString());
+                    }
+
+                }
+
+            }
+            catch (WebException ex)
+            {
+
+
+            }
+
+            return fileId;
+        }
 
 
         public JArray GetAllUserListList(ClientContext ctx)
@@ -334,5 +484,45 @@ namespace VarshaWeb.DAL
                 throw new Exception(string.Format("An error occured while reading data. GUID: {0}", ""));
             }
         }
+
+        public XmlNode GetFormDigest(string siteUrl, XmlNamespaceManager xmlnspm)
+        {
+            try
+            {
+                var formDigestXML = new XmlDocument();
+                HttpWebRequest contextinfoRequest =
+                    (HttpWebRequest)HttpWebRequest.Create(siteUrl + "/_api/contextinfo");
+                //System.Threading.Thread.Sleep(10000);
+                contextinfoRequest.Method = "POST";
+                contextinfoRequest.ContentType = "application/json;odata=verbose;charset=utf-8";
+                contextinfoRequest.ContentLength = 0;
+
+                contextinfoRequest.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
+                contextinfoRequest.Headers.Add("Authorization", accessToken);
+                CredentialCache myCache = new CredentialCache();
+
+                contextinfoRequest.Credentials = System.Net.CredentialCache.DefaultCredentials;
+                HttpWebResponse contextinfoResponse = (HttpWebResponse)contextinfoRequest.GetResponse();
+
+                using (StreamReader contextinfoReader = new StreamReader(contextinfoResponse.GetResponseStream(), System.Text.Encoding.UTF8))
+                {
+                    formDigestXML.LoadXml(contextinfoReader.ReadToEnd());
+                }
+                //contextinfoRequest.KeepAlive = false;
+                var formDigestNode = formDigestXML.SelectSingleNode("//d:FormDigestValue", xmlnspm);
+                return formDigestNode;
+            }
+            catch (WebException ex)
+            {
+
+                throw new Exception(string.Format("An error occured while reading data. GUID: {0}", ex.ToString()));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(string.Format("An error occured while reading data. GUID: {0}", ex.ToString()));
+            }
+        }
+
+
     }
 }

@@ -35,7 +35,7 @@ namespace VarshaWeb.Models.EmployeeManagement
         public string Branch { get; set; }
         public string ManagerCode { get; set; }
         public string User_Name { get; set; }
-       public string UserNameId { get; set; }
+        public string UserNameId { get; set; }
         public string Manager { get; set; }
         public int ManagerId { get; set; }
         public string Profile_pic_url { get; set; }
@@ -47,6 +47,7 @@ namespace VarshaWeb.Models.EmployeeManagement
         public string Tiktok { get; set; }
         public string DOB_Months { get; set; }
         public string JoiningDate_Month { get; set; }
-
+        
+         public string MobileNo { get; set; }
     }
 }

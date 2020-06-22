@@ -181,6 +181,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BAL\EmployeeManagement\Emp_CountryBal.cs" />
+    <Compile Include="BAL\EmployeeManagement\Emp_Vendor_DocumentBal.cs" />
+    <Compile Include="BAL\EmployeeManagement\Emp_Vendor_State_MasterBal.cs" />
+    <Compile Include="BAL\EmployeeManagement\Emp_VendorMasterDetailsBal.cs" />
     <Compile Include="BAL\EmployeeManagement\Emp_BranchBal.cs" />
     <Compile Include="BAL\EmployeeManagement\Emp_CompanyMasterBal.cs" />
     <Compile Include="BAL\EmployeeManagement\Emp_DepartmentBal.cs" />
@@ -190,6 +194,7 @@
     <Compile Include="BAL\EmployeeManagement\Emp_RegionBal.cs" />
     <Compile Include="BAL\NavigationBal.cs" />
     <Compile Include="BAL\UsersGroup.cs" />
+    <Compile Include="Controllers\EmployeeManagement\EmployeeController.cs" />
     <Compile Include="Controllers\EmployeeManagement\EmployeeDashboardController.cs" />
     <Compile Include="Controllers\EmployeeManagement\VendorDashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -210,6 +215,8 @@
     <Compile Include="Models\EmployeeManagement\Emp_ClientMasterDetailsModel.cs" />
     <Compile Include="Models\EmployeeManagement\Emp_CompanyMasterModel.cs" />
     <Compile Include="Models\EmployeeManagement\Emp_CostCentreModel.cs" />
+    <Compile Include="Models\EmployeeManagement\Emp_Vendor_DocumentModel.cs" />
+    <Compile Include="Models\EmployeeManagement\Emp_Vendor_State_MasterModel.cs" />
     <Compile Include="Models\EmployeeManagement\Emp_CountryModel.cs" />
     <Compile Include="Models\EmployeeManagement\Emp_DepartmentModel.cs" />
     <Compile Include="Models\EmployeeManagement\Emp_DesignationModel.cs" />
@@ -240,7 +247,7 @@
     <Compile Include="Models\EmployeeManagement\Emp_VendorMasterDetailsModel.cs" />
     <Compile Include="Models\EmployeeManagement\Emp_VisaInformationModel.cs" />
     <Compile Include="Models\EmployeeManagement\Emp_WorkExperienceModel.cs" />
-    <Compile Include="Models\EmployeeManagement\ViewModels\ViewEmp_BasicInfoModel.cs" />
+    <Compile Include="Models\EmployeeManagement\ViewModels\VM_Emp_BasicInfoModel.cs" />
     <Compile Include="Models\EmployeeManagement\ViewModels\ViewEmp_CompanyMasterModel.cs" />
     <Compile Include="Models\NavigationModel.cs" />
     <Compile Include="Models\RESTOption.cs" />
@@ -8198,8 +8205,10 @@
     <Content Include="Scripts\Angular\DAL\CommonJs.js" />
     <Content Include="Scripts\Angular\DAL\DAL.js" />
     <Content Include="Scripts\Angular\DAL\Navigation.js" />
+    <Content Include="Scripts\Angular\EmployeeManagement\JS\VendorRequest.js" />
     <Content Include="Scripts\Angular\EmployeeManagement\JS\EmployeeRequest.js" />
     <Content Include="Scripts\Angular\EmployeeManagement\JS\ViewEmployee.js" />
+    <Content Include="Scripts\Angular\EmployeeManagement\Services\VendorRequestServices.js" />
     <Content Include="Scripts\Angular\EmployeeManagement\Services\EmployeeRequestServices.js" />
     <Content Include="Scripts\Angular\EmployeeManagement\Services\ViewEmployeeDetailService.js" />
     <Content Include="Scripts\Angular\EmployeeManagement\Services\ViewEmployeeServices.js" />
@@ -9190,12 +9199,19 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Scripts\version.json" />
-    <Content Include="Views\VendorDashboard\VendorDashboard.cshtml" />
     <Content Include="Views\EmployeeDashboard\AddEmployeeBasicInfo.cshtml" />
     <Content Include="Views\EmployeeDashboard\Index.cshtml" />
     <Content Include="Views\EmployeeDashboard\EmployeeDetails.cshtml" />
     <Content Include="Views\EmployeeDashboard\EmployeeEdit.cshtml" />
     <Content Include="Views\EmployeeDashboard\EmployeeBasicEdit.cshtml" />
+    <Content Include="Views\VendorDashboard\AddVendor.cshtml" />
+    <Content Include="Views\VendorDashboard\Index.cshtml" />
+    <Content Include="Views\VendorDashboard\VendorEdit.cshtml" />
+    <Content Include="Views\VendorDashboard\VendorDetails.cshtml" />
+    <Content Include="Views\VendorDashboard\EditVendorDetail.cshtml" />
+    <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\Employee\View.cshtml" />
+    <Content Include="Views\Employee\_PV_Emp_Basic_Info.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

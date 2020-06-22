@@ -5,13 +5,9 @@ var jsonheaders = { 'headers': { 'accept': 'application/json;odata=verbose' } };
 
 EmployeeServiceModule.service('EmployeeService', function ($http, CommonAppUtilityService) {
 
-    this.Postdata = function (option) {
+    this.Postdata = function (option, path) {
 
-        return CommonAppUtilityService.CreateItem("/EmployeeDashboard/SaveInfo", option);
-    }
-    this.EmpPostdata = function (option) {
-
-        return CommonAppUtilityService.CreateItem("/EmployeeDashboard/UpdateInfo", option);
+        return CommonAppUtilityService.CreateItem(path, option);
     }
 });
 

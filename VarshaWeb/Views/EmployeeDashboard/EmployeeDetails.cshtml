@@ -6,287 +6,286 @@
 }
 
 <!-- breadcrumb -->
-<div class="breadcrumb-header justify-content-between">
-    <div class="my-auto">
-        <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">Employee Mangment</h4><span class="text-muted mt-1 tx-13 ml-2 mb-0">/ Employee Details</span>
+    <form id="AddEmployeeDetailForm" ng-app="EmployeeApp" ng-controller="EmployeeController">
+        <div class="breadcrumb-header justify-content-between">
+            <div class="my-auto">
+                <div class="d-flex">
+                    <h4 class="content-title mb-0 my-auto">Employee Mangment</h4><span class="text-muted mt-1 tx-13 ml-2 mb-0">/ Employee Details</span>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-<!-- breadcrumb -->
-<!-- row -->
-<div class="row">
-    <div class="col-xl-12 col-lg-12">
+        <!-- breadcrumb -->
+        <!-- row -->
+        <div class="row">
+            <div class="col-xl-12 col-lg-12">
 
 
-        <!--Entry Code start-->
-        <div class="card custom-card">
-            <div class="card-body">
+                <!--Entry Code start-->
+                <div class="card custom-card">
+                    <div class="card-body">
 
-                <div class="card-body pt-0">
-                    <div class="mg-b-50">
-                        <div class="row row-sm mg-b-20">
-                            <div class="col-lg-3">
-                                <span class="tx-bold">
-                                    <label>First Name</label>
-                                </span>
+                        <div class="card-body pt-0">
+                            <div class="mg-b-50">
+                                <div class="row row-sm mg-b-20">
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>First Name</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.name[0].FirstName
+
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>Last Name</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.name[0].LastName
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row row-sm mg-b-20">
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>Employee Code</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.name[0].EmpCode
+
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label> Gender</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.name[0].Gender
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row row-sm mg-b-20">
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>Joining Date</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.name[0].JoiningDate
+
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label> Date of Birth</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.name[0].DOB
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row row-sm mg-b-20">
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>Designation</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.name[0].Designation
+
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>Department</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.name[0].Department
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row row-sm mg-b-20">
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>Marial status</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.name[0].MaritalStatus
+
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>OnProbationTill</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.name[0].OnProbationTill
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="row row-sm mg-b-20">
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>Probation status</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.name[0].ProbationStatus
+
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>Manager</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.name[0].Manager
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row row-sm mg-b-20">
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>Office Mail</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.name[0].OfficeEmail
+
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>Mobile No</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.name[0].ContactNumber
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="row row-sm mg-b-20">
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>Employee Status</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.name[0].EmpStatus
+
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>Company</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.name[0].Company
+                                        </label>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row row-sm mg-b-20">
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>Division</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.name[0].Division
+
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>Region</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.name[0].Region
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="row row-sm mg-b-20">
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>Branch</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.name[0].Branch
+
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>User Name</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.name[0].User_Name
+                                        </label>
+                                    </div>
+                                </div>
+
+
+
+
+
+
                             </div>
-                            <div class="col-lg-3">
-                                <label for="">
-                                    @ViewBag.name[0].FirstName
 
-                                </label>
-                            </div>
-                            <div class="col-lg-3">
-                                <span class="tx-bold">
-                                    <label>Last Name</label>
-                                </span>
-                            </div>
-                            <div class="col-lg-3">
-                                <label for="">
-                                    @ViewBag.name[0].LastName
-                                </label>
+                            <div class="row row-sm text-center justify-content-center">
+                                <div class="col-lg-3">
+                                    <button type="button" class="btn btn-light btn-block" ng-click="CancelViewpage()">Back</button>
+                                </div>
                             </div>
                         </div>
-                        <div class="row row-sm mg-b-20">
-                            <div class="col-lg-3">
-                                <span class="tx-bold">
-                                    <label>Employee Code</label>
-                                </span>
-                            </div>
-                            <div class="col-lg-3">
-                                <label for="">
-                                    @ViewBag.name[0].EmpCode
 
-                                </label>
-                            </div>
-                            <div class="col-lg-3">
-                                <span class="tx-bold">
-                                    <label> Gender</label>
-                                </span>
-                            </div>
-                            <div class="col-lg-3">
-                                <label for="">
-                                    @ViewBag.name[0].Gender
-                                </label>
-                            </div>
-                        </div>
-                        <div class="row row-sm mg-b-20">
-                            <div class="col-lg-3">
-                                <span class="tx-bold">
-                                    <label>Joining Date</label>
-                                </span>
-                            </div>
-                            <div class="col-lg-3">
-                                <label for="">
-                                    @ViewBag.name[0].JoiningDate
-
-                                </label>
-                            </div>
-                            <div class="col-lg-3">
-                                <span class="tx-bold">
-                                    <label> Date of Birth</label>
-                                </span>
-                            </div>
-                            <div class="col-lg-3">
-                                <label for="">
-                                    @ViewBag.name[0].DOB
-                                </label>
-                            </div>
-                        </div>
-                        <div class="row row-sm mg-b-20">
-                            <div class="col-lg-3">
-                                <span class="tx-bold">
-                                    <label>Marial status</label>
-                                </span>
-                            </div>
-                            <div class="col-lg-3">
-                                <label for="">
-                                    @ViewBag.name[0].MaritalStatus
-
-                                </label>
-                            </div>
-                            <div class="col-lg-3">
-                                <span class="tx-bold">
-                                    <label>OnProbationTill</label>
-                                </span>
-                            </div>
-                            <div class="col-lg-3">
-                                <label for="">
-                                    @ViewBag.name[0].OnProbationTill
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="row row-sm mg-b-20">
-                            <div class="col-lg-3">
-                                <span class="tx-bold">
-                                    <label>Probation status</label>
-                                </span>
-                            </div>
-                            <div class="col-lg-3">
-                                <label for="">
-                                    @ViewBag.name[0].ProbationStatus
-
-                                </label>
-                            </div>
-                            <div class="col-lg-3">
-                                <span class="tx-bold">
-                                    <label>Manager</label>
-                                </span>
-                            </div>
-                            <div class="col-lg-3">
-                                <label for="">
-                                    @ViewBag.name[0].Manager
-                                </label>
-                            </div>
-                        </div>
-                        <div class="row row-sm mg-b-20">
-                            <div class="col-lg-3">
-                                <span class="tx-bold">
-                                    <label>Office Mail</label>
-                                </span>
-                            </div>
-                            <div class="col-lg-3">
-                                <label for="">
-                                    @ViewBag.name[0].OfficeEmail
-
-                                </label>
-                            </div>
-                            <div class="col-lg-3">
-                                <span class="tx-bold">
-                                    <label>Mobile No</label>
-                                </span>
-                            </div>
-                            <div class="col-lg-3">
-                                <label for="">
-                                    @ViewBag.name[0].ContactNumber
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="row row-sm mg-b-20">
-                            <div class="col-lg-3">
-                                <span class="tx-bold">
-                                    <label>Employee Status</label>
-                                </span>
-                            </div>
-                            <div class="col-lg-3">
-                                <label for="">
-                                    @ViewBag.name[0].EmpStatus
-
-                                </label>
-                            </div>
-                            <div class="col-lg-3">
-                                <span class="tx-bold">
-                                    <label>Company</label>
-                                </span>
-                            </div>
-                            <div class="col-lg-3">
-                                <label for="">
-                                    @ViewBag.name[0].Company
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="row row-sm mg-b-20">
-                            <div class="col-lg-3">
-                                <span class="tx-bold">
-                                    <label>Designation</label>
-                                </span>
-                            </div>
-                            <div class="col-lg-3">
-                                <label for="">
-                                    @ViewBag.name[0].Designation
-
-                                </label>
-                            </div>
-                            <div class="col-lg-3">
-                                <span class="tx-bold">
-                                    <label>Department</label>
-                                </span>
-                            </div>
-                            <div class="col-lg-3">
-                                <label for="">
-                                    @ViewBag.name[0].Department
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="row row-sm mg-b-20">
-                            <div class="col-lg-3">
-                                <span class="tx-bold">
-                                    <label>Division</label>
-                                </span>
-                            </div>
-                            <div class="col-lg-3">
-                                <label for="">
-                                    @ViewBag.name[0].Division
-
-                                </label>
-                            </div>
-                            <div class="col-lg-3">
-                                <span class="tx-bold">
-                                    <label>Region</label>
-                                </span>
-                            </div>
-                            <div class="col-lg-3">
-                                <label for="">
-                                    @ViewBag.name[0].Region
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="row row-sm mg-b-20">
-                            <div class="col-lg-3">
-                                <span class="tx-bold">
-                                    <label>Branch</label>
-                                </span>
-                            </div>
-                            <div class="col-lg-3">
-                                <label for="">
-                                    @ViewBag.name[0].Branch
-
-                                </label>
-                            </div>
-                            <div class="col-lg-3">
-                                <span class="tx-bold">
-                                    <label>User Name</label>
-                                </span>
-                            </div>
-                            <div class="col-lg-3">
-                                <label for="">
-                                    @ViewBag.name[0].User_Name
-                                </label>
-                            </div>
-                        </div>
-
-
-
-
-
-
-                    </div>
-
-                    <div class="row row-sm text-center justify-content-center">
-                        <div class="col-lg-3">
-                            <button type="button" class="btn btn-light btn-block">Back</button>
-                        </div>
                     </div>
                 </div>
+                <!--Entry Code End-->
 
             </div>
         </div>
-        <!--Entry Code End-->
+        </form>
+        @section scripts {
 
-    </div>
-</div>
-@*@section scripts {
-
-        <script src="~/Scripts/angular.min.js"></script>
-        <script src="~/Scripts/angular-resource.min.js"></script>
-        <script src="~/Scripts/Angular/DAL/CommonJs.js"></script>
-        <script src="~/Scripts/Angular/DAL/DAL.js"></script>
-        <script src="~/Scripts/Angular/EmployeeManagement/JS/ViewEmployee.js"></script>
-        <script src="~/Scripts/Angular/EmployeeManagement/Services/ViewEmployeeDetailService.js"></script>
-    } *@
+            <script src="~/Scripts/Angular/EmployeeManagement/Services/EmployeeRequestServices.js"></script>
+            <script src="~/Scripts/Angular/EmployeeManagement/JS/EmployeeRequest.js"></script>
+        }

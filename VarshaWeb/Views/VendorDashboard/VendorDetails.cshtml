@@ -1,0 +1,184 @@
+﻿
+@{
+    ViewBag.Title = "VendorDetails";
+}
+
+<!-- breadcrumb -->
+    <form id="DetailForm" ng-app="VendorApp" ng-controller="VendorController">
+        <div class="breadcrumb-header justify-content-between">
+            <div class="my-auto">
+                <div class="d-flex">
+                    <h4 class="content-title mb-0 my-auto">Employee Mangment</h4><span class="text-muted mt-1 tx-13 ml-2 mb-0">/Vendor Details</span>
+                </div>
+            </div>
+        </div>
+        <!-- breadcrumb -->
+        <!-- row -->
+        <div class="row">
+            <div class="col-xl-12 col-lg-12">
+                <!--Entry Code start-->
+                <div class="card custom-card">
+                    <div class="card-body">
+
+                        <div class="card-body pt-0">
+                            <div class="mg-b-50">
+                                <div class="row row-sm mg-b-20">
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>Vendor Company</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.VendorInfo[0].VendorCompany
+
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>Vendor Name</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.VendorInfo[0].VendorName
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row row-sm mg-b-20">
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>Contact</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.VendorInfo[0].VendorContact
+
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label> Mail ID</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.VendorInfo[0].VendormailID
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row row-sm mg-b-20">
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>Designation</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.VendorInfo[0].Designation
+
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>Address</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.VendorInfo[0].VendorAddress
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row row-sm mg-b-20">
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>City</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.VendorInfo[0].City
+
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>States</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.VendorInfo[0].States
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row row-sm mg-b-20">
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>Country</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.VendorInfo[0].Country
+
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>Pan Card No</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.VendorInfo[0].PanCardNo
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="row row-sm mg-b-20">
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>Gst No</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.VendorInfo[0].GstNo
+
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <span class="tx-bold">
+                                            <label>Remark</label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            @ViewBag.VendorInfo[0].Remark
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row row-sm text-center justify-content-center">
+                                <div class="col-lg-3">
+                                    <button type="button" class="btn btn-light btn-block" ng-click="CancelViewpage()">Back</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!--Entry Code End-->
+
+            </div>
+        </div>
+    </form>
+
+@section scripts {
+    <script src="~/Scripts/Angular/EmployeeManagement/Services/VendorRequestServices.js"></script>
+    <script src="~/Scripts/Angular/EmployeeManagement/JS/VendorRequest.js"></script>
+}

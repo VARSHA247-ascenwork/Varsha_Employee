@@ -1,27 +1,28 @@
 ﻿@using VarshaWeb.Models.EmployeeManagement;
 
 @{
-    ViewBag.Title = "EmployeeDashboard";
+    ViewBag.Title = "VendorDashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@section style {
 
-    <!-- Internal Select2 css -->
-    <link href="../assets/plugins/select2/css/select2.min.css" rel="stylesheet">
+<!-- Internal Data table css -->
+<link href="~/assets/plugins/datatable/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<link href="~/assets/plugins/datatable/css/buttons.bootstrap4.min.css" rel="stylesheet">
+<link href="~/assets/plugins/datatable/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+<link href="~/assets/plugins/datatable/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="~/assets/plugins/datatable/css/responsive.dataTables.min.css" rel="stylesheet">
+<link href="~/assets/plugins/select2/css/select2.min.css" rel="stylesheet">
 
-    <!-- Internal Data table css -->
-    <link href="~/assets/plugins/datatable/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
-    <link href="~/assets/plugins/datatable/css/buttons.bootstrap4.min.css" rel="stylesheet">
-    <link href="~/assets/plugins/datatable/css/responsive.bootstrap4.min.css" rel="stylesheet" />
-    <link href="~/assets/plugins/datatable/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="~/assets/plugins/datatable/css/responsive.dataTables.min.css" rel="stylesheet">
-    
-}
+<!--- Style css-->
+<link href="~/assets/css/style.css" rel="stylesheet">
+<link href="~/assets/css/style-dark.css" rel="stylesheet">
+<!-- breadcrumb -->
+<!-- row -->
 
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">Employee Managment</h4><span class="text-muted mt-1 tx-13 ml-2 mb-0">/ Employee Master Dashboard</span>
+            <h4 class="content-title mb-0 my-auto">Employee Managment</h4><span class="text-muted mt-1 tx-13 ml-2 mb-0">/Vendor Master Dashboard</span>
         </div>
     </div>
 </div>
@@ -36,7 +37,7 @@
                 <div class="card-body">
                     <div class=" row-sm text-center">
                         <div class="col-sm-6 col-md-2 mg-t-10 float-right">
-                            <button class="btn btn-info btn-block" ng-click="addEmployee()">Add Employee</button>
+                            <button class="btn btn-info btn-block" ng-click="addVendor()">Add Vendor</button>
                         </div>
                     </div>
                 </div>
@@ -44,42 +45,36 @@
             <div class="card-body">
 
                 <div class="table-responsive">
-                    <table id="Employeetable" class="table key-buttons text-md-nowrap">
+                    <table id="vendortable" class="table key-buttons text-md-nowrap">
                         <thead>
                             <tr>
-                                <th>Employee Name</th>
-                                <th>Employee Code</th>
-                                <th>Company</th>
-                                <th>Designation</th>
-                                <th>Reporting To</th>
-                                <th>Department</th>
+                                <th class="border-bottom-0">Company</th>
+                                <th class="border-bottom-0">Vendor Name</th>
+                                <th class="border-bottom-0">Mobile No</th>
+                                <th class="border-bottom-0">Email ID</th>
+                                <th class="border-bottom-0">Designation</th>
+
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                            @if (ViewBag.EmpList != null)
+                            @if (ViewBag.vendorInfo != null)
                             {
-                                foreach (Emp_BasicInfoModel empinfo in (List<Emp_BasicInfoModel>)ViewBag.EmpList)
+                                foreach (Emp_VendorMasterDetailsModel vendordetail in (List<Emp_VendorMasterDetailsModel>)ViewBag.vendorInfo)
                                 {
                                     <tr>
-                                        <td>@empinfo.FirstName</td>
-                                        <td>@empinfo.EmpCode</td>
-                                        <td>@empinfo.Company</td>
-                                        <td>@empinfo.Designation</td>
-                                        <td>@empinfo.Manager</td>
-                                        <td>@empinfo.Department</td>
-
+                                        <td>@vendordetail.VendorCompany</td>
+                                        <td>@vendordetail.VendorName</td>
+                                        <td>@vendordetail.VendorContact</td>
+                                        <td>@vendordetail.VendormailID</td>
+                                        <td>@vendordetail.Designation</td>
                                         <td>
-
                                             <div class="btn-icon-list">
-                                                <button class="btn btn-primary btn-icon" onclick="EditEmployee(@empinfo.ID)"><i class="far fa-edit"></i></button>
-                                                <button class="btn btn-info btn-icon" onclick="ViewEmployee(@empinfo.ID)"><i class="far fa-eye"></i></button>
-
-
+                                                <button class="btn btn-primary btn-icon" onclick="EditVendor(@vendordetail.ID)"><i class="far fa-edit"></i></button>
+                                                <button class="btn btn-info btn-icon" onclick="ViewVendor(@vendordetail.ID)"><i class="far fa-eye"></i></button>
                                             </div>
                                         </td>
-
                                     </tr>
 
                                 }
@@ -94,9 +89,6 @@
     </div>
 </div>
 @section scripts {
-
-
-
     <!--Dashboard Code End-->
     <!-- Internal Data tables -->
 
@@ -119,27 +111,28 @@
     <script src="~/assets/plugins/datatable/js/dataTables.responsive.min.js"></script>
     <script src="~/assets/plugins/datatable/js/responsive.bootstrap4.min.js"></script>
 
-    <script src="~/Scripts/Angular/EmployeeManagement/Services/EmployeeRequestServices.js"></script>
-    <script src="~/Scripts/Angular/EmployeeManagement/JS/EmployeeRequest.js"></script>
 
-    <script>
-        function EditEmployee(empid) {
+    <!--Internal  Datatable js -->
+    <script src="../assets/js/table-data.js"></script>
 
-            document.cookie = "EditEmployeeID=" + empid;
+    <script type="text/javascript">
 
-            Pageredirect("/EmployeeDashboard/EmployeeEdit");
+        function EditVendor(vendorid) {
 
-        }
-        function ViewEmployee(CurrentID) {
+            document.cookie = "EditVendorID=" + vendorid;
 
-            document.cookie = "ViewEmployeeID=" + CurrentID;
-
-            Pageredirect("/EmployeeDashboard/EmployeeDetails");
+            Pageredirect("/VendorDashboard/EditVendorDetail");
 
         }
 
+        function ViewVendor(CurrentID) {
 
-        $('#Employeetable').DataTable({
+            document.cookie = "ViewVendorID=" + CurrentID;
+
+            Pageredirect("/VendorDashboard/VendorDetails");
+
+        }
+        $('#vendortable').DataTable({
 
             responsive: true,
             language: {

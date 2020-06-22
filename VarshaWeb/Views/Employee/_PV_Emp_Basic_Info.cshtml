@@ -1,0 +1,273 @@
+﻿@model VarshaWeb.Models.EmployeeManagement.ViewModels.VM_Emp_BasicInfoModel
+    
+
+
+<form id="AddEmployeeDetailForm">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12">
+            <!--Dashboard Code start-->
+            <div class="card mg-b-20">
+
+                <div class="card-body">
+                    <!--<div>
+                        <h6 class="card-title mb-1">Entry Page</h6>
+                        <p class="text-muted card-sub-title">Entry Page</p>
+                    </div> -->
+                    <div class="card-body pt-0">
+                        <div class="">
+                            <div class="row row-sm">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="First_Name">First Name</label>
+
+                                        @Html.EditorFor(model => model.VMEmpdata.FirstName, new { htmlAttributes = new { @class = "form-control", @id = "txtFirst" } })
+                                          </div>
+
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="Last_Name">Last Name</label>
+                                        @Html.EditorFor(model => Model.VMEmpdata.LastName, new { htmlAttributes = new { @class = "form-control", @id = "last" } })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row row-sm">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="Last_Name">Employee Code</label>
+                                        <input required="" readonly="readonly" type="text" value="@Model.VMEmpdata.EmpCode" class="form-control" ng-model="ngtxtEmpcodeEdit" id="EmpcodeEdit" placeholder="Enter Last_Name">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">User Name</label>
+                                        <input required="" readonly="readonly" value="@Model.VMEmpdata.User_Name" type="text" class="form-control" ng-model="ngddluserEdit" id="UsernameEdit" placeholder="Enter Middle_Name">
+                                        
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row row-sm">
+                                <div class="col-lg-6">
+                                    <label for="Joiningdate">Joining Date</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+                                            </div>
+                                        </div><input class="form-control" value="@Model.VMEmpdata.JoiningDate" ng-change="getdate()" ng-model="ngtxtJoiningdateEdit" id="datetimepickerEdit" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="DateOfBirth">Date Of Birth</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+                                                </div>
+                                            </div><input required="" class="form-control" value="@Model.VMEmpdata.DOB" ng-model="ngtxtDOBEdit" id="datetimepicker1Edit" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row row-sm">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Gender</label>
+                                        <select class="form-control select2" data-val="true" id="ddlgender">
+
+                                            if (@Model.VMEmpdata.ID)
+                                            {
+                                            <option value="@Model.VMEmpdata.ID" selected="selected">
+                                                @Model.VMEmpdata.Gender
+                                            </option>
+                                            }
+                                            else
+                                            {
+                                            
+                                            <option value="Male">
+                                                Male
+                                            </option>
+                                            <option value="Female">
+                                                Female
+                                            </option>
+                                            }
+
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Marial Status</label>
+                                        <div id="slWrapperMarrial" class="parsley-select">
+                                            <select required="" class="form-control select2" ng-model="ngdddlMarialstatusEdit" data-parsley-class-handler="#slWrapperMarrial" data-parsley-errors-container="#slErrorContainermarrial">
+                                                if (@Model.VMEmpdata.ID)
+                                                {
+                                                <option value="@Model.VMEmpdata.ID" selected="selected">
+                                                    @Model.VMEmpdata.MaritalStatus
+                                                </option>
+                                                }
+                                                else
+                                                {
+                                                <option value="Married">
+                                                Married
+                                                </option>
+                                                <option value="UnMarried">
+                                                    UnMarried
+                                                </option>
+                                                }
+
+                                            </select>
+                                        </div>
+                                        <div id="slErrorContainermarrial"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row row-sm">
+                                <div class="col-lg-6">
+                                    <label for="exampleInputPassword1">OnProbationTill</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+                                            </div>
+                                        </div><input class="form-control" id="datetimepicker2Edit" value="@Model.VMEmpdata.OnProbationTill" ng-model="ngtxtProbationtillEdit" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Probation Status</label>
+                                        <div id="slWrapperProbation" class="parsley-select">
+                                            <select required="" class="form-control select2" ng-model="ngddlProbationstatusEdit" data-parsley-class-handler="#slWrapperProbation" data-parsley-errors-container="#slErrorContainerProbation">
+                                                if (@Model.VMEmpdata.ID)
+                                                {
+                                                <option value="@Model.VMEmpdata.ID" selected="selected">
+                                                    @Model.VMEmpdata.ProbationStatus
+                                                </option>
+                                                }
+                                                else
+                                                {
+                                                <option label="Choose one">
+                                                </option>
+                                                <option value="Probation">
+                                                    Probation
+                                                </option>
+                                                <option value="Confirmed">
+                                                    Confirmed
+                                                </option>
+                                                }
+
+                                            </select>
+                                        </div>
+                                        <div id="slErrorContainerProbation"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row row-sm">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Manager</label>
+
+
+
+                                        @Html.DropDownListFor(model => model.SelectetManagerID, new SelectList(Model.Empdata, "Id", "FirstName"), new { @class = "form-control select2", @id = "Manager" })
+
+
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="Middle_Name">Office Mail</label>
+                                        <input required="" type="email" class="form-control" value="@Model.VMEmpdata.OfficeEmail" ng-model="ngtxtOfficemailEdit" id="txtofficemailEdit" placeholder="Enter Office_Mail">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row row-sm">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Mobile Number</label>
+                                        <div class="input-group">
+                                            <input class="form-control" onkeypress="return restrictCharacters(event);" value="@Model.VMEmpdata.MobileNo" maxlength="10" ng-model="ngtxtmobileEdit" id="phoneEdit" name="phone" type="tel">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="Telephone_Number">Telephone Number</label>
+                                        <!--   <input type="tel" name="country_code" id="Telephone_Number" required="" onkeypress="phoneno()" maxlength="10" class="form-control" ng-model="ngtxtmobileno"  placeholder="Enter Telephone Number">-->
+                                        <input type="text" maxlength="10" value="@Model.VMEmpdata.ContactNumber" onkeypress="return restrictCharacters(event);" id="Telephone_NumberEdit" class="form-control" ng-model="ngtxtmobilenoEdit" placeholder="Enter Telephone Number" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row row-sm">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Company</label>
+                                        @Html.DropDownListFor(model => model.SelectedCompanyID, new SelectList(Model.company, "Id", "CompanyName"), new { @class = "form-control select2", @id = "Company" })
+
+                                    </div>
+                                </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Designation</label>
+                                            
+                                                @Html.DropDownListFor(model => model.SelectedDesignationID, new SelectList(Model.Designation, "Id", "Designation"), new { @class = "form-control select2", @id = "Designation" })
+
+                                           
+
+                                    </div>
+                                </div>
+                           </div>
+                            <div class="row row-sm">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+
+                                        <label for="exampleInputPassword1">Department</label>
+                                        @Html.DropDownListFor(model => model.SelectedDepartmentID, new SelectList(Model.DepartmentName, "Id", "DepartmentName"), new { @class = "form-control select2", @id = "Department" })
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Division</label>
+                                        @Html.DropDownListFor(model => model.SelectedDivisionID, new SelectList(Model.Division, "Id", "Division"), new { @class = "form-control select2", @id = "Division" })
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row row-sm">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Region</label>
+                                        @Html.DropDownListFor(model => model.SelectedRegionID, new SelectList(Model.Region, "Id", "Region"), new { @class = "form-control select2", @id = "Region" })
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Branch</label>
+                                        @Html.DropDownListFor(model => model.SelectedBranchID, new SelectList(Model.Branch, "Id", "Branch"), new { @class = "form-control select2", @id = "Branch" })
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</form>

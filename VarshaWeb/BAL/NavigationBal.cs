@@ -66,7 +66,7 @@ namespace VarshaWeb.BAL
             rESTOption.top = "5000";
 
 
-            jArray = restService.GetAllItemFromList(clientContext, "Navigation", rESTOption);
+            jArray = restService.GetAllItemFromList(clientContext, "GEN_Navigation", rESTOption);
 
             return jArray;
         }

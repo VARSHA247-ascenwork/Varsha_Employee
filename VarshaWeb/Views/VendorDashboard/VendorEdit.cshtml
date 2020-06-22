@@ -1,0 +1,298 @@
+﻿@using VarshaWeb.Models.EmployeeManagement;
+
+@{
+    ViewBag.Title = "VendorEdit";
+    
+
+}
+
+
+<!-- Internal Select2 css -->
+<link href="../assets/plugins/select2/css/select2.min.css" rel="stylesheet">
+
+<!--Internal  TelephoneInput css-->
+<link rel="stylesheet" href="../assets/plugins/telephoneinput/telephoneinput.css">
+<script>
+    function restrictCharacters(evt) {
+
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (((charCode >= '48') && (charCode <= '57')) || (charCode == '44')) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+</script>
+<!--- Style css-->
+<link href="~/assets/css/style.css" rel="stylesheet">
+<link href="~/assets/css/style-dark.css" rel="stylesheet">
+
+<!-- breadcrumb -->
+<!-- row -->
+<form id="AddVendorDetailForm" ng-app="VendorApp" ng-controller="VendorController">
+    <div class="breadcrumb-header justify-content-between">
+        <div class="my-auto">
+            <div class="d-flex">
+                <h4 class="content-title mb-0 my-auto">Employee Management</h4><span class="text-muted mt-1 tx-13 ml-2 mb-0">/ Add Vendor Details</span>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb -->
+    <!-- row -->
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12">
+            <!--Dashboard Code start-->
+            <div class="card mg-b-20">
+
+                <div class="card-body">
+
+                    <div class="card-body pt-0">
+
+                        <div class="row row-sm">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="Company_Name">Company</label>
+                                    <input required="" value="@ViewBag.Vendordata[0].VendorCompany" type="text" class="form-control" id="txtVendorcompany" placeholder="Enter Company_Name">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="Vendor_Name">Contact Person</label>
+                                    <input required="" value="@ViewBag.Vendordata[0].VendorName" type="text" class="form-control" id="txtVendor_Name" placeholder="Enter Vendor_Name">
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="row row-sm">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="Contact">Mobile Number </label>
+                                    <div class="input-group">
+                                        <input class="form-control" onkeypress="return restrictCharacters(event);" maxlength="10" value="@ViewBag.Vendordata[0].MobileNo" id="phone" name="phone" type="tel">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="Contact">Telephone Number </label>
+                                    <input required="" value="@ViewBag.Vendordata[0].VendorContact" onkeypress="return restrictCharacters(event);" maxlength="10" type="text" class="form-control" id="txTelephone" placeholder="Enter Telephone Number">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row row-sm">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="Middle_Name"> Email ID</label>
+                                    <input required="" value="@ViewBag.Vendordata[0].VendormailID" type="email" class="form-control" id="txtVendorEmail" placeholder="Enter Email">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Designation</label>
+                                    <div id="slWrapperDesignation" class="parsley-select">
+                                        <select required="" class="form-control select2" id="ddlDesignation" data-parsley-class-handler="#slWrapperDesignation" data-parsley-errors-container="#slErrorContainerDesignation">
+                                            <option value="">
+                                                Choose one
+                                            </option>
+                                            @*   if(@ViewBag.Vendordata!=null)
+        {
+        @foreach (var obj in ViewBag.designation)
+         //@foreach (VarshaWeb.Models.EmployeeManagement.Emp_DesignationModel designation in (List<VarshaWeb.Models.EmployeeManagement.Emp_DesignationModel>)ViewBag.designation)
+            {
+
+                if (ViewBag.Vendordata[0].DesignationId == @obj.ID)
+                {
+                    <option value="@ViewBag.Vendordata[0].DesignationId" selected="selected">
+                        @ViewBag.Vendordata[0].Designation
+                    </option>
+                }
+                else
+                {
+                    <option value="@obj.ID">
+                        @obj.Designation
+                    </option>
+                }
+            }
+        }*@
+                                        </select>
+                                    </div>
+                                    <div id="slErrorContainerDesignation"></div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                        <div class="row row-sm">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="Last_Name">Address</label>
+                                    <input required="" value="@ViewBag.Vendordata[0].VendorAddress" type="text" class="form-control" id="txtaddress" placeholder="Enter Address">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="City">City</label>
+                                    <input required="" value="@ViewBag.Vendordata[0].City" type="text" class="form-control" id="txtCity" placeholder="Enter City">
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+
+                        <div class="row row-sm">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="Country"> Country</label>
+                                    <div id="slWrapperCountry" class="parsley-select">
+                                        <select required="" class="form-control select2" id="ddlCountry" data-parsley-class-handler="#slWrapperCountry" data-parsley-errors-container="#slErrorContainerCountry">
+                                            <option value="">
+                                                Choose one
+                                            </option>
+                                            @*   if(@ViewBag.Vendordata!=null)
+           {
+           @foreach(var obj in ViewBag.country)
+           //  @foreach (VarshaWeb.Models.EmployeeManagement.Emp_CountryModel country in (List<VarshaWeb.Models.EmployeeManagement.Emp_CountryModel>)ViewBag.country)
+           {
+               if (ViewBag.Vendordata[0].CountryId == @obj.ID)
+               {
+                   <option value="@ViewBag.Vendordata[0].CountryId" selected="selected">
+                       @ViewBag.Vendordata[0].Country
+                   </option>
+               }
+               else
+               {
+                   <option value="@obj.ID">
+                       @obj.CountryName
+                   </option>
+               }
+           }
+        }*@
+                                        </select>
+                                    </div>
+                                    <div id="slErrorContainerCountry"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="state"> State</label>
+                                    <div id="slWrapperState" class="parsley-select">
+                                        <select required="" class="form-control select2" id="ddlState" data-parsley-class-handler="#slWrapperState" data-parsley-errors-container="#slErrorContainerState">
+                                            <option value="">
+                                                Choose one
+                                            </option>
+
+                                            @*    if(@ViewBag.Vendordata != null)
+         {
+        @foreach(var obj in ViewBag.state)
+            // @foreach (VarshaWeb.Models.EmployeeManagement.Emp_Vendor_State_MasterModel statename in (List<VarshaWeb.Models.EmployeeManagement.Emp_Vendor_State_MasterModel>)ViewBag.state)
+             {
+
+                 if (ViewBag.Vendordata[0].StatesId == @obj.ID)
+                 {
+                     <option value="@ViewBag.Vendordata[0].StatesId" selected="selected">
+                         @ViewBag.Vendordata[0].States
+                     </option>
+                 }
+                 else
+                 {
+                     <option value="@obj.ID">
+                         @obj.StateName
+                     </option>
+                 }
+             return;
+             }
+         } *@
+                                        </select>
+                                    </div>
+                                    <div id="slErrorContainerState"></div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
+                        <div class="row row-sm">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+
+                                    <label for="PanCardNo">PAN Card No</label>
+                                    <input required="" value="@ViewBag.Vendordata[0].PanCardNo" type="text" class="form-control" id="txtPANcardno" placeholder="Enter PAN Card No">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="Gstno"> GST No</label>
+                                    <input required="" value="@ViewBag.Vendordata[0].GstNo" type="text" class="form-control" id="txtGSTno" placeholder="Enter GSTno">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-sm">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="Remark">Remark</label>
+                                    <input required="" type="text" value="@ViewBag.Vendordata[0].Remark" class="form-control" id="txtremark" placeholder="Enter Remark">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="uploadFile">Upload Document</label>
+                                    <div class="custom-file">
+                                        <input class="custom-file-input" id="uploadFile" type="file"> <label class="custom-file-label" for="uploadFile">Choose file</label>
+                                    </div>
+                                </div>
+                                <br />
+                                <div value="@ViewBag.document[0].DocumentPath"></div>
+                                <div ng-repeat="i in UploadQuotationFiles">
+                                    {{i.Name}}&nbsp;
+                                    <button type="button" class="btn btn-warning badge" ng-click="Remove($index)"><i class="fa fa-times"></i></button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row row-sm text-center justify-content-center">
+                        <div class="col-sm-6 col-md-3 mg-t-10">
+                            <!---  <button  ng-click="Save()" class="btn btn-primary btn-block">Submit</button>-->
+                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                        </div>
+                        <div class="col-sm-6 col-md-3 mg-t-10">
+                            <button class="btn btn-secondary btn-block" ng-click="CancelAddpage()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+@section scripts {
+
+    
+    <!-- Internal Select2.min js -->
+    <script src="../assets/plugins/select2/js/select2.min.js"></script>
+    <script src="../assets/js/select2.js"></script>
+
+
+    <!-- Internal TelephoneInput js-->
+    <script src="../assets/plugins/telephoneinput/telephoneinput.js"></script>
+    <script src="../assets/plugins/telephoneinput/inttelephoneinput.js"></script>
+
+    <!--Internal  Parsley.min js -->
+    <script src="../assets/plugins/parsleyjs/parsley.min.js"></script>
+
+    <script src="~/Scripts/Angular/EmployeeManagement/Services/VendorRequestServices.js"></script>
+    <script src="~/Scripts/Angular/EmployeeManagement/JS/VendorRequest.js"></script>
+
+}

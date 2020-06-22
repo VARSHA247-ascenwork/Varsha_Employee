@@ -6,25 +6,25 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!-- Internal Select2 css -->
-<link href="../assets/plugins/select2/css/select2.min.css" rel="stylesheet">
 
-<!--Internal  Datetimepicker-slider css -->
-<link href="../assets/plugins/amazeui-datetimepicker/css/amazeui.datetimepicker.css" rel="stylesheet">
+@section style {
+    <!-- Internal Select2 css -->
+    <link href="../assets/plugins/select2/css/select2.min.css" rel="stylesheet">
 
-<!--Internal  TelephoneInput css-->
-<link rel="stylesheet" href="../assets/plugins/telephoneinput/telephoneinput.css">
+    <!--Internal  Datetimepicker-slider css -->
+    <link href="../assets/plugins/amazeui-datetimepicker/css/amazeui.datetimepicker.css" rel="stylesheet">
 
-<!--- Style css-->
-<link href="~/assets/css/style.css" rel="stylesheet">
-<link href="~/assets/css/style-dark.css" rel="stylesheet">
+    <!--Internal  TelephoneInput css-->
+    <link rel="stylesheet" href="../assets/plugins/telephoneinput/telephoneinput.css">
+
+    }
 <!-- breadcrumb -->
 <!-- row -->
 <form id="AddEmployeeDetailForm" ng-app="EmployeeApp" ng-controller="EmployeeController">
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Employee Managment</h4><span class="text-muted mt-1 tx-13 ml-2 mb-0">/ Employee Master Dashboard</span>
+                <h4 class="content-title mb-0 my-auto">Employee Managment</h4><span class="text-muted mt-1 tx-13 ml-2 mb-0">/ Add Employee Details</span>
             </div>
         </div>
     </div>
@@ -67,10 +67,32 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
+                                        <label for="exampleInputPassword1">User Name</label>
+                                        <div id="slWrapper" class="parsley-select">
+                                            <div id="slWrapperUsername" class="parsley-select">
+                                                <select required="" class="form-control select2" name="username" ng-model="ngddluser" data-parsley-class-handler="#slWrapperUsername" data-parsley-errors-container="#slErrorContainerUsername">
+                                                    <option value="">
+                                                        Choose One
+                                                    </option>
+                                                    @foreach (VarshaWeb.Models.UserGroupModel user in (List<VarshaWeb.Models.UserGroupModel>)ViewBag.username)
+                                                    {
+                                                        <option value="@user.ID">
+                                                            @user.Title
+                                                        </option>
+                                                    }
+                                                </select>
+                                            </div>
+                                            <div id="slErrorContainerUsername"></div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- <div class="col-lg-6">
+                                    <div class="form-group">
                                         <label for="Empcode">Emp Code</label>
                                         <input required="" type="text" class="form-control" ng-model="ngtxtEmpcode" id="Middle_Name" placeholder="Enter Emp_Code">
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
                             <div class="row row-sm">
                                 <div class="col-lg-6">
@@ -80,7 +102,7 @@
                                             <div class="input-group-text">
                                                 <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
                                             </div>
-                                        </div><input required="" class="form-control" ng-model="ngtxtJoiningdate" id="datetimepicker" type="text" value="2018-12-20 21:05">
+                                        </div><input class="form-control" ng-change="getdate()" ng-model="ngtxtJoiningdate" id="datetimepicker" type="text">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -91,7 +113,7 @@
                                                 <div class="input-group-text">
                                                     <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
                                                 </div>
-                                            </div><input required="" class="form-control" ng-model="ngtxtDOB" id="datetimepicker1" type="text" value="2018-12-20 21:05">
+                                            </div><input required="" class="form-control" ng-model="ngtxtDOB" id="datetimepicker1" type="text">
                                         </div>
                                     </div>
                                 </div>
@@ -117,7 +139,7 @@
                                         </div>
                                         <div id="slErrorContainer"></div>
                                     </div>
-                                    </div>
+                                </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Marial Status</label>
@@ -138,7 +160,7 @@
                                         <div id="slErrorContainermarrial"></div>
                                     </div>
 
-                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="row row-sm">
@@ -149,7 +171,7 @@
                                         <div class="input-group-text">
                                             <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
                                         </div>
-                                    </div><input required="" class="form-control" id="datetimepicker2" ng-model="ngtxtProbationtill" type="text" value="2018-12-20 21:05">
+                                    </div><input class="form-control" id="datetimepicker2" ng-model="ngtxtProbationtill" type="text">
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -171,7 +193,7 @@
                                     </div>
                                     <div id="slErrorContainerProbation"></div>
                                 </div>
-                                </div>
+                            </div>
                         </div>
                         <div class="row row-sm">
                             <div class="col-lg-6">
@@ -195,11 +217,11 @@
                                     <div id="slErrorContainermanager"></div>
 
                                 </div>
-                                </div>
+                            </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="Middle_Name">Office Mail</label>
-                                    <input required="" type="text" class="form-control" ng-model="ngtxtOfficemail" id="Middle_Name" placeholder="Enter Office_Mail">
+                                    <input required="" type="email" class="form-control" ng-model="ngtxtOfficemail" id="Middle_Name" placeholder="Enter Office_Mail">
                                 </div>
                             </div>
                         </div>
@@ -209,14 +231,15 @@
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Mobile Number</label>
                                     <div class="input-group">
-                                        <input class="form-control" ng-model="ngtxtmobile" id="phone" name="phone" type="tel">
+                                        <input class="form-control" maxlength="10" ng-model="ngtxtmobile" onkeypress="return restrictCharacters(event);" id="phone" name="phone" type="tel">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="Telephone_Number">Telephone Number</label>
-                                    <input type="text" required="" class="form-control" ng-model="ngtxtmobileno" id="Telephone_Number" placeholder="Enter Telephone_Number">
+                                    <!--   <input type="tel" name="country_code" id="Telephone_Number" required="" onkeypress="phoneno()" maxlength="10" class="form-control" ng-model="ngtxtmobileno"  placeholder="Enter Telephone Number">-->
+                                    <input type="text" maxlength="10" id="Telephone_Number" onkeypress="return restrictCharacters(event);" class="form-control" ng-model="ngtxtmobileno" placeholder="Enter Telephone Number" />
                                 </div>
                             </div>
                         </div>
@@ -239,7 +262,7 @@
                                     </div>
                                     <div id="slErrorContainerCompany"></div>
                                 </div>
-                                </div>
+                            </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Designation</label>
@@ -259,7 +282,7 @@
                                     <div id="slErrorContainerDesignation"></div>
                                 </div>
 
-                                </div>
+                            </div>
                         </div>
                         <div class="row row-sm">
                             <div class="col-lg-6">
@@ -281,7 +304,7 @@
                                     </div>
                                     <div id="slErrorContainerDepartment"></div>
                                 </div>
-                                </div>
+                            </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Division</label>
@@ -301,7 +324,7 @@
                                     <div id="slErrorContainerDivision"></div>
                                 </div>
 
-                                </div>
+                            </div>
                         </div>
                         <div class="row row-sm">
                             <div class="col-lg-6">
@@ -322,7 +345,7 @@
                                     </div>
                                     <div id="slErrorContainerRegion"></div>
                                 </div>
-                                </div>
+                            </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Branch</label>
@@ -342,32 +365,10 @@
                                     <div id="slErrorContainerBranch"></div>
                                 </div>
 
-                                </div>
+                            </div>
                         </div>
 
                         <div class="row row-sm">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">User Name</label>
-                                    <div id="slWrapper" class="parsley-select">
-                                        <div id="slWrapperUsername" class="parsley-select">
-                                            <select required="" class="form-control select2" name="username" ng-model="ngddluser" data-parsley-class-handler="#slWrapperUsername" data-parsley-errors-container="#slErrorContainerUsername">
-                                                <option value="">
-                                                    Choose One
-                                                </option>
-                                                @foreach (VarshaWeb.Models.UserGroupModel user in (List<VarshaWeb.Models.UserGroupModel>)ViewBag.username)
-                                                {
-                                                    <option value="@user.ID">
-                                                        @user.Title
-                                                    </option>
-                                                }
-                                            </select>
-                                        </div>
-                                        <div id="slErrorContainerUsername"></div>
-                                    </div>
-
-                                    </div>
-                                </div>
 
                         </div>
                     </div>
@@ -376,50 +377,70 @@
                             <button type="submit" class="btn btn-primary btn-block">Submit</button>
                         </div>
                         <div class="col-sm-6 col-md-3 mg-t-10">
-                            <button class="btn btn-secondary btn-block">Cancel</button>
+                            <button type="button" class="btn btn-secondary btn-block" ng-click="CancelAddpage()">Cancel</button>
                         </div>
-
-
                     </div>
                 </div>
-
-
+            </div>
+            <div class="modal" id="modaldemo4" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content tx-size-sm">
+                        <div class="modal-body tx-center pd-y-20 pd-x-20">
+                            <i class="icon ion-ios-checkmark-circle-outline tx-100 tx-success lh-1 mg-t-20 d-inline-block"></i>
+                            <h4 class="tx-success tx-semibold mg-b-20">Congratulations!</h4>
+                            <p class="mg-b-20 mg-x-20">Your request have been successfully submitted.</p><button aria-label="Close" class="btn ripple btn-success pd-x-25" data-dismiss="modal" type="button" ng-click="PerformAction()">Continue</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </form>
-    @section scripts {
+@section scripts {
 
-        <!-- Internal Select2.min js -->
-        <script src="../assets/plugins/select2/js/select2.min.js"></script>
-        <script src="../assets/js/select2.js"></script>
+    <!-- Internal Select2.min js -->
+    <script src="../assets/plugins/select2/js/select2.min.js"></script>
+    <script src="../assets/js/select2.js"></script>
 
-        <!--Internal  Parsley.min js -->
-        <script src="../assets/plugins/parsleyjs/parsley.min.js"></script>
+    <!--Internal  Parsley.min js -->
+    <script src="../assets/plugins/parsleyjs/parsley.min.js"></script>
 
-        <!-- Internal TelephoneInput js-->
-        <script src="../assets/plugins/telephoneinput/telephoneinput.js"></script>
-        <script src="../assets/plugins/telephoneinput/inttelephoneinput.js"></script>
+    <!-- Internal TelephoneInput js-->
+    <script src="../assets/plugins/telephoneinput/telephoneinput.js"></script>
+    <script src="../assets/plugins/telephoneinput/inttelephoneinput.js"></script>
 
-        <!--Internal  jquery-simple-datetimepicker js -->
-        <script src="../assets/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js"></script>
-        <script src="../assets/js/datePicker.js"></script>
+    <!--Internal  jquery-simple-datetimepicker js -->
+    <script src="../assets/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js"></script>
+    <script src="../assets/js/datePicker.js"></script>
+    <script>
+        function restrictCharacters(evt) {
 
-        <script>
-            $('#datetimepicker1').datetimepicker({
-                minView: 2,
-                format: 'dd-mm-yyyy',
-                autoclose: true
-            });
-            $('#datetimepicker2').datetimepicker({
-                minView: 2,
-                format: 'dd-mm-yyyy',
-                autoclose: true
-            });
-        </script>
-        <script src="~/Scripts/Angular/EmployeeManagement/Services/EmployeeRequestServices.js"></script>
-        <script src="~/Scripts/Angular/EmployeeManagement/JS/EmployeeRequest.js"></script>
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (((charCode >= '48') && (charCode <= '57')) || (charCode == '44')) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+    </script>
+    <script>
+        $('#datetimepicker1').datetimepicker({
+            minView: 2,
+            format: 'dd-mm-yyyy',
+            autoclose: true
+        });
+        $('#datetimepicker2').datetimepicker({
+            minView: 2,
+            format: 'dd-mm-yyyy',
+            autoclose: true
+        });
+    </script>
+    <script src="~/Scripts/Angular/EmployeeManagement/Services/EmployeeRequestServices.js"></script>
+    <script src="~/Scripts/Angular/EmployeeManagement/JS/EmployeeRequest.js"></script>
 
 
 
-    }
+}

@@ -86,26 +86,44 @@ namespace VarshaWeb.BAL.EmployeeManagement
 
        
 
-        public List<Emp_BasicInfoModel> GeEmployeeById(ClientContext clientContext, string empid)
+        public List<Emp_BasicInfoModel> GetEmployeeById(ClientContext clientContext, string empid)
         {
             List<Emp_BasicInfoModel> empdetails = new List<Emp_BasicInfoModel>();
             string filter = "ID eq " + empid;
             JArray jArray = RESTGet(clientContext, filter);
+           
 
             foreach (JObject j in jArray)
             {
+
+                DateTime dt = Convert.ToDateTime(j["JoiningDate"]);
+
+              // string joiningdate = dt.ToString("dd/MM/yyyy");
+
+               DateTime dt1 = Convert.ToDateTime(j["DOB"]);
+                DateTime dt2 = Convert.ToDateTime(j["OnProbationTill"]);
+
+                //string Birthdate = dt1.ToString("dd/MM/yyyy");
                 empdetails.Add(new Emp_BasicInfoModel
                 {
+                 // string formattedDate = j["JoiningDate"] == null ? "" : j["JoiningDate"].ToString("dd-MM-yyyy"),
+                
+                
                     ID = Convert.ToInt32(j["ID"]),
                     FirstName = j["FirstName"] == null ? "" : j["FirstName"].ToString(),
                     MiddleName = j["MiddleName"] == null ? "" : j["MiddleName"].ToString(),
                     LastName = j["LastName"] == null ? "" : j["LastName"].ToString(),
                     EmpCode = j["EmpCode"] == null ? "" : j["EmpCode"].ToString(),
-                    JoiningDate = j["JoiningDate"] == null ? "" : Convert.ToString(j["JoiningDate"]).Trim(),
-                    DOB = j["DOB"] == null ? "" : Convert.ToString(j["DOB"]).Trim(),
+                   //JoiningDate = j["JoiningDate"] == null ? "" : Convert.ToString(j["JoiningDate"]),
+                     JoiningDate = dt.ToString("dd/MM/yyyy"),
+                   // DOB = j["DOB"] == null ? "" : Convert.ToString(j["DOB"]),
+                      DOB= dt1.ToString("dd/MM/yyyy"),
+
                     Gender = j["Gender"] == null ? "" : j["Gender"].ToString(),
                     MaritalStatus = j["MaritalStatus"] == null ? "" : j["MaritalStatus"].ToString(),
-                    OnProbationTill = j["OnProbationTill"] == null ? "" : Convert.ToString(j["OnProbationTill"]).Trim(),
+                   // OnProbationTill = j["OnProbationTill"] == null ? "" : Convert.ToString(j["OnProbationTill"]),
+                    OnProbationTill= dt2.ToString("dd/MM/yyyy"),
+
                     ProbationStatus = j["ProbationStatus"] == null ? "" : j["ProbationStatus"].ToString(),
                     ManagerId = Convert.ToInt32(j["Manager"]["Id"]),
                     //   ManagerId = j["Manager"]["Id"] == null ? "" : j["Manager"]["Id"].ToString(),
@@ -126,6 +144,7 @@ namespace VarshaWeb.BAL.EmployeeManagement
                     Region = j["Region"]["Region"] == null ? "" : j["Region"]["Region"].ToString(),
                     BranchId = Convert.ToInt32(j["Branch"]["Id"]),
                     Branch = j["Branch"]["Branch"] == null ? "" : j["Branch"]["Branch"].ToString(),
+                    MobileNo = j["MobileNo"] == null ? "" : j["MobileNo"].ToString(),
                     UserNameId = j["User_Name"]["Id"] == null ? "" : Convert.ToString(j["User_Name"]["Id"]),
                     User_Name = j["User_Name"] ["Title"] == null ? "" : j["User_Name"]["Title"].ToString(),
                    //Manager_Code = j["Manager_Code"] == null ? "" : j["Manager_Code"].ToString()
@@ -143,7 +162,7 @@ namespace VarshaWeb.BAL.EmployeeManagement
                 JArray jArray = new JArray();
                 RESTOption rESTOption = new RESTOption();
                 rESTOption.filter = filter;
-                rESTOption.select = "ID,FirstName,MiddleName,LastName,EmpCode,Gender,MaritalStatus,DOB,JoiningDate,OnProbationTill,ProbationStatus,OfficeEmail,ContactNumber,EmpStatus,Designation/Id,Designation/Designation,Department/Id,Department/DepartmentName,Division/Id,Division/Division,Region/Id,Region/Region,Branch/Id,Branch/Branch,Company/Id,Company/CompanyName,Manager/Id,Manager/FirstName,Manager/EmpCode,User_Name/Id,User_Name/Title,Profile_Pic_Url,Facebook,Google,LinkedIn,Twitter,Instagram,Tiktok,DOB_Months,ManagerCode,JoiningDate_Month";
+                rESTOption.select = "ID,FirstName,MiddleName,LastName,EmpCode,Gender,MaritalStatus,DOB,JoiningDate,OnProbationTill,ProbationStatus,OfficeEmail,ContactNumber,EmpStatus,Designation/Id,Designation/Designation,Department/Id,Department/DepartmentName,Division/Id,Division/Division,Region/Id,Region/Region,Branch/Id,Branch/Branch,Company/Id,Company/CompanyName,Manager/Id,Manager/FirstName,Manager/EmpCode,User_Name/Id,User_Name/Title,Profile_Pic_Url,Facebook,Google,LinkedIn,Twitter,Instagram,Tiktok,DOB_Months,ManagerCode,JoiningDate_Month,MobileNo";
                 rESTOption.expand = "Company,Designation,Department,Division,Region,Branch,User_Name,Manager";
                 rESTOption.top = "5000";
                 jArray = restService.GetAllItemFromList(clientContext, "Emp_BasicInfo", rESTOption);

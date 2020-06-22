@@ -14,7 +14,20 @@
 
 <!--Internal  TelephoneInput css-->
 <link rel="stylesheet" href="../assets/plugins/telephoneinput/telephoneinput.css">
+<script>
+    function restrictCharacters(evt) {
 
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (((charCode >= '48') && (charCode <= '57')) || (charCode == '44')) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+</script>
 <!--- Style css-->
 <link href="~/assets/css/style.css" rel="stylesheet">
 <link href="~/assets/css/style-dark.css" rel="stylesheet">
@@ -24,7 +37,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Employee Managment</h4><span class="text-muted mt-1 tx-13 ml-2 mb-0">/ Employee Master Dashboard</span>
+                <h4 class="content-title mb-0 my-auto">Employee Managment</h4><span class="text-muted mt-1 tx-13 ml-2 mb-0">/Edit Employee Details</span>
             </div>
         </div>
     </div>
@@ -39,23 +52,23 @@
                     <div class="card-body">
 
                         <!--<div>
-                            <h6 class="card-title mb-1">Entry Page</h6>
-                            <p class="text-muted card-sub-title">Entry Page</p>
-                        </div> -->
+                    <h6 class="card-title mb-1">Entry Page</h6>
+                    <p class="text-muted card-sub-title">Entry Page</p>
+                </div> -->
                         <div class="card-body pt-0">
                             <div class="">
                                 <div class="row row-sm">
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="First_Name">First Name</label>
-                                            <input type="text" value="@ViewBag.Empdata[0].FirstName" class="form-control" id="First_Name" placeholder="Enter First_Name">
+                                            <input type="text" value="@ViewBag.Empdata[0].FirstName" class="form-control" id="txtFirst_Name" placeholder="Enter First_Name">
                                         </div>
 
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="Middle_Name">Middle Name</label>
-                                            <input type="text" value="@ViewBag.Empdata[0].MiddleName" class="form-control" id="Middle_Name" placeholder="Enter Middle_Name">
+                                            <input type="text" value="@ViewBag.Empdata[0].MiddleName" class="form-control" id="txtMiddle_Name" placeholder="Enter Middle_Name">
                                         </div>
                                     </div>
                                 </div>
@@ -63,13 +76,13 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="First_Name">Last Name</label>
-                                            <input type="text" class="form-control" value="@ViewBag.Empdata[0].LastName" id="Last_Name" placeholder="Enter Last_Name">
+                                            <input type="text" class="form-control" value="@ViewBag.Empdata[0].LastName" id="txtLast_Name" placeholder="Enter Last_Name">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="Middle_Name">Emp Code</label>
-                                            <input type="text" class="form-control" value="@ViewBag.Empdata[0].EmpCode" id="Middle_Name" placeholder="Enter Emp_Code">
+                                            <input type="text" class="form-control" value="@ViewBag.Empdata[0].EmpCode" id="txtEmpcode" placeholder="Enter Emp_Code" readonly="readonly">
                                         </div>
                                     </div>
                                 </div>
@@ -81,7 +94,7 @@
                                                 <div class="input-group-text">
                                                     <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
                                                 </div>
-                                            </div><input class="form-control" value="@ViewBag.Empdata[0].JoiningDate" id="datetimepicker" type="text">
+                                            </div><input class="form-control" value="@ViewBag.Empdata[0].JoiningDate" id="txtjoiningdate" type="text">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
@@ -101,7 +114,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Gender</label>
-                                            <select class="form-control select2">
+                                            <select class="form-control select2" data-val="true" id="ddlgender">
 
                                                 if (ViewBag.Empdata[0].ID)
                                                 {
@@ -129,7 +142,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Marial Status</label>
-                                            <select class="form-control select2">
+                                            <select class="form-control select2" id="ddlMarialstatus">
                                                 if (ViewBag.Empdata != null)
                                                 {
                                                 <option value="@ViewBag.Empdata[0].ID" selected="selected">
@@ -138,8 +151,6 @@
                                                 }
                                                 else
                                                 {
-                                                <option label="Choose one">
-                                                </option>
                                                 <option value="Married">
                                                     Married
                                                 </option>
@@ -167,7 +178,7 @@
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Probation Status</label>
                                             <div id="slWrapperProbation" class="parsley-select">
-                                                <select required="" class="form-control select2" data-parsley-class-handler="#slWrapperProbation" data-parsley-errors-container="#slErrorContainerProbation">
+                                                <select required="" id="ddlProbationstatus" class="form-control select2" data-parsley-class-handler="#slWrapperProbation" data-parsley-errors-container="#slErrorContainerProbation">
                                                     if (ViewBag.Empdata != null)
                                                     {
                                                     <option value="@ViewBag.Empdata[0].ID" selected="selected">
@@ -176,8 +187,7 @@
                                                     }
                                                     else
                                                     {
-                                                    <option value="">
-                                                        Choose one
+                                                    <option label="Choose one">
                                                     </option>
                                                     <option value="Probation">
                                                         Probation
@@ -197,33 +207,30 @@
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Manager</label>
                                             <div id="slWrapperManager" class="parsley-select">
-                                                <select required="" class="form-control select2" name="EmployeeName" data-parsley-class-handler="#slWrapperManager" data-parsley-errors-container="#slErrorContainermanager">
+                                                <select required="" id="ddlManager" class="form-control select2" name="EmployeeName" data-parsley-class-handler="#slWrapperManager" data-parsley-errors-container="#slErrorContainermanager">
                                                     <option value="">
 
                                                         Choose one
                                                     </option>
-                                                 @*@foreach (VarshaWeb.Models.EmployeeManagement.Emp_BasicInfoModel manager in (List<VarshaWeb.Models.EmployeeManagement.Emp_CompanyMasterModel>)ViewBag.empmanager)
+
+                                                    @foreach (var obj in ViewBag.emp)
                                                     {
 
-
-                                                    }*@
-                                                        @foreach (var obj in ViewBag.empmanager)
+                                                        if (ViewBag.Empdata[0].UserNameId == @obj.UserNameId)
                                                         {
-                                                            
-                                                            if (ViewBag.Empdata[0].ManagerId == @obj.ManagerId)
-                                                            {
-                                                                <option value="@ViewBag.Empdata[0].ID" selected="selected">
-                                                                 @ViewBag.Empdata[0].Manager
-                                                                </option>
-                                                            }
-                                                                else
-                                                                {
-                                                                <option value="@obj.ManagerId">
-                                                                    @obj.Manager
-                                                                </option>
-                                                                }
-                                                            }
-                                                    </select>
+                                                            <option value="@ViewBag.Empdata[0].UserNameId" selected="selected">
+                                                                @ViewBag.Empdata[0].Manager
+                                                            </option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@obj.UserNameId">
+                                                                @obj.User_Name
+                                                            </option>
+
+                                                        }
+                                                    }
+                                                </select>
 
                                             </div>
                                             <div id="slErrorContainermanager"></div>
@@ -233,7 +240,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="Middle_Name">Office Mail</label>
-                                            <input required="" type="text" value="@ViewBag.Empdata[0].OfficeEmail" class="form-control" id="Middle_Name" placeholder="Enter Office_Mail">
+                                            <input required="" type="text" value="@ViewBag.Empdata[0].OfficeEmail" class="form-control" id="txtOfficemail" placeholder="Enter Office_Mail">
                                         </div>
                                     </div>
                                 </div>
@@ -243,14 +250,14 @@
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Mobile Number</label>
                                             <div class="input-group">
-                                                <input class="form-control" id="phone" name="phone" type="tel">
+                                                <input class="form-control"  onkeypress="return restrictCharacters(event);" maxlength="10" value="@ViewBag.Empdata[0].MobileNo" id="phone" name="phone" type="text">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="Telephone_Number">Telephone Number</label>
-                                            <input type="text" required="" value="@ViewBag.Empdata[0].ContactNumber" class="form-control" id="Telephone_Number" placeholder="Enter Telephone_Number">
+                                            <input type="text" required="" onkeypress="return restrictCharacters(event);" maxlength="10" value="@ViewBag.Empdata[0].ContactNumber" class="form-control" id="txtContact" placeholder="Enter Telephone_Number">
                                         </div>
                                     </div>
                                 </div>
@@ -258,23 +265,23 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">company</label>
-                                            <select class="form-control select2">
+                                            <select class="form-control select2" id="ddlCompany">
                                                 @foreach (VarshaWeb.Models.EmployeeManagement.Emp_CompanyMasterModel company in (List<VarshaWeb.Models.EmployeeManagement.Emp_CompanyMasterModel>)ViewBag.company)
-                                                        {
-                                                            if (ViewBag.Empdata[0].CompanyId == @company.ID)
-                                                            {
-                                                        <option value="@ViewBag.Empdata[0].ID" selected="selected">
+                                                {
+                                                    if (ViewBag.Empdata[0].CompanyId == @company.ID)
+                                                    {
+                                                        <option value="@ViewBag.Empdata[0].CompanyId" selected="selected">
                                                             @ViewBag.Empdata[0].Company
                                                         </option>
-        
+
                                                     }
-                                                            else
-                                                            {
+                                                    else
+                                                    {
                                                         <option value="@company.ID">
                                                             @company.CompanyName
                                                         </option>
-                                                            }
-                                                        }
+                                                    }
+                                                }
 
                                             </select>
 
@@ -284,25 +291,25 @@
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Designation</label>
                                             <div id="slWrapperDesignation" class="parsley-select">
-                                                <select required="" class="form-control select2" data-parsley-class-handler="#slWrapperDesignation" data-parsley-errors-container="#slErrorContainerDesignation">
+                                                <select required="" class="form-control select2" id="ddlDegination" data-parsley-class-handler="#slWrapperDesignation" data-parsley-errors-container="#slErrorContainerDesignation">
                                                     <option value="">
                                                         Choose one
                                                     </option>
                                                     @foreach (VarshaWeb.Models.EmployeeManagement.Emp_DesignationModel designation in (List<VarshaWeb.Models.EmployeeManagement.Emp_DesignationModel>)ViewBag.designation)
+                                                    {
+                                                        if (ViewBag.Empdata[0].DesignationId == @designation.ID)
                                                         {
-                                                            if (ViewBag.Empdata[0].DesignationId == @designation.ID)
-                                                            {
-                                                            <option value="@ViewBag.Empdata[0].ID" selected="selected">
+                                                            <option value="@ViewBag.Empdata[0].DesignationId" selected="selected">
                                                                 @ViewBag.Empdata[0].Designation
                                                             </option>
-                                                            }
-                                                            else
-                                                            {
+                                                        }
+                                                        else
+                                                        {
                                                             <option value="@designation.ID">
                                                                 @designation.Designation
                                                             </option>
-                                                            }
                                                         }
+                                                    }
                                                 </select>
                                             </div>
                                             <div id="slErrorContainerDesignation"></div>
@@ -317,25 +324,25 @@
 
                                             <label for="exampleInputPassword1">Department</label>
                                             <div id="slWrapperDepartment" class="parsley-select">
-                                                <select required="" class="form-control select2" data-parsley-class-handler="#slWrapperDepartment" data-parsley-errors-container="#slErrorContainerDepartment">
+                                                <select required="" class="form-control select2" id="ddlDepartment" data-parsley-class-handler="#slWrapperDepartment" data-parsley-errors-container="#slErrorContainerDepartment">
                                                     <option value="">
                                                         Choose one
                                                     </option>
                                                     @foreach (VarshaWeb.Models.EmployeeManagement.Emp_DepartmentModel department in (List<VarshaWeb.Models.EmployeeManagement.Emp_DepartmentModel>)ViewBag.department)
+                                                    {
+                                                        if (ViewBag.Empdata[0].DepartmentId == @department.ID)
                                                         {
-                                                            if (ViewBag.Empdata[0].DepartmentId == @department.ID)
-                                                            {
-                                                            <option value="@ViewBag.Empdata[0].ID" selected="selected">
+                                                            <option value="@ViewBag.Empdata[0].DepartmentId" selected="selected">
                                                                 @ViewBag.Empdata[0].Department
                                                             </option>
-                                                            }
-                                                            else
-                                                            {
+                                                        }
+                                                        else
+                                                        {
                                                             <option value="@department.ID">
                                                                 @department.DepartmentName
                                                             </option>
-                                                            }
                                                         }
+                                                    }
                                                 </select>
                                             </div>
                                             <div id="slErrorContainerDepartment"></div>
@@ -345,25 +352,25 @@
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Division</label>
                                             <div id="slWrapperDivision" class="parsley-select">
-                                                <select required="" class="form-control select2" data-parsley-class-handler="#slWrapperDivision" data-parsley-errors-container="#slErrorContainerDivision">
+                                                <select required="" id="ddlDivision" class="form-control select2" data-parsley-class-handler="#slWrapperDivision" data-parsley-errors-container="#slErrorContainerDivision">
                                                     <option value="">
                                                         Choose one
                                                     </option>
                                                     @foreach (VarshaWeb.Models.EmployeeManagement.Emp_DivisionModel division in (List<VarshaWeb.Models.EmployeeManagement.Emp_DivisionModel>)ViewBag.division)
+                                                    {
+                                                        if (ViewBag.Empdata[0].DivisionId == @division.ID)
                                                         {
-                                                            if (ViewBag.Empdata[0].DivisionId == @division.ID)
-                                                            {
-                                                            <option value="@ViewBag.Empdata[0].ID" selected="selected">
+                                                            <option value="@ViewBag.Empdata[0].DivisionId" selected="selected">
                                                                 @ViewBag.Empdata[0].Division
                                                             </option>
-                                                            }
-                                                            else
-                                                            {
+                                                        }
+                                                        else
+                                                        {
                                                             <option value="@division.ID">
                                                                 @division.Division
                                                             </option>
-                                                            }
                                                         }
+                                                    }
                                                 </select>
                                             </div>
                                             <div id="slErrorContainerDivision"></div>
@@ -376,25 +383,25 @@
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Region</label>
                                             <div id="slWrapperRegion" class="parsley-select">
-                                                <select required="" class="form-control select2" data-parsley-class-handler="#slWrapperRegion" data-parsley-errors-container="#slErrorContainerRegion">
+                                                <select required="" id="ddlRegion" class="form-control select2" data-parsley-class-handler="#slWrapperRegion" data-parsley-errors-container="#slErrorContainerRegion">
                                                     <option value="">
                                                         Choose one
                                                     </option>
                                                     @foreach (VarshaWeb.Models.EmployeeManagement.Emp_RegionModel Region in (List<VarshaWeb.Models.EmployeeManagement.Emp_RegionModel>)ViewBag.Region)
+                                                    {
+                                                        if (ViewBag.Empdata[0].RegionId == @Region.ID)
                                                         {
-                                                            if (ViewBag.Empdata[0].RegionId == @Region.ID)
-                                                            {
-                                                            <option value="@ViewBag.Empdata[0].ID" selected="selected">
+                                                            <option value="@ViewBag.Empdata[0].RegionId" selected="selected">
                                                                 @ViewBag.Empdata[0].Region
                                                             </option>
-                                                            }
-                                                            else
-                                                            {
+                                                        }
+                                                        else
+                                                        {
                                                             <option value="@Region.ID">
                                                                 @Region.Region
                                                             </option>
-                                                            }
                                                         }
+                                                    }
                                                 </select>
                                             </div>
                                             <div id="slErrorContainerRegion"></div>
@@ -404,25 +411,25 @@
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Branch</label>
                                             <div id="slWrapperBranch" class="parsley-select">
-                                                <select required="" class="form-control select2" data-parsley-class-handler="#slWrapperBranch" data-parsley-errors-container="#slErrorContainerBranch">
+                                                <select required="" id="ddlBranch" class="form-control select2" data-parsley-class-handler="#slWrapperBranch" data-parsley-errors-container="#slErrorContainerBranch">
                                                     <option value="">
                                                         Choose one
                                                     </option>
                                                     @foreach (VarshaWeb.Models.EmployeeManagement.Emp_BranchModel Branch in (List<VarshaWeb.Models.EmployeeManagement.Emp_BranchModel>)ViewBag.Branch)
+                                                    {
+                                                        if (ViewBag.Empdata[0].BranchId == @Branch.ID)
                                                         {
-                                                            if (ViewBag.Empdata[0].BranchId == @Branch.ID)
-                                                            {
-                                                            <option value="@ViewBag.Empdata[0].ID" selected="selected">
+                                                            <option value="@ViewBag.Empdata[0].BranchId" selected="selected">
                                                                 @ViewBag.Empdata[0].Branch
                                                             </option>
-                                                            }
-                                                            else
-                                                            {
+                                                        }
+                                                        else
+                                                        {
                                                             <option value="@Branch.ID">
                                                                 @Branch.Branch
                                                             </option>
-                                                            }
                                                         }
+                                                    }
                                                 </select>
                                             </div>
                                             <div id="slErrorContainerBranch"></div>
@@ -435,30 +442,30 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">User Name</label>
-                                           
-                                                    <input required="" type="text" value="@ViewBag.Empdata[0].User_Name" class="form-control" readonly="readonly">
 
-                                                    @*<select required="" class="form-control select2" name="username" data-parsley-class-handler="#slWrapperUsername" data-parsley-errors-container="#slErrorContainerUsername">
-                                                        <option value="">
-                                                            Choose One
-                                                        </option>
-                                                        @foreach (VarshaWeb.Models.UserGroupModel user in (List<VarshaWeb.Models.UserGroupModel>)ViewBag.username)
-                                                            {
-                                                            if (ViewBag.Empdata[0].ID != null)
-                                                            {
-                                                            <option value="@ViewBag.Empdata[0].ID" selected="selected">
-                                                                @ViewBag.Empdata[0].User_Name
-                                                            </option>
-                                                            }
-                                                            else
-                                                            {
-                                                            <option value="@user.ID">
-                                                                @user.Title
-                                                            </option>
-                                                            }
-                                                            }
-                                                    </select>*@
-                                                
+                                            <input required="" type="text" value="@ViewBag.Empdata[0].User_Name" class="form-control" readonly="readonly">
+
+                                            @*<select required="" class="form-control select2" name="username" data-parsley-class-handler="#slWrapperUsername" data-parsley-errors-container="#slErrorContainerUsername">
+                                            <option value="">
+                                                Choose One
+                                            </option>
+                                            @foreach (VarshaWeb.Models.UserGroupModel user in (List<VarshaWeb.Models.UserGroupModel>)ViewBag.username)
+                                                {
+                                                if (ViewBag.Empdata[0].ID != null)
+                                                {
+                                                <option value="@ViewBag.Empdata[0].ID" selected="selected">
+                                                    @ViewBag.Empdata[0].User_Name
+                                                </option>
+                                                }
+                                                else
+                                                {
+                                                <option value="@user.ID">
+                                                    @user.Title
+                                                </option>
+                                                }
+                                                }
+                                        </select>*@
+
 
                                         </div>
                                     </div>
@@ -468,7 +475,7 @@
                                         <button type="submit" class="btn btn-primary btn-block" id="updateEmployee">Submit</button>
                                     </div>
                                     <div class="col-sm-6 col-md-3 mg-t-10">
-                                        <button type="button" ng-click="cancel()" class="btn btn-light btn-block">Cancel</button>
+                                        <button type="button" ng-click="cancelEditpage()" class="btn btn-light btn-block">Cancel</button>
                                     </div>
                                 </div>
 
@@ -481,6 +488,17 @@
                         <!--Dashboard Code End-->
                     </div>
 
+                </div>
+            </div>
+            <div class="modal" id="modaldemo4" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content tx-size-sm">
+                        <div class="modal-body tx-center pd-y-20 pd-x-20">
+                            <i class="icon ion-ios-checkmark-circle-outline tx-100 tx-success lh-1 mg-t-20 d-inline-block"></i>
+                            <h4 class="tx-success tx-semibold mg-b-20">Congratulations!</h4>
+                            <p class="mg-b-20 mg-x-20">Your request have been successfully submitted.</p><button aria-label="Close" class="btn ripple btn-success pd-x-25" data-dismiss="modal" type="button" ng-click="editmsg()">Continue</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -504,6 +522,11 @@
         <script src="../assets/js/datePicker.js"></script>
 
         <script>
+            $('#txtjoiningdate').datetimepicker({
+                minView: 2,
+                format: 'dd-mm-yyyy',
+                autoclose: true
+            });
             $('#datetimepicker1').datetimepicker({
                 minView: 2,
                 format: 'dd-mm-yyyy',
