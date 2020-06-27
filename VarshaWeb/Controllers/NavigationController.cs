@@ -107,12 +107,7 @@ namespace VarshaWeb.Controllers
 
                     Session["Navigation"] = ht;
                 }
-
             }
-
-
-
-
             return Json(Session["Navigation"].ToString(), JsonRequestBehavior.AllowGet);
 
         }

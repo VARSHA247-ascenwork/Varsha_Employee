@@ -5,16 +5,7 @@ var jsonheaders = { 'headers': { 'accept': 'application/json;odata=verbose' } };
 
 VendorServiceModule.service('VendorService', function ($http, CommonAppUtilityService) {
 
-   /* this.Postdata = function (option) {
-
-         return CommonAppUtilityService.CreateItem("/VendorDashboard/SaveInfo", option);
-    }
-    this.EditPostdata = function (option) {
-
-        return CommonAppUtilityService.CreateItem("/VendorDashboard/UpdateInfo", option);
-    }  */
-
-    this.Postdata = function (option, files, path) {
+   this.Postdata = function (option, files, path) {
 
 
         var fileData = new FormData();
@@ -29,5 +20,8 @@ VendorServiceModule.service('VendorService', function ($http, CommonAppUtilitySe
 
         fileData.append('VendorDetails', JSON.stringify(objArr));
         return CommonAppUtilityService.DataWithFile(path, fileData);
-    }
+    }  
+
+
+    
 });

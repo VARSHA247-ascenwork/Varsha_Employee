@@ -1,22 +1,17 @@
-﻿
+﻿@using VarshaWeb.Models.EmployeeManagement;
 
 @{
     ViewBag.Title = "Index";
-   
 }
-
 
 @section style
 {
     <!-- Internal Select2 css -->
     <link href="~/assets/plugins/select2/css/select2.min.css" rel="stylesheet">
 
-
-    <!--Internal  TelephoneInput css-->
-    <link rel="stylesheet" href="../assets/plugins/telephoneinput/telephoneinput.css">
-
     <!--Internal  Datetimepicker-slider css -->
     <link href="~/assets/plugins/amazeui-datetimepicker/css/amazeui.datetimepicker.css" rel="stylesheet">
+
     <!-- Internal Data table css -->
     <link href="~/assets/plugins/datatable/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
     <link href="~/assets/plugins/datatable/css/buttons.bootstrap4.min.css" rel="stylesheet">
@@ -61,6 +56,10 @@
         right: 0;
     }
 </style>
+
+
+
+
 
 <!-- breadcrumb -->
 <div class="breadcrumb-header justify-content-between">
@@ -125,7 +124,7 @@
 
                             </tr>
 
-                          
+
 
 
                         </tbody>
@@ -137,19 +136,22 @@
 
 
     </div>
-    <div class="modal left fade" id="ModalPopUp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static" aria-hidden="true">
+    <form id="AddEmployeeDetailForm">
+        <div class="modal left fade" id="ModalPopUp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static" aria-hidden="true">
 
-        <!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title w-100" id="myModalLabel"></h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="AddEmployeeDetailForm">
+            <!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div ng-show="AddDetail"><h4 class="modal-title w-100" id="myModalLabel">Add Employee Details</h4></div>
+
+                        <div ng-show="UpdateDetail"><h4 class="modal-title w-100" id="myModalLabel">Update Details</h4></div>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
                         <div class="row">
                             <div class="col-xl-12 col-lg-12">
                                 <!--Dashboard Code start-->
@@ -157,9 +159,9 @@
 
                                     <div class="card-body">
                                         <!--<div>
-                                            <h6 class="card-title mb-1">Entry Page</h6>
-                                            <p class="text-muted card-sub-title">Entry Page</p>
-                                        </div> -->
+                                        <h6 class="card-title mb-1">Entry Page</h6>
+                                        <p class="text-muted card-sub-title">Entry Page</p>
+                                    </div> -->
                                         <div class="card-body pt-0">
                                             <div class="">
                                                 <div class="row row-sm">
@@ -167,34 +169,57 @@
                                                         <div class="form-group">
                                                             <label for="First_Name">First Name</label>
 
-                                                            <input required="" type="text" class="form-control" ng-model="ngtxtfirstname" id="First_Name" placeholder="Enter First_Name">
+                                                            <input required="" ng-readonly="makeReadOnly" type="text" class="form-control" ng-model="ngtxtfirstname" id="txtFirst_Name" placeholder="Enter First_Name">
                                                         </div>
 
                                                     </div>
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-6" ng-show="addMiddlename">
                                                         <div class="form-group">
                                                             <label for="Middle_Name">Middle Name</label>
-                                                            <input required="" type="text" class="form-control" ng-model="ngtxtMiddlename" id="Middle_Name" placeholder="Enter Middle_Name">
+                                                            <input required="" type="text" class="form-control" ng-model="ngtxtMiddlename" id="txtMiddle_Name" placeholder="Enter Middle_Name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6" ng-show="viewlastname">
+                                                        <div class="form-group">
+                                                            <label for="Last_Name">Last Name</label>
+                                                            <input readonly="readonly" type="text" class="form-control" ng-model="ngtxtlastname" placeholder="Enter Last_Name">
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row row-sm">
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-6" ng-show="addLastname">
                                                         <div class="form-group">
                                                             <label for="Last_Name">Last Name</label>
-                                                            <input required="" type="text" class="form-control" ng-model="ngtxtlastname" id="Last_Name" placeholder="Enter Last_Name">
+                                                            <input type="text" class="form-control" ng-model="ngtxtlastnameadd" id="txtLast_Name" placeholder="Enter Last_Name">
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-6" ng-show="viewEmpcode">
+                                                        <div class="form-group">
+                                                            <label for="Last_Name">Employee Code</label>
+                                                            <input readonly="readonly" type="text" class="form-control" ng-model="ngtxtEmpcode" placeholder="Enter Last_Name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6" ng-show="ViewUsername">
+                                                        <div class="form-group">
+                                                            <label for="Last_Name">User Name</label>
+                                                            <input type="text" class="form-control" ng-model="ngtxtusername" id="txtUsername" readonly="readonly">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6" ng-show="Username">
                                                         <div class="form-group">
                                                             <label for="exampleInputPassword1">User Name</label>
                                                             <div id="slWrapper" class="parsley-select">
                                                                 <div id="slWrapperUsername" class="parsley-select">
-                                                                    <select required="" class="form-control select2" name="username" ng-model="ngddluser" data-parsley-class-handler="#slWrapperUsername" data-parsley-errors-container="#slErrorContainerUsername">
+                                                                    <select class="form-control select2" id="ddlUsername" name="username" ng-model="ngddluser" data-parsley-class-handler="#slWrapperUsername" data-parsley-errors-container="#slErrorContainerUsername">
                                                                         <option value="">
                                                                             Choose One
                                                                         </option>
-
+                                                                        @foreach (var obj in ViewBag.username)
+                                                                        {
+                                                                            <option value="@obj.ID">
+                                                                                @obj.Title
+                                                                            </option>
+                                                                        }
 
                                                                     </select>
                                                                 </div>
@@ -213,7 +238,7 @@
                                                                 <div class="input-group-text">
                                                                     <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
                                                                 </div>
-                                                            </div><input class="form-control" ng-change="getdate()" ng-model="ngtxtJoiningdate" id="datetimepicker" type="text">
+                                                            </div><input required="" class="form-control" ng-change="getdate()" ng-model="ngtxtJoiningdate" id="txtjoiningDate" type="text">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6">
@@ -224,7 +249,7 @@
                                                                     <div class="input-group-text">
                                                                         <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
                                                                     </div>
-                                                                </div><input required="" class="form-control" ng-model="ngtxtDOB" id="datetimepicker1" type="text">
+                                                                </div><input required="" class="form-control" ng-model="ngtxtDOB" id="datetimepicker" type="text">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -235,10 +260,8 @@
                                                         <div class="form-group">
                                                             <label for="exampleInputPassword1">Gender</label>
                                                             <div id="slWrapper" class="parsley-select">
-                                                                <select required="" class="form-control select2" ng-model="ngddlGender" data-parsley-class-handler="#slWrapper" data-parsley-errors-container="#slErrorContainer">
-                                                                    <option value="">
-                                                                        Choose one
-                                                                    </option>
+                                                                <select required="" class="form-control select2" id="ddlGender" ng-model="ngddlGender" data-parsley-class-handler="#slWrapper" data-parsley-errors-container="#slErrorContainer">
+
                                                                     <option value="Male">
                                                                         Male
                                                                     </option>
@@ -255,10 +278,8 @@
                                                         <div class="form-group">
                                                             <label for="exampleInputPassword1">Marial Status</label>
                                                             <div id="slWrapperMarrial" class="parsley-select">
-                                                                <select required="" class="form-control select2" ng-model="ngdddlMarialstatus" data-parsley-class-handler="#slWrapperMarrial" data-parsley-errors-container="#slErrorContainermarrial">
-                                                                    <option value="">
-                                                                        Choose one
-                                                                    </option>
+                                                                <select required="" class="form-control select2" ng-model="ngdddlMarialstatus" id="dddlMarialStatus" data-parsley-class-handler="#slWrapperMarrial" data-parsley-errors-container="#slErrorContainermarrial">
+
                                                                     <option value="Married">
                                                                         Married
                                                                     </option>
@@ -282,17 +303,15 @@
                                                             <div class="input-group-text">
                                                                 <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
                                                             </div>
-                                                        </div><input class="form-control" id="datetimepicker2" ng-model="ngtxtProbationtill" type="text">
+                                                        </div><input required="" class="form-control" id="txtProbationaltill" ng-model="ngtxtProbationtill" type="text">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label for="exampleInputPassword1">Probation Status</label>
                                                         <div id="slWrapperProbation" class="parsley-select">
-                                                            <select required="" class="form-control select2" ng-model="ngddlProbationstatus" data-parsley-class-handler="#slWrapperProbation" data-parsley-errors-container="#slErrorContainerProbation">
-                                                                <option value="">
-                                                                    Choose one
-                                                                </option>
+                                                            <select required="" class="form-control select2" id="ddlProbationStatus" ng-model="ngddlProbationstatus" data-parsley-class-handler="#slWrapperProbation" data-parsley-errors-container="#slErrorContainerProbation">
+
                                                                 <option value="Probation">
                                                                     Probation
                                                                 </option>
@@ -306,35 +325,14 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row row-sm">
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputPassword1">Manager</label>
-                                                        <div id="slWrapperManager" class="parsley-select">
-                                                            <select required="" class="form-control select2" ng-options="e.ID as e.FirstName for e in EmpInfo" ng-model="ngddlManager" data-parsley-class-handler="#slWrapperManager" data-parsley-errors-container="#slErrorContainermanager">
-                                                            </select>
 
-                                                        </div>
-                                                        <div id="slErrorContainermanager"></div>
-
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label for="Middle_Name">Office Mail</label>
-                                                        <input required="" type="email" class="form-control txtmail" value="@Model.VMEmpdata.OfficeEmail" ng-model="ngtxtOfficemailEdit" id="txtofficemailEdit" placeholder="Enter Office_Mail">
-
-
-                                                    </div>
-                                                </div>
-                                            </div>
 
                                             <div class="row row-sm">
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label for="exampleInputPassword1">Mobile Number</label>
                                                         <div class="input-group">
-                                                            <input class="form-control" onkeypress="return restrictCharacters(event);" maxlength="10" ng-model="ngtxtmobile" id="phone" name="phone" type="tel">
+                                                            <input class="form-control" required="" onkeypress="return restrictCharacters(event);" maxlength="10" ng-model="ngtxtmobile" id="phone" name="phone" type="tel">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -342,7 +340,67 @@
                                                     <div class="form-group">
                                                         <label for="Telephone_Number">Telephone Number</label>
                                                         <!--   <input type="tel" name="country_code" id="Telephone_Number" required="" onkeypress="phoneno()" maxlength="10" class="form-control" ng-model="ngtxtmobileno"  placeholder="Enter Telephone Number">-->
-                                                        <input type="text" maxlength="10" onkeypress="return restrictCharacters(event);" id="Telephone_Number" class="form-control" ng-model="ngtxtmobileno" placeholder="Enter Telephone Number" />
+                                                        <input type="text" required="" maxlength="10" onkeypress="return restrictCharacters(event);" id="Telephone_Number" class="form-control" ng-model="ngtxtContact" placeholder="Enter Telephone Number" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row row-sm">
+                                                <div class="col-lg-6" ng-show="AddManager">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Manager</label>
+                                                        <div id="slWrapper" class="parsley-select">
+                                                            <div id="slWrappermanager" class="parsley-select">
+                                                                <select class="form-control select2" id="ddlManageradd" ng-model="ngddlManagerAdd" data-parsley-class-handler="#slWrappermanager" data-parsley-errors-container="#slErrorContainermanager">
+                                                                    <option value="">
+                                                                        Choose One
+                                                                    </option>
+                                                                    @foreach (var user in ViewBag.emp)
+                                                                    {
+                                                                        <option value="@user.UserNameId">
+                                                                            @user.User_Name
+                                                                        </option>
+                                                                    }
+
+                                                                </select>
+                                                            </div>
+                                                            <div id="slErrorContainermanager"></div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6" ng-show="viewmanager">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Manager</label>
+                                                        <div id="slWrapperManagerview" class="parsley-select">
+                                                            <select required="" class="form-control select2" id="ddlManager" name="EmployeeName" ng-model="ngddlManager" data-parsley-class-handler="#slWrapperManagerview" data-parsley-errors-container="#slErrorContainermanagerview">
+                                                                @foreach (var obj in ViewBag.emp)
+                                                                {
+
+                                                                    if (obj.ID == obj.ManagerId)
+                                                                    {
+                                                                        <option value="@obj.ManagerId" selected="selected">
+                                                                            @obj.Manager
+                                                                        </option>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <option value="@obj.ID">
+                                                                            @obj.FirstName
+                                                                        </option>
+
+                                                                    }
+                                                                }
+                                                            </select>
+
+                                                        </div>
+                                                        <div id="slErrorContainermanagerview"></div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="Middle_Name">Office Mail</label>
+                                                        <input required="" type="email" class="form-control" ng-model="ngtxtOfficemail" id="txtOfficeMail" placeholder="Enter Office_Mail">
                                                     </div>
                                                 </div>
                                             </div>
@@ -353,13 +411,17 @@
                                                         <label for="company">
                                                             company
                                                         </label>
-
-                                                        <select class="form-control select2" ng-model="ngddlcompanyedit" id="ddlCompanyEdit" ng-options="c.ID as c.CompanyName for c in CompanyMaster">
-                                                            <option value="">
-                                                                Choose one
-                                                            </option>
-                                                        </select>
-
+                                                        <div id="slWrapperCompany" class="parsley-select">
+                                                            <select class="form-control select2" ng-model="ngddlcompany" id="ddlCompany" data-parsley-class-handler="#slWrapperDesignation" data-parsley-errors-container="#slErrorContainerDesignation">
+                                                                @foreach (var arr in ViewBag.company)
+                                                                {
+                                                                    <option value="@arr.ID">
+                                                                        @arr.CompanyName
+                                                                    </option>
+                                                                }
+                                                            </select>
+                                                        </div>
+                                                        <div id="slErrorContainerCompany"></div>
                                                     </div>
                                                 </div>
 
@@ -369,7 +431,14 @@
                                                         <div id="slWrapperDesignation" class="parsley-select">
 
 
-                                                            <select class="form-control select2" ng-model="ngddlDesination" id="ddlDesignation" ng-options="d.ID as d.Designation for d in DesignationMaster">
+                                                            <select class="form-control select2" ng-model="ngddlDesignation" id="ddlDesignation" data-parsley-class-handler="#slWrapperDesignation" data-parsley-errors-container="#slErrorContainerDesignation">
+                                                                @foreach (var arr in ViewBag.designation)
+                                                                {
+                                                                    <option value="@arr.ID">
+                                                                        @arr.Designation
+                                                                    </option>
+                                                                }
+
                                                             </select>
                                                         </div>
                                                         <div id="slErrorContainerDesignation"></div>
@@ -383,7 +452,13 @@
 
                                                         <label for="exampleInputPassword1">Department</label>
                                                         <div id="slWrapperDepartment" class="parsley-select">
-                                                            <select required="" class="form-control select2" ng-model="ngddlDepartment" data-parsley-class-handler="#slWrapperDepartment" data-parsley-errors-container="#slErrorContainerDepartment">
+                                                            <select required="" class="form-control select2" id="ddlDepartment" ng-model="ngddlDepartment" data-parsley-class-handler="#slWrapperDepartment" data-parsley-errors-container="#slErrorContainerDepartment">
+                                                                @foreach (var department in ViewBag.department)
+                                                                {
+                                                                    <option value="@department.ID">
+                                                                        @department.DepartmentName
+                                                                    </option>
+                                                                }
                                                             </select>
                                                         </div>
                                                         <div id="slErrorContainerDepartment"></div>
@@ -393,11 +468,14 @@
                                                     <div class="form-group">
                                                         <label for="exampleInputPassword1">Division</label>
                                                         <div id="slWrapperDivision" class="parsley-select">
-                                                            <select required="" class="form-control select2" ng-model="ngddlDivision" data-parsley-class-handler="#slWrapperDivision" data-parsley-errors-container="#slErrorContainerDivision">
-                                                                <option value="">
-                                                                    Choose one
-                                                                </option>
+                                                            <select required="" class="form-control select2" id="ddlDivision" ng-model="ngddlDivision" data-parsley-class-handler="#slWrapperDivision" data-parsley-errors-container="#slErrorContainerDivision">
 
+                                                                @foreach (var obj in ViewBag.division)
+                                                                {
+                                                                    <option value="@obj.ID">
+                                                                        @obj.Division
+                                                                    </option>
+                                                                }
                                                             </select>
                                                         </div>
                                                         <div id="slErrorContainerDivision"></div>
@@ -410,11 +488,14 @@
                                                     <div class="form-group">
                                                         <label for="exampleInputPassword1">Region</label>
                                                         <div id="slWrapperRegion" class="parsley-select">
-                                                            <select required="" class="form-control select2" ng-model="ngddlRegion" data-parsley-class-handler="#slWrapperRegion" data-parsley-errors-container="#slErrorContainerRegion">
-                                                                <option value="">
-                                                                    Choose one
-                                                                </option>
+                                                            <select required="" class="form-control select2" id="ddlRegion" ng-model="ngddlRegion" data-parsley-class-handler="#slWrapperRegion" data-parsley-errors-container="#slErrorContainerRegion">
 
+                                                                @foreach (var region in ViewBag.Region)
+                                                                {
+                                                                    <option value="@region.ID">
+                                                                        @region.Region
+                                                                    </option>
+                                                                }
                                                             </select>
                                                         </div>
                                                         <div id="slErrorContainerRegion"></div>
@@ -424,17 +505,14 @@
                                                     <div class="form-group">
                                                         <label for="exampleInputPassword1">Branch</label>
                                                         <div id="slWrapperBranch" class="parsley-select">
-                                                            <select required="" class="form-control select2" ng-model="ngddlBranch" data-parsley-class-handler="#slWrapperBranch" data-parsley-errors-container="#slErrorContainerBranch">
-                                                                <option value="">
-                                                                    Choose one
-                                                                </option>
+                                                            <select required="" class="form-control select2" id="ddlBranch" ng-model="ngddlBranch" data-parsley-class-handler="#slWrapperBranch" data-parsley-errors-container="#slErrorContainerBranch">
+
                                                                 @foreach (var arr in ViewBag.Branch)
                                                                 {
                                                                     <option value="@arr.ID">
                                                                         @arr.Branch
                                                                     </option>
                                                                 }
-
                                                             </select>
                                                         </div>
                                                         <div id="slErrorContainerBranch"></div>
@@ -450,39 +528,34 @@
 
                                     </div>
                                 </div>
-                                <div class="modal" id="modaldemo4" data-backdrop="static" data-keyboard="false">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content tx-size-sm">
-                                            <div class="modal-body tx-center pd-y-20 pd-x-20">
-                                                <i class="icon ion-ios-checkmark-circle-outline tx-100 tx-success lh-1 mg-t-20 d-inline-block"></i>
-                                                <h4 class="tx-success tx-semibold mg-b-20">Congratulations!</h4>
-                                                <p class="mg-b-20 mg-x-20">Your request have been successfully submitted.</p><button aria-label="Close" class="btn ripple btn-success pd-x-25" data-dismiss="modal" type="button" ng-click="PerformAction()">Continue</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                               
                             </div>
                         </div>
-                    </form>
+
+
+                    </div>
                     <div class="modal-footer justify-content-center">
-                        <div class="row row-sm text-center justify-content-center">
-                            <div class="col-sm-6 col-md-3 mg-t-10">
-                                <button type="submit" class="btn btn-primary btn-block">Submit</button>
-                            </div>
-                            <div class="col-sm-6 col-md-3 mg-t-10">
-                                <button type="button" class="btn btn-secondary btn-block" ng-click="CancelAddpage()">Cancel</button>
-                            </div>
-                        </div>
-                        <button ng-click="updateEmp()" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary" id="btnProjectCreation" ng-show="addEmployee">Submit</button>
+                        <button type="submit" class="btn btn-primary" id="btnUpdate" ng-show="editEmployee">Save Changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
+
             </div>
 
         </div>
-
-    </div>
-
-
+        <div class="modal" id="modaldemo4" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content tx-size-sm">
+                    <div class="modal-body tx-center pd-y-20 pd-x-20">
+                        <i class="icon ion-ios-checkmark-circle-outline tx-100 tx-success lh-1 mg-t-20 d-inline-block"></i>
+                        <h4 class="tx-success tx-semibold mg-b-20">Congratulations!</h4>
+                        <p class="mg-b-20 mg-x-20">Your request have been successfully submitted.</p><button aria-label="Close" class="btn ripple btn-success pd-x-25" data-dismiss="modal" type="button" ng-click="PerformAction()">Continue</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
     <!-----view  page  Modal -->
     <div class="modal left fade" id="ModalPopupView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static" aria-hidden="true">
 
@@ -490,7 +563,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title w-100" id="myModalLabel"></h4>
+                    <h4 class="modal-title w-100" id="myModalLabel">Employee Details</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -542,7 +615,7 @@
                                         <div class="row row-sm text-center justify-content-center">
 
 
-                                            <button type="button" style="width:100px" class="btn btn-secondary btn-block" ng-click="CancelViewpage()">Cancel</button>
+
 
                                         </div>
                                     </div>
@@ -554,10 +627,13 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal-footer justify-content-center">
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
-
 
     <!-----Edit page  Modal -->
 </div>
@@ -569,13 +645,11 @@
 <!---<a href="#top" id="back-to-top"><i class="las la-angle-double-up"></i></a> -->
 
 @section scripts {
+
+
     <!-- Internal Select2.min js -->
     <script src="~/assets/plugins/select2/js/select2.min.js"></script>
     <script src="~/assets/js/select2.js"></script>
-
-    <!-- Internal TelephoneInput js -->
-    <script src="../assets/plugins/telephoneinput/telephoneinput.js"></script>
-    <script src="../assets/plugins/telephoneinput/inttelephoneinput.js"></script>
 
     <!--Internal  pickerjs js -->
     <script src="../assets/plugins/pickerjs/picker.min.js"></script>
@@ -604,7 +678,6 @@
     <script src="~/assets/plugins/datatable/js/buttons.print.min.js"></script>
     <script src="~/assets/plugins/datatable/js/buttons.colVis.min.js"></script>
     <script src="~/assets/plugins/datatable/js/responsive.bootstrap4.min.js"></script>
-
     <script>
         function restrictCharacters(evt) {
 
@@ -619,9 +692,6 @@
         }
 
     </script>
-
-
-
-    <script src="~/Scripts/Angular/EmployeeManagement/Services/EmployeeRequestServices.js"></script>
-    <script src="~/Scripts/Angular/EmployeeManagement/JS/EmployeeRequest.js"></script>
+    <script src="~/Scripts/Angular/EmployeeManagement/Services/EmployeeRequestService.js"></script>
+    <script src="~/Scripts/Angular/EmployeeManagement/JS/EmployeeRequestNew.js"></script>
 }

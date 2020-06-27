@@ -5,20 +5,21 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using VarshaWeb.BAL.EmployeeManagement;
-using VarshaWeb.Models.EmployeeManagement.ViewModels;
+//using VarshaWeb.Models.EmployeeManagement.ViewModels;
 using VarshaWeb.Models.EmployeeManagement;
 using VarshaWeb.DAL;
 using VarshaWeb.Models;
 using VarshaWeb.BAL;
 using Newtonsoft.Json;
 using System.Web.Helpers;
+using System.Deployment.Internal;
 
 namespace VarshaWeb.Controllers.EmployeeManagement
 {
     public class EmployeeController : Controller
     {
 
-        VM_Emp_BasicInfoModel VM_Emp_Detail = new VM_Emp_BasicInfoModel();
+       // VM_Emp_BasicInfoModel VM_Emp_Detail = new VM_Emp_BasicInfoModel();
 
         List<Emp_BasicInfoModel> emp_manager = new List<Emp_BasicInfoModel>();
         Emp_BasicInfoBal empmanager = new Emp_BasicInfoBal();
@@ -49,32 +50,26 @@ namespace VarshaWeb.Controllers.EmployeeManagement
         //get Region
         List<Emp_RegionModel> emp_Region = new List<Emp_RegionModel>();
         Emp_RegionBal Region = new Emp_RegionBal();
+
        
-        [SharePointContextFilter]
         public ActionResult Index()
         {
-          
-            var spContext = SharePointContextProvider.Current.GetSharePointContext(HttpContext);
-            using (var clientContext = spContext.CreateUserClientContextForSPHost())
+            try
             {
-                
-                ViewBag.company = company.GetAllCompany(clientContext);
-                ViewBag.designation = designation.GetDesignation(clientContext);
-                ViewBag.department = department.GetAllDepartment(clientContext);
-                ViewBag.division = division.GetDivision(clientContext);
-                ViewBag.Branch = Branch.GetBranch(clientContext);
-                ViewBag.Region = Region.GetRegion(clientContext);
-                ViewBag.username = username.Getusergroup(clientContext);
-                ViewBag.emp = emp.GetAllEmployee(clientContext);
-               
-
+                var spContext = SharePointContextProvider.Current.GetSharePointContext(HttpContext);
+                using (var clientContext = spContext.CreateUserClientContextForSPHost())
+                {
+                    ViewBag.ProjectTypeData = emp.GetAllEmployee(clientContext);
+                  
+                }
             }
-
-            Session["managercode"] = empBasicinfo;
-            
+            catch (Exception ex)
+            {
+                throw new Exception(string.Format("An error occured while performing action. GUID: {0}", ex.ToString()));
+            }
             return View();
         }
-        public ActionResult getEmpdata(int id)
+      public ActionResult getEmpdata(int id)
         {
 
           
@@ -86,7 +81,7 @@ namespace VarshaWeb.Controllers.EmployeeManagement
             }
             return Json(empBasicinfo, JsonRequestBehavior.AllowGet);
 
-        }
+        } 
 
         
           public ActionResult getEmpdataById(string EId)
@@ -100,9 +95,38 @@ namespace VarshaWeb.Controllers.EmployeeManagement
               }
             return Json(empBasicinfo, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult getEmpdataByIdEdit(string EId)
+        {
 
+            var spContext = SharePointContextProvider.Current.GetSharePointContext(HttpContext);
+            using (var clientContext = spContext.CreateUserClientContextForSPHost())
+            {
+                empBasicinfo = emp.GetEmployeeById(clientContext, EId);
+                
 
-        public ActionResult EditBasicInfo(Emp_BasicInfoModel EmpInfo)
+            }
+            return Json(empBasicinfo, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult getcompany(int id)
+        {
+            var spContext = SharePointContextProvider.Current.GetSharePointContext(HttpContext);
+            using (var clientContext = spContext.CreateUserClientContextForSPHost())
+            {
+                emp_Company = company.GetAllCompany(clientContext);
+            }
+            return Json(emp_Company, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult getDesignation(int id)
+        {
+            var spContext = SharePointContextProvider.Current.GetSharePointContext(HttpContext);
+            using (var clientContext = spContext.CreateUserClientContextForSPHost())
+            {
+                emp_designation = designation.GetDesignation(clientContext);
+            }
+            return Json(emp_designation, JsonRequestBehavior.AllowGet);
+        }
+
+      /* public ActionResult EditBasicInfo(Emp_BasicInfoModel EmpInfo)
         {
             Session["EmpID"] = EmpInfo.ID.ToString();
 
@@ -147,8 +171,10 @@ namespace VarshaWeb.Controllers.EmployeeManagement
 
 
             }
-            return PartialView("_PV_Emp_Basic_Info", VM_Emp_Detail);
-        }
+           // return PartialView("_PV_Emp_Basic_Info", VM_Emp_Detail);
+            return View(VM_Emp_Detail);
+            //return Json(empBasicinfo, JsonRequestBehavior.AllowGet);
+        }  */
 
         [SharePointContextFilter]
        
@@ -232,7 +258,8 @@ namespace VarshaWeb.Controllers.EmployeeManagement
         public ActionResult UpdateInfo(Emp_BasicInfoModel EditEmpInfo)
         {
             string returnID = "0";
-            string id = Session["EmpID"].ToString();
+           string Id = EditEmpInfo.ID.ToString();
+
             //  string EmpId = Session["EMPID"].ToString();
             //   List<Emp_BasicInfoModel> empBasicinfo = (List<Emp_BasicInfoModel>)Session["manager"];
 
@@ -251,15 +278,15 @@ namespace VarshaWeb.Controllers.EmployeeManagement
                   } */
 
 
-              string itemdata = EditEmpInfo.FirstName == null ? "'FirstName' : null" : "'FirstName' : '" + EditEmpInfo.FirstName + "'";
-               itemdata += EditEmpInfo.LastName == null ? ",'LastName' : null" : ",'LastName' : '" + EditEmpInfo.LastName + "'";
+            //  string itemdata = EditEmpInfo.FirstName == null ? "'FirstName' : null" : "'FirstName' : '" + EditEmpInfo.FirstName + "'";
+              // itemdata += EditEmpInfo.LastName == null ? ",'LastName' : null" : ",'LastName' : '" + EditEmpInfo.LastName + "'";
 
-             // string itemdata = "'FirstName': '" + EditEmpInfo.FirstName + "'";
-
+              string itemdata = "'FirstName': '" + EditEmpInfo.FirstName + "',";
+                itemdata += "'CompanyId': " + EditEmpInfo.Company + "";
 
                 //items += emp_Publication.Publication == null ? ",'Publication':null" : ",'Publication':'" + emp_Publication.Publication + "'";
                 //   itemdata += "'MiddleName': '" + EditEmpInfo.MiddleName + "',";
-             ///   itemdata += "'LastName': '" + EditEmpInfo.LastName + "'";
+                //    itemdata += "'LastName': '" + EditEmpInfo.LastName + "'";
                 /*   itemdata += "'JoiningDate': '" + EditEmpInfo.JoiningDate + "',";
                    // itemdata += "'JoiningDate': '" + dt.ToString("MM/dd/yyyy") + "',";
                    itemdata += "'DOB': '" + EditEmpInfo.DOB + "',";
@@ -279,7 +306,8 @@ namespace VarshaWeb.Controllers.EmployeeManagement
                    itemdata += "'RegionId': " + EditEmpInfo.Region + ",";
                    itemdata += "'BranchId':" + EditEmpInfo.Branch + ""; */
 
-                       emp.UpdateEmp(clientContext, itemdata,id);
+                    emp.UpdateEmp(clientContext, itemdata,Id);
+
                 //    VM_Emp_Detail.Empdata = emp.GetEmployeeById(clientContext, id);
                 
             }

@@ -119,8 +119,7 @@ namespace VarshaWeb.Controllers.EmployeeManagement
                 vendor_designation = designation.GetDesignation(clientContext);
                 vendor_state = state.GetState(clientContext);
                 vendor_country = country.GetAllCountries(clientContext);
-
-               vendor_Doc = vendorDocument.GetVendorDocumentById(clientContext, EditVendorID,path);
+                vendor_Doc = vendorDocument.GetVendorDocumentById(clientContext, EditVendorID,path);
             }
             ViewBag.Vendordata = VendorEdit;
             ViewBag.designation = vendor_designation;
@@ -152,7 +151,7 @@ namespace VarshaWeb.Controllers.EmployeeManagement
                 itemdata += "'DesignationId': '" + vendor_datail[0].Designation + "',";
                 itemdata += "'VendorAddress': '" + vendor_datail[0].VendorAddress + "',";
                 itemdata += "'City':'" + vendor_datail[0].City + "',";
-                itemdata += "'StatesId': '" + vendor_datail[0].States + "',";
+             //   itemdata += "'StatesId': '" + vendor_datail[0].States + "',";
                 itemdata += "'CountryId': '" + vendor_datail[0].Country + "',";
                 itemdata += "'PanCardNo': '" + vendor_datail[0].PanCardNo + "',";
                 itemdata += "'GstNo':'" + vendor_datail[0].GstNo + "',";
@@ -199,7 +198,7 @@ namespace VarshaWeb.Controllers.EmployeeManagement
                     itemdata += "'DesignationId': '" + vendor_datail[0].Designation + "',";
                     itemdata += "'VendorAddress': '" + vendor_datail[0].VendorAddress + "',";
                     itemdata += "'City': '" + vendor_datail[0].City + "',";
-                    itemdata += "'StatesId':" + vendor_datail[0].States + ",";
+                 //   itemdata += "'StatesId':" + vendor_datail[0].States + ",";
                     itemdata += "'CountryId':" + vendor_datail[0].Country + ",";
                     itemdata += "'PanCardNo': '" + vendor_datail[0].PanCardNo + "',";
                     itemdata += "'GstNo': '" + vendor_datail[0].GstNo + "',";

@@ -35,8 +35,8 @@ namespace VarshaWeb.BAL.EmployeeManagement
 
                 return RESTUploadFile(clientContext, files, ItemData);
             }
-        public List<Emp_VendorMasterDetailsModel> GetAllVendor(ClientContext clientContext)
-        {
+             public List<Emp_VendorMasterDetailsModel> GetAllVendor(ClientContext clientContext)
+            {
             List<Emp_VendorMasterDetailsModel> VendorInfo = new List<Emp_VendorMasterDetailsModel>();
 
             JArray jArray = RESTGet(clientContext, null);
@@ -49,6 +49,7 @@ namespace VarshaWeb.BAL.EmployeeManagement
                     VendorName = j["VendorName"] == null ? "" : j["VendorName"].ToString(),
                     VendorAddress = j["VendorAddress"] == null ? "" : j["VendorAddress"].ToString(),
                     VendorContact = j["VendorContact"] == null ? "" : j["VendorContact"].ToString(),
+                      MobileNo = j["MobileNo"] == null ? "" : j["MobileNo"].ToString(),
                     VendormailID = j["VendormailID"] == null ? "" : j["VendormailID"].ToString(),
                     Designation = j["Designation"]["Designation"] == null ? "" : j["Designation"]["Designation"].ToString(),
                     VendorCompany = j["VendorCompany"] == null ? "" : j["VendorCompany"].ToString(),
@@ -56,7 +57,8 @@ namespace VarshaWeb.BAL.EmployeeManagement
                     GstNo = j["GstNo"] == null ? "" : j["GstNo"].ToString(),
                     PanCardNo = j["PanCardNo"] == null ? "" : j["PanCardNo"].ToString(),
                     Remark = j["Remark"] == null ? "" : j["Remark"].ToString(),
-                    States = j["States"]["StateName"] == null ? "" : j["States"]["StateName"].ToString(),
+                  
+                    VendorState = j["VendorState"]["StateName"] == null ? "" : j["VendorState"]["StateName"].ToString(),
                     Country = j["Country"]["CountryName"] == null ? "" : j["Country"]["CountryName"].ToString(),
 
                 });
@@ -66,12 +68,11 @@ namespace VarshaWeb.BAL.EmployeeManagement
         }
 
 
-
-
         public List<Emp_VendorMasterDetailsModel> GetVendorById(ClientContext clientContext, string vendorid)
         {
             List<Emp_VendorMasterDetailsModel> Vendordetails = new List<Emp_VendorMasterDetailsModel>();
-            string filter = "ID eq " + vendorid;
+          //  string filter = "ID eq " + vendorid;
+            string filter = "ID eq '" + vendorid + "'";
             JArray jArray = RESTGet(clientContext, filter);
 
             foreach (JObject j in jArray)
@@ -90,13 +91,13 @@ namespace VarshaWeb.BAL.EmployeeManagement
                     GstNo = j["GstNo"] == null ? "" : j["GstNo"].ToString(),
                     PanCardNo = j["PanCardNo"] == null ? "" : j["PanCardNo"].ToString(),
                     Remark = j["Remark"] == null ? "" : j["Remark"].ToString(),
-                    StatesId = Convert.ToInt32(j["States"]["Id"]),
-                    States = j["States"]["StateName"] == null ? "" : j["States"]["StateName"].ToString(),
+                    VendorStateId = Convert.ToInt32(j["VendorState"]["Id"]),
+                    VendorState = j["VendorState"]["StateName"] == null ? "" : j["VendorState"]["StateName"].ToString(),
                     CountryId = Convert.ToInt32(j["Country"]["Id"]),
                     Country = j["Country"]["CountryName"] == null ? "" : j["Country"]["CountryName"].ToString(),
                     MobileNo = j["MobileNo"] == null ? "" : j["MobileNo"].ToString(),
-                });
-            }
+                    });
+                }
             return Vendordetails;
 
         }
@@ -107,8 +108,8 @@ namespace VarshaWeb.BAL.EmployeeManagement
                 JArray jArray = new JArray();
                 RESTOption rESTOption = new RESTOption();
                 rESTOption.filter = filter;
-                rESTOption.select = "ID,VendorName,VendorAddress,VendorContact,VendormailID,VendorCompany,City,GstNo,PanCardNo,Designation/Id,Designation/Designation,Country/Id,Country/CountryName,Remark,States/Id,States/StateName,MobileNo";
-                rESTOption.expand = "States,Country,Designation";
+                rESTOption.select = "ID,VendorName,VendorAddress,VendorContact,VendormailID,VendorCompany,City,GstNo,PanCardNo,Designation/Id,Designation/Designation,Country/Id,Country/CountryName,Remark,VendorState/Id,VendorState/StateName,MobileNo";
+                rESTOption.expand = "Country,VendorState,Designation";
                 rESTOption.top = "5000";
                 jArray = restService.GetAllItemFromList(clientContext, "Emp_VendorMasterDetails", rESTOption);
                 return jArray;
@@ -128,14 +129,14 @@ namespace VarshaWeb.BAL.EmployeeManagement
 
                  return restService.UpdateItem(clientContext, "Emp_VendorMasterDetails", ItemData, ID);
             }
-        private int RESTUploadFile(ClientContext clientContext, HttpPostedFileBase files, string ItemData)
-        {
+            private int RESTUploadFile(ClientContext clientContext, HttpPostedFileBase files, string ItemData)
+            {
 
             RestService restService = new RestService();
 
             return restService.UploadDocument(clientContext, "Emp_Vendor_Document", files, ItemData);
-        }
+            }
 
 
     }
-    }
+ }

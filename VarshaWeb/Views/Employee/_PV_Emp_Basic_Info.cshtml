@@ -1,9 +1,9 @@
 ﻿@model VarshaWeb.Models.EmployeeManagement.ViewModels.VM_Emp_BasicInfoModel
-    
 
 
-<form id="AddEmployeeDetailForm">
-    <div class="row">
+
+
+    <div class="row" id="editEmployee">
         <div class="col-xl-12 col-lg-12">
             <!--Dashboard Code start-->
             <div class="card mg-b-20">
@@ -20,14 +20,14 @@
                                     <div class="form-group">
                                         <label for="First_Name">First Name</label>
 
-                                        @Html.EditorFor(model => model.VMEmpdata.FirstName, new { htmlAttributes = new { @class = "form-control", @id = "txtFirst" } })
-                                          </div>
+                                        @Html.EditorFor(model => Model.VMEmpdata.FirstName, new { htmlAttributes = new { @class = "form-control txtnameedit",  } })
+                                    </div>
 
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="Last_Name">Last Name</label>
-                                        @Html.EditorFor(model => Model.VMEmpdata.LastName, new { htmlAttributes = new { @class = "form-control", @id = "last" } })
+                                        @Html.EditorFor(model => Model.VMEmpdata.LastName, new { htmlAttributes = new { @class = "form-control", @id = "txtlast" } })
                                     </div>
                                 </div>
                             </div>
@@ -42,7 +42,7 @@
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">User Name</label>
                                         <input required="" readonly="readonly" value="@Model.VMEmpdata.User_Name" type="text" class="form-control" ng-model="ngddluserEdit" id="UsernameEdit" placeholder="Enter Middle_Name">
-                                        
+
                                     </div>
                                 </div>
 
@@ -86,7 +86,7 @@
                                             }
                                             else
                                             {
-                                            
+
                                             <option value="Male">
                                                 Male
                                             </option>
@@ -113,7 +113,7 @@
                                                 else
                                                 {
                                                 <option value="Married">
-                                                Married
+                                                    Married
                                                 </option>
                                                 <option value="UnMarried">
                                                     UnMarried
@@ -184,7 +184,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="Middle_Name">Office Mail</label>
-                                        <input required="" type="email" class="form-control" value="@Model.VMEmpdata.OfficeEmail" ng-model="ngtxtOfficemailEdit" id="txtofficemailEdit" placeholder="Enter Office_Mail">
+                                        <input required="" type="email" class="form-control txtmail" value="@Model.VMEmpdata.OfficeEmail" ng-model="ngtxtOfficemailEdit" id="txtofficemailEdit" placeholder="Enter Office_Mail">
                                     </div>
                                 </div>
                             </div>
@@ -214,17 +214,17 @@
 
                                     </div>
                                 </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Designation</label>
-                                            
-                                                @Html.DropDownListFor(model => model.SelectedDesignationID, new SelectList(Model.Designation, "Id", "Designation"), new { @class = "form-control select2", @id = "Designation" })
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Designation</label>
 
-                                           
+                                        @Html.DropDownListFor(model => model.SelectedDesignationID, new SelectList(Model.Designation, "Id", "Designation"), new { @class = "form-control select2", @id = "Designation" })
+
+
 
                                     </div>
                                 </div>
-                           </div>
+                            </div>
                             <div class="row row-sm">
                                 <div class="col-lg-6">
                                     <div class="form-group">
@@ -264,10 +264,10 @@
 
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
-            
+
         </div>
     </div>
-</form>
+

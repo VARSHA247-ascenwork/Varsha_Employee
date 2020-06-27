@@ -182,6 +182,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BAL\EmployeeManagement\Emp_CountryBal.cs" />
+    <Compile Include="BAL\EmployeeManagement\Emp_StateMasterBal.cs" />
     <Compile Include="BAL\EmployeeManagement\Emp_Vendor_DocumentBal.cs" />
     <Compile Include="BAL\EmployeeManagement\Emp_Vendor_State_MasterBal.cs" />
     <Compile Include="BAL\EmployeeManagement\Emp_VendorMasterDetailsBal.cs" />
@@ -196,6 +197,8 @@
     <Compile Include="BAL\UsersGroup.cs" />
     <Compile Include="Controllers\EmployeeManagement\EmployeeController.cs" />
     <Compile Include="Controllers\EmployeeManagement\EmployeeDashboardController.cs" />
+    <Compile Include="Controllers\EmployeeManagement\EmployeeNewController.cs" />
+    <Compile Include="Controllers\EmployeeManagement\VendorController.cs" />
     <Compile Include="Controllers\EmployeeManagement\VendorDashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
@@ -215,6 +218,7 @@
     <Compile Include="Models\EmployeeManagement\Emp_ClientMasterDetailsModel.cs" />
     <Compile Include="Models\EmployeeManagement\Emp_CompanyMasterModel.cs" />
     <Compile Include="Models\EmployeeManagement\Emp_CostCentreModel.cs" />
+    <Compile Include="Models\EmployeeManagement\Emp_StateMasterModel.cs" />
     <Compile Include="Models\EmployeeManagement\Emp_Vendor_DocumentModel.cs" />
     <Compile Include="Models\EmployeeManagement\Emp_Vendor_State_MasterModel.cs" />
     <Compile Include="Models\EmployeeManagement\Emp_CountryModel.cs" />
@@ -8205,9 +8209,11 @@
     <Content Include="Scripts\Angular\DAL\CommonJs.js" />
     <Content Include="Scripts\Angular\DAL\DAL.js" />
     <Content Include="Scripts\Angular\DAL\Navigation.js" />
+    <Content Include="Scripts\Angular\EmployeeManagement\JS\EmployeeRequestNew.js" />
     <Content Include="Scripts\Angular\EmployeeManagement\JS\VendorRequest.js" />
     <Content Include="Scripts\Angular\EmployeeManagement\JS\EmployeeRequest.js" />
     <Content Include="Scripts\Angular\EmployeeManagement\JS\ViewEmployee.js" />
+    <Content Include="Scripts\Angular\EmployeeManagement\Services\EmployeeRequestService.js" />
     <Content Include="Scripts\Angular\EmployeeManagement\Services\VendorRequestServices.js" />
     <Content Include="Scripts\Angular\EmployeeManagement\Services\EmployeeRequestServices.js" />
     <Content Include="Scripts\Angular\EmployeeManagement\Services\ViewEmployeeDetailService.js" />
@@ -9210,8 +9216,9 @@
     <Content Include="Views\VendorDashboard\VendorDetails.cshtml" />
     <Content Include="Views\VendorDashboard\EditVendorDetail.cshtml" />
     <Content Include="Views\Employee\Index.cshtml" />
-    <Content Include="Views\Employee\View.cshtml" />
     <Content Include="Views\Employee\_PV_Emp_Basic_Info.cshtml" />
+    <Content Include="Views\EmployeeNew\Index.cshtml" />
+    <Content Include="Views\Vendor\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

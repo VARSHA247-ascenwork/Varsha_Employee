@@ -4,29 +4,66 @@
 
 EmployeeApp.controller('EmployeeController', function ($scope, $timeout, EmployeeService, CommonAppUtilityService) {
 
+    
+    $(function () {
+
+        setTimeout(function () {
 
 
-    $('#datetimepicker').datetimepicker({
-        minView: 2,
-        format: 'dd-mm-yyyy',
-        autoclose: true
-    });
+            $('#Employeetable').DataTable({
 
-    $('#datetimepicker1').datetimepicker({
-        minView: 2,
-        format: 'dd-mm-yyyy',
-        autoclose: true
-    });
+                responsive: true,
+                language: {
+                    searchPlaceholder: 'Search...',
+                    sSearch: '',
+                    lengthMenu: '_MENU_ ',
+                }
 
-    $('#datetimepicker2').datetimepicker({
-        minView: 2,
-        format: 'dd-mm-yyyy',
-        autoclose: true
-    });
+            });
+        }, 2000);
 
+        $('#AddEmployeeDetailForm').parsley().on('field:validated', function () {
+            var ok = $('.parsley-error').length === 0;
+            $('.bs-callout-info').toggleClass('hidden', !ok);
+            $('.bs-callout-warning').toggleClass('hidden', ok);
+        })
+            .on('form:submit', function () {
+
+
+                //  $scope.updateEmp();
+                $scope.Save();
+
+                return false;
+            });
+
+       
+
+
+
+        $('#datetimepicker').datetimepicker({
+            minView: 2,
+            format: 'dd-mm-yyyy',
+            autoclose: true
+        });
+
+        $('#txtjoiningDate').datetimepicker({
+            minView: 2,
+            format: 'dd-mm-yyyy',
+            autoclose: true
+        });
+
+        $('#txtProbationaltill').datetimepicker({
+            minView: 2,
+            format: 'dd-mm-yyyy',
+            autoclose: true
+        });
+
+    })
+   
+   
     
 
-    $scope.getdataEmployee = function () {
+ $scope.getdataEmployee = function () {
         var ApplyAssetObj = {
             Id: 1
         }
@@ -40,7 +77,7 @@ EmployeeApp.controller('EmployeeController', function ($scope, $timeout, Employe
 
         });
     }
-    $scope.getdataEmployee();
+    $scope.getdataEmployee();  
 
   
 
@@ -52,50 +89,35 @@ EmployeeApp.controller('EmployeeController', function ($scope, $timeout, Employe
             EId: emId
         }
 
-        CommonAppUtilityService.CreateItem("/Employee/getEmpdataById",empid).then(function (response) {
+       CommonAppUtilityService.CreateItem("/Employee/getEmpdataByIdEdit",empid).then(function (response) {
             console.log(response);
-
+          
             $scope.EmpInfo = response.data;
-
+            
          //   $scope.firstname = $scope.EmpInfo.FirstName;
         });
     }
 
   
-
-    EditEmployee = function (Eid) {
+/*   EditEmployee = function (Eid) {
         var data = { "ID": Eid }
-        EmployeeService.Postdata(data,"/Employee/EditBasicInfo").then(function (response) {
-            $('#ModalPopupEdit').modal('show');
-            $(".modal-body").html(response.data);
-            var button = '<button onclick="updateEmp()" class="btn btn-primary">Save changes</button>'+
-                '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
+       EmployeeService.Postdata(data, "/Employee/EditBasicInfo").then(function (response) {
+
+           $scope.eeee = response.data;
+
+        //  $('#ModalPopupEdit').modal('show');
+      //  $(".modal-body").html(response.data);
+
+         //   $scope.ngtxtname = $scope.FirstName;
+         // var button = '<button type="button" onclick="updateEmp()" class="btn btn-primary">Save changes</button>'+
+           //    '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
            // $(".modal-title").html('Educational Details');
-            $(".modal-footer").html(button);
+         // $(".modal-footer").html(button);
           
-        });
-    }
+       });
+    }   */
     
-   // validate function
-
-        $(function () {
-        'use strict'
-        //validation
-        $('#AddEmployeeDetailForm').parsley().on('field:validated', function () {
-            var ok = $('.parsley-error').length === 0;
-            $('.bs-callout-info').toggleClass('hidden', !ok);
-            $('.bs-callout-warning').toggleClass('hidden', ok);
-        })
-            .on('form:submit', function () {
-
-
-              //  $scope.updateEmp();
-                $scope.Save();
-
-                return false;
-            });
-
-    });
+  
 
 
   $scope.getdate = function () {
@@ -130,13 +152,13 @@ $scope.Save = function () {
             OnProbationTill: moment($("#datetimepicker2").val(), 'DD-MM-YYYY').format("MM-DD-YYYY"),
           
             ProbationStatus: $scope.ngddlProbationstatus,
-          Manager: $scope.ngddlManager,
+            Manager: $scope.ngddlManager,
          
             OfficeEmail: $scope.ngtxtOfficemail,
             ContactNumber: $scope.ngtxtmobileno,
             MobileNo: $scope.ngtxtmobile,
             Company: $scope.ngddlCompany,
-           Designation: $scope.ngddlDesignation,
+            Designation: $scope.ngddlDesignation,
             Department: $scope.ngddlDepartment,
             Division: $scope.ngddlDivision,
             Region: $scope.ngddlRegion,
@@ -162,16 +184,21 @@ $scope.Save = function () {
     }
 
     
-   
-  updateEmp = function () {
+    $scope.empid = "0";
+
+    $scope.updateEmp = function () {
+
+        $scope.empid = $scope.EmpInfo[0].ID;
+
       var data = {
 
+          ID : $scope.empid,
 
-          'FirstName': angular.element("#txtFirst").val(),
-          'LastName': angular.element("#last").val(),
-         // FirstName: $('#txtfirstName').val(),
-          
-       //   LastName: $('#last').val(),
+        //  'FirstName': angular.element("#txtFirst").val(),
+          //  'LastName': angular.element("#txtlast").val(),
+          FirstName:$scope.ngtxtfirstnameedit,
+          Company: $scope.ngddlcompanyedit,
+      //    LastName: $("#txtlast").val(),
             //  MiddleName: $('#txtMiddle_Name').val(),
        //   LastName: $('#last').val(),
             /*  JoiningDate: moment($("#txtjoiningdate").val(),'DD-MM-YYYY').format("MM-DD-YYYY"),
@@ -192,7 +219,7 @@ $scope.Save = function () {
               Branch: $('#ddlBranch').val(), */
             
         }
-    EmployeeService.Postdata(data, "/Employee/UpdateInfo").then(function (response) {
+    EmployeeService.Postdata(data,"/Employee/UpdateInfo").then(function (response) {
      //     CommonAppUtilityService.CreateItem(data, "/Employee/UpdateInfo").then(function (response) {
 
 
@@ -205,19 +232,7 @@ $scope.Save = function () {
         Pageredirect("/Employee");
     }
 
-   /*  $scope.editmsg = function () {
-        Pageredirect("/Employee/Index");
-    }
-
-   $scope.addEmployee = function () {
-        Pageredirect("/Employee/Index");
-    } 
-    
-    
-     $scope.cancelEditpage = function () {
-        Pageredirect("/Employee");
-    }
-    */
+   
 
 
     $scope.CancelViewpage = function () {
@@ -225,35 +240,89 @@ $scope.Save = function () {
     }
     
 
-   
-
-
-  /* $scope.EditEmployee = function (id) {
-       
-        var data = {
-            'ID': id,
+    
+    $scope.getcompany = function () {
+        var aaa = {
+            Id: 1
         }
 
-        CommonAppUtilityService.CreateItem("/EmployeeDashboard/getEmployeeEditId", data).then(function (response) {
-            Pageredirect("/EmployeeDashboard/EmployeeEdit");
+        CommonAppUtilityService.CreateItem("/Employee/getcompany", aaa).then(function (response) {
+            console.log(response);
+
+            $scope.CompanyMaster = response.data;
         });
+    }
+    $scope.getcompany();
+    $scope.getDesignation = function () {
+        var aaa = {
+            Id: 1
+        }
 
-    }  */
+        CommonAppUtilityService.CreateItem("/Employee/getDesignation", aaa).then(function (response) {
+            console.log(response);
 
-    setTimeout(function () {
-        $(function () {
-          
-            $('#Employeetable').DataTable({
+            $scope.DesignationMaster = response.data;
+        });
+    }
+    $scope.getDesignation();
+    $scope.AddEmployee = function () {
 
-                responsive: true,
-                language: {
-                    searchPlaceholder: 'Search...',
-                    sSearch: '',
-                    lengthMenu: '_MENU_ ',
+        $scope.ngddlcompanyedit = "";
+    }
+
+
+
+
+   EditEmployee = function (emId) {
+       
+        $scope.ngddlcompanyedit = "";
+        $scope.ngddlDesination = "";
+        var empid = {
+            EId: emId
+
+        }
+
+        CommonAppUtilityService.CreateItem("/Employee/getEmpdataById", empid).then(function (response) {
+            console.log(response);
+
+            $scope.EmpInfo = response.data;
+
+            //   $scope.empid = $scope.EmpInfo.ID;
+
+            $scope.ngtxtfirstnameedit = $scope.EmpInfo[0].FirstName;
+            $scope.ngddlDesignation = $scope.EmpInfo[0].DesignationId;
+            //  $("#txtFirst_NameEdit").val($scope.EmpInfo[0].FirstName);
+            //  $("#ngddlcompanyedit").val($scope.EmpInfo[0].CompanyId);
+            //  $("#ngddlcompanyedit").val($scope.EmpInfo[0].CompanyId).trigger('change');
+
+            for (var i = 0; i < $scope.CompanyMaster.length; i++) {
+                if ($scope.EmpInfo[0].CompanyId == $scope.CompanyMaster[i].ID) {
+                    $scope.ngddlcompanyedit = $scope.EmpInfo[0].CompanyId;
+                      }
+                    }
+                for (var j = 0; j < $scope.DesignationMaster.length; j++) {
+                    if ($scope.EmpInfo[0].DesignationId == $scope.DesignationMaster[j].ID) {
+                        $scope.ngddlDesination = $scope.EmpInfo[0].DesignationId;
+                    }
                 }
+          //  $scope.ngddlDepartment = $scope.EmpInfo[0].DepartmentId;
+
+            for (var k = 0; k < $scope.EmpInfo.length; k++) {
+                if ($scope.EmpInfo[k].ID == $scope.EmpInfo[k].ManagerId) {
+                    $scope.ngddlManager = $scope.EmpInfo[k].ManagerId;
+                }
+            }
             });
-        });
-    }, 2000);
+  
+
+       
+    
+
+    }   
+
+  
+
+   
 
   
 

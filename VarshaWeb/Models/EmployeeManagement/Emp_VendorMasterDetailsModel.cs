@@ -17,8 +17,8 @@ namespace VarshaWeb.Models.EmployeeManagement
         public string GstNo { get; set; }
         public string PanCardNo { get; set; }
         public string Remark { get; set; }
-        public int StatesId { get; set; }
-        public string States { get; set; }
+        public int VendorStateId { get; set; }
+        public string VendorState { get; set; }
         public string Designation { get; set; }
         public int DesignationId { get; set; }
         public string Country { get; set; }
