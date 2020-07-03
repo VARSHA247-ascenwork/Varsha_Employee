@@ -32,20 +32,7 @@ EmployeeApp.controller('EmployeeController', function ($scope, $timeout, Employe
                 $(this).val('');
             }
         });
-        setTimeout(function () {
-
-
-            $('#Employeetable').DataTable({
-
-                responsive: true,
-                language: {
-                    searchPlaceholder: 'Search...',
-                    sSearch: '',
-                    lengthMenu: '_MENU_ ',
-                }
-
-            });
-        }, 2000);
+       
         //Validation
         $('#AddEmployeeDetailForm').parsley().on('field:validated', function () {
             var ok = $('.parsley-error').length === 0;
@@ -55,8 +42,6 @@ EmployeeApp.controller('EmployeeController', function ($scope, $timeout, Employe
             .on('form:submit', function () {
                 $scope.Save();
                 $scope.updateEmp();
-               
-
                 return false;
             });
 
@@ -80,6 +65,18 @@ EmployeeApp.controller('EmployeeController', function ($scope, $timeout, Employe
             console.log(response);
 
             $scope.empdata = response.data;
+            setTimeout(function () {
+                $('#Employeetable').DataTable({
+                    responsive: true,
+                    bDestroy: true,
+                    language: {
+                        searchPlaceholder: 'Search...',
+                        sSearch: '',
+                        lengthMenu: '_MENU_ ',
+                    }
+
+                });
+            },200);
         });
     }
         $scope.getdataEmployee();  
@@ -252,16 +249,17 @@ EmployeeApp.controller('EmployeeController', function ($scope, $timeout, Employe
         $scope.viewmanager = false;
         $scope.ViewUsername = false;
         $scope.Username = true;
-        $scope.ngddlcompany = "";
-        $scope.ngddlDesignation = "";
-        $scope.ngddlDepartment = "";
-        $scope.ngddlRegion = "";
-        $scope.ngddlDivision = "";
-        $scope.ngddlBranch = "";
-        $scope.ngddlGender = "";
-        $scope.ngdddlMarialstatus = "";
-        $scope.ngddlProbationstatus = "";
-        $scope.ngddlManager = "";
+        $("#ddlUsername")[0].selectedIndex = 0;
+        $("#ddlGender")[0].selectedIndex = 0;
+        $("#dddlMarialStatus")[0].selectedIndex = 0;
+        $("#ddlProbationStatus")[0].selectedIndex = 0;
+        $("#ddlManageradd")[0].selectedIndex = 0;
+        $("#ddlCompany")[0].selectedIndex = 0;
+        $("#ddlDesignation")[0].selectedIndex = 0;
+        $("#ddlDepartment")[0].selectedIndex = 0;
+        $("#ddlDivision")[0].selectedIndex = 0;
+        $("#ddlRegion")[0].selectedIndex = 0;
+        $("#ddlBranch")[0].selectedIndex = 0;
         $scope.ngtxtfirstname = "";
         $scope.ngtxtMiddlename ="";
         $scope.ngtxtlastname = "";
@@ -271,5 +269,12 @@ EmployeeApp.controller('EmployeeController', function ($scope, $timeout, Employe
         $scope.ngtxtmobile = "";
         $scope.ngtxtContact ="";
         $scope.ngtxtOfficemail = "";
+        $('.select2').select2({
+            placeholder: 'Choose one',
+            searchInputPlaceholder: 'Search',
+            width: '100%',
+            dropdownParent: $("#ModalPopUp")
+
+        });
     }
 });

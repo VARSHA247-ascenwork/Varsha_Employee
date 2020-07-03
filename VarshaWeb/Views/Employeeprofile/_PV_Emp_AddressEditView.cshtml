@@ -1,0 +1,67 @@
+﻿@model WizrrWeb.Models.EmployeeManagement.ViewModels.VM_EmployeeProfileModel
+
+<form role="form">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Type">Type</label>
+                <div class="form-group">
+                    @Html.DropDownListFor(model => model.Addresses.AddressType, new List<SelectListItem>{
+                       new SelectListItem{ Text="Home", Value="Home"},
+                       new SelectListItem{ Text="Village", Value="Village"},
+                       new SelectListItem{ Text="Office", Value="Office"}
+                   }, "Choose One", new { @class = "form-control select2", @id = "ddlType" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="HomeCountry">Country</label>
+                <div class="form-group">
+                    @Html.DropDownListFor(model => model.SelectedCountryId, new SelectList(Model.emp_Countries, "Id", "CountryName"), "Choose one", new { @class = "form-control select2 getCountryId", @id = "ddlHomeCountry" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="HomeCity">City</label>
+                <div class="form-group">
+                    @Html.EditorFor(model => model.Addresses.City, new { htmlAttributes = new { @class = "form-control", @placeholder = "City", @id = "ddlHomeCity" } })
+                </div>
+                <div class="form-group">
+                    <label for="HomePostalcode">Postal Code</label>
+                    @Html.EditorFor(model => model.Addresses.PostalCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "Postal Code", @id = "txtPostalcode" } })
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Address">Address</label>
+                @Html.TextAreaFor(model => model.Addresses.Address, new { @class = "form-control", @placeholder = "Address", @id = "txtAddress" })
+            </div>
+            <div class="form-group">
+                <label for="HomeState">State</label>
+                <div class="form-group">
+                    @if (Model.SelectedStateID > 0)
+                    {
+                        @Html.DropDownListFor(model => model.SelectedStateID, new SelectList(Model.emp_States, "Id", "StateName"), "Choose one", new { @class = "form-control select2 getStates", @id = "ddlHomeState", @placeholder = "Choose one" })
+                    }
+                    else
+                    {
+                        @Html.DropDownList("State", new SelectList(string.Empty, "Value", "Text"), "Choose one", new { @class = "form-control select2 getStates", @id = "ddlHomeState", @placeholder = "Choose one" })
+                    }
+                </div>
+            </div><div class="form-group">
+                <label for="Landmark">Landmark</label>
+                @Html.EditorFor(model => model.Addresses.Landmark, new { htmlAttributes = new { @class = "form-control", @placeholder = "Landmark", @id = "txtHomeLandmark" } })
+            </div>
+            <div class="form-group">
+                <label for="HomeResidingSince">Residing Since</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+                        </div>
+                    </div>
+                    @Html.EditorFor(model => model.Addresses.ResidingSince, new { htmlAttributes = new { @class = "form-control", @placeholder = "DD/MM/YYYY", @id = "txtHomeResidingSince" } })
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

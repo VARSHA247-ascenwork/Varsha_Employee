@@ -1,0 +1,45 @@
+﻿@model IEnumerable<WizrrWeb.Models.EmployeeManagement.Emp_WorkExperienceModel>
+
+
+<div class="col-xl-12">
+    <div class="table-responsive">
+        <table class="tables" style="width:100%">
+            <thead>
+                <tr>
+                    <th scope="col">Org Name</th>
+                    <th scope="col">Designation</th>
+                    <th scope="col">From</th>
+                    <th scope="col">To</th>
+                    <th scope="col">Salary</th>
+                    <th scope="col">Contact No</th>
+                    <!--<th scope="col">Notes</th>-->
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Count() > 0)
+                {
+                    foreach (var i in Model)
+                    {
+                        <tr>
+                            <td scope="row" data-label="Org Name">@i.OrganizationName</td>
+                            <td data-label="Designation">@i.Designation</td>
+                            <td data-label="From">@i.FromDate</td>
+                            <td data-label="To">@i.ToDate</td>
+                            <td data-label="Salary">@i.AnnualSalary</td>
+                            <td data-label="Contact No">@i.ContactNumber</td>
+                            <!--<td data-label="Notes">Thanks!</td>-->
+                            <td data-label="Action">
+                                <div class="btn-icon-list center">
+                                    <button class="btn" style="padding:0px 5px 0px 5px;margin:0px;" onclick="EditWorkExperience(@i.ID)"><i class="si si-pencil text-primary mr-2" data-toggle="tooltip" title="" data-placement="top" data-original-title="Edit"></i></button>
+                                    <button class="btn" style="padding:0px 5px 0px 5px;margin:0px;" onclick="DetailsWorkExperience(@i.ID)"><i class="si si-eye text-success mr-2" data-toggle="tooltip" title="" data-placement="top" data-original-title="View"></i></button>
+                                    <button class="btn" style="padding:0px;margin:0px;" onclick="DeleteWorkExperience(@i.ID)"><i class="si si-trash text-danger mr-2" data-toggle="tooltip" title="" data-placement="top" data-original-title="Delete"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div><!-- bd -->
+</div>

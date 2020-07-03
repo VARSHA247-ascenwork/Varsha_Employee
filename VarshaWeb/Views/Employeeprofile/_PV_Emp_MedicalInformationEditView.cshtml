@@ -1,0 +1,79 @@
+﻿@model WizrrWeb.Models.EmployeeManagement.ViewModels.VM_EmployeeProfileModel
+
+    <form role="form">
+        <div class="form-group">
+            <label for="Medical Condition Name">Medical Condition Name</label>
+            @Html.DropDownListFor(model => model.emp_Medical.MedicalConditionName, new List<SelectListItem>{
+                      new SelectListItem{ Text="Diabetes", Value="Diabetes"},
+                      new SelectListItem{ Text="Flu", Value="Flu"},
+                      new SelectListItem{ Text="Other", Value="Other"}
+                  }, "Choose One", new { @class = "form-control select2", @id = "ddlDiseaseName" })
+        </div>
+        <div class="form-group">
+            <label for="Medical Condition From">Medical Condition From</label>
+            @Html.DropDownListFor(model => model.emp_Medical.MedicalConditionFrom, new SelectList(Model.MedicalConditionFrom, "Value", "Text"), "Choose one", new { @class = "form-control", @id = "ddlDisease" })
+        </div>
+        <div class="form-group">
+            <label for="Currently Active">Currently Active</label>
+        <div class="form-group">
+        <div class="row">
+            <div class="col-lg-6">
+                <label class="rdiobox">
+                    @Html.RadioButtonFor(model => model.emp_Medical.CurrentlyActive, "Yes",new { @id= "CurrentlyYes" })
+                    <span>Yes</span>
+                </label>
+                </div>
+            <div class="col-lg-6 mg-t-20 mg-lg-t-0">
+                <label class="rdiobox">
+                    @if (Model.emp_Medical.CurrentlyActive != null)
+                    {
+                        @Html.RadioButtonFor(model => model.emp_Medical.CurrentlyActive, "No")
+                    }
+                    else
+                    {
+                        @Html.RadioButtonFor(model => model.emp_Medical.CurrentlyActive, "No", new { @id = "CurrentlyNo", @checked = true })
+                    }
+                        <span>No</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        </div><div class="form-group">
+            <label for="Need Special Attention">Need Special Attention</label>
+        <div class="form-group">
+        <div class="row">
+            <div class="col-lg-6">
+                <label class="rdiobox">
+                    @Html.RadioButtonFor(model => model.emp_Medical.NeedSpecialAttention, "Yes",new { @id = "NeedSpecialYes" })
+                    <span>Yes</span>
+                </label>
+                </div>
+            <div class="col-lg-6 mg-t-20 mg-lg-t-0">
+                <label class="rdiobox">
+                    @if (Model.emp_Medical.NeedSpecialAttention != null)
+                    {
+                        @Html.RadioButtonFor(model => model.emp_Medical.NeedSpecialAttention, "No")
+                    }
+                    else
+                    {
+                        @Html.RadioButtonFor(model => model.emp_Medical.NeedSpecialAttention, "No", new { @id = "NeedSpecialNo", @checked = true })
+                    }
+                    <span>No</span>
+                </label>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="form-group">
+            <label for="Notes">Notes</label>
+            @Html.TextAreaFor(model=>model.emp_Medical.Notes,new { @placeholder = "Notes", @id = "txtMedicalNotes", @class = "form-control" })
+        </div>
+    </form>
+@*<script>
+    function year() {
+        for (i = new Date().getFullYear(); i > 1900; i--) {
+            $('#ddlDisease').append($('<option />').val(i).html(i));
+        }
+    }
+    year();
+</script>*@

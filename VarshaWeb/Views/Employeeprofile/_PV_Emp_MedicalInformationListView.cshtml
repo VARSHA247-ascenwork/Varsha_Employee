@@ -1,0 +1,40 @@
+﻿@model IEnumerable<WizrrWeb.Models.EmployeeManagement.Emp_MedicalInformationModel>
+
+    <div class="col-xl-12">
+        <div class="table-responsive">
+            <table class="tables" style="width:100%">
+                <thead>
+                    <tr>
+                        <th scope="col">Medical Condition Name</th>
+                        <th scope="col">Medical Condition From</th>
+                        <th scope="col">Currently Active</th>
+                        <th scope="col">Need Special Attention</th>
+                        <th scope="col">Notes</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count() > 0)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td scope="row" data-label="Disease Name">@item.MedicalConditionName</td>
+                                <td data-label="Disease From">@item.MedicalConditionFrom</td>
+                                <td data-label="Currently Active">@item.CurrentlyActive</td>
+                                <td data-label="Need Special Attention">@item.NeedSpecialAttention</td>
+                                <td data-label="Notes">@item.Notes</td>
+                                <td data-label="Action">
+                                    <div class="btn-icon-list center">
+                                        <button class="btn" style="padding:0px 5px 0px 35px;margin:0px;" onclick="MedicalInformationView('Edit',@item.ID)"><i class="si si-pencil text-primary mr-2" data-toggle="tooltip" title="" data-placement="top" data-original-title="Edit"></i></button>
+                                        <button class="btn" style="padding:0px;margin:0px;" onclick="MedicalInformationView('View',@item.ID)"><i class="si si-eye text-primary mr-2" data-toggle="tooltip" title="" data-placement="top" data-original-title="View"></i></button>
+                                        <button class="btn" style="padding:0px;margin:0px;" onclick="DeleteMedicalInformation(@item.ID)"><i class="si si-trash text-danger mr-2" data-toggle="tooltip" title="" data-placement="top" data-original-title="Delete"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>

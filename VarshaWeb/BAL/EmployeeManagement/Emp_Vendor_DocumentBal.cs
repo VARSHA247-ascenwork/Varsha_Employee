@@ -34,7 +34,14 @@ namespace VarshaWeb.BAL.EmployeeManagement
             }
             return VendorDocument;
         }
-         private JArray RESTGet(ClientContext clientContext, string filter)
+
+        public string DeleteVendorDocument(ClientContext client, string id)
+        {
+            RestService restService = new RestService();
+            string delete = restService.DeleteItem(client, "Emp_Vendor_Document", id);
+            return delete;
+        }
+        private JArray RESTGet(ClientContext clientContext, string filter)
          {
             RestService restService = new RestService();
             JArray jArray = new JArray();

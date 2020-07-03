@@ -69,10 +69,10 @@ CommonAppUtility.service('CommonAppUtilityService', function ($http, $q) {
             processData: false, // Not to process data  
             data: fileData,
             success: function (result) {
-                alert(result);
+              //  alert(result);
             },
             error: function (err) {
-                alert(err.statusText);
+             //   alert(err.statusText);
             }
         });
 
@@ -90,10 +90,10 @@ CommonAppUtility.service('CommonAppUtilityService', function ($http, $q) {
             processData: false, // Not to process data
             data: fileData,
             success: function (result) {
-                alert(result);
+             //   alert(result);
             },
             error: function (err) {
-                alert(err.statusText);
+              //  alert(err.statusText);
             }
         });
 

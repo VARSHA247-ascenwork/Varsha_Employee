@@ -1,7 +1,6 @@
 ﻿var VendorApp = angular.module('VendorApp', ['VendorServiceModule', 'CommonAppUtility'])
 
-VendorApp.controller('VendorController', function ($scope,  $timeout,VendorService, CommonAppUtilityService) {
-    
+VendorApp.controller('VendorController', function ($scope, $timeout, VendorService, CommonAppUtilityService) {
 
     $(function () {
 
@@ -12,23 +11,17 @@ VendorApp.controller('VendorController', function ($scope,  $timeout,VendorServi
             $('.bs-callout-warning').toggleClass('hidden', ok);
         })
             .on('form:submit', function () {
-            //   $scope.Update();
-               $scope.Save();
+               
+                if ($scope.addVendor == true) {
+                    $scope.Save();
 
+                } else if ($scope.editVendor == true) {
+                    $scope.Update();
+                }
+               
                 return false;
             });
-        //table
-        setTimeout(function () {
-            $('#Vendortable').DataTable({
-                responsive: true,
-                language: {
-                    searchPlaceholder: 'Search...',
-                    sSearch: '',
-                    lengthMenu: '_MENU_ ',
-                }
-
-            });
-        }, 2000);
+        
         //Dropdown
         $('.select2').select2({
             placeholder: 'Choose one',
@@ -40,12 +33,16 @@ VendorApp.controller('VendorController', function ($scope,  $timeout,VendorServi
     })
 
     $scope.AddVendor = function () {
+        $("#ddlDesignation")[0].selectedIndex = 0;
+        $("#ddlCountry")[0].selectedIndex = 0;
+        $("#ddlState")[0].selectedIndex = 0;
+        $scope.UploadQuotationFiles.length = 0;
         $scope.editVendor = false;
         $scope.addVendor = true;
+        $scope.viewdocument = false;
           $('#ddlCountry').on("change", function () {
         getState();
     })
-
         $scope.ngVendorCompany ="";
         $scope.ngVendorname ="";
         $scope.ngtxtmobile = "";
@@ -56,11 +53,14 @@ VendorApp.controller('VendorController', function ($scope,  $timeout,VendorServi
         $scope.ngPANcardno = "";
         $scope.ngGSTno ="";
         $scope.ngRemark = "";
-        $scope.ngddlState = "";
-        $scope.ngddlCountry = "";
-        $scope.ngddlDesignation = "";
-    }
+        $('.select2').select2({
+            placeholder: 'Choose one',
+            searchInputPlaceholder: 'Search',
+            width: '100%',
+            dropdownParent: $("#ModalPopUp")
 
+        });
+    }
 
     $scope.getVendordata = function () {
         var obj = {
@@ -68,13 +68,36 @@ VendorApp.controller('VendorController', function ($scope,  $timeout,VendorServi
         }
         CommonAppUtilityService.CreateItem("/Vendor/getVendordata", obj).then(function (response) {
             console.log(response);
-
             $scope.Vendordata = response.data;
+            setTimeout(function () {
+                $('#Vendortable').DataTable({
+                    responsive: true,
+                    bDestroy: true,
+                    language: {
+                        searchPlaceholder: 'Search...',
+                        sSearch: '',
+                        lengthMenu: '_MENU_ ',
+                    }
+
+                });
+            }, 1000);
         });
     }
     $scope.getVendordata();  
     
-   
+    $scope.DeleteDocument = function (did) {
+        if (confirm("Are you sure you want to delete this?")) {
+            var obj = {
+                DId: did
+            }
+            CommonAppUtilityService.CreateItem("/Vendor/DeleteDocument", obj).then(function (response) {
+                $scope.VendorDoc = response.data;
+            });
+        }
+        else {
+            false;
+        }
+    }
     $scope.ViewVendor = function (VDid) {
         var obj = {
             VId: VDid
@@ -93,7 +116,10 @@ VendorApp.controller('VendorController', function ($scope,  $timeout,VendorServi
 
 
     $scope.EditVendor = function (VDid) {
-       // $scope.editVendor = true;
+        $scope.UploadQuotationFiles.length = 0;
+        $scope.editVendor = true;
+        $scope.addVendor = false;
+        $scope.viewdocument = true;
         $('#ddlCountry').on("change", function () {
             getState();
         })
@@ -141,9 +167,6 @@ VendorApp.controller('VendorController', function ($scope,  $timeout,VendorServi
         });
     }
 
-  
-    
-
     $scope.UploadQuotationFiles = [];
 
     $("#uploadFile").change(function () {
@@ -162,14 +185,10 @@ VendorApp.controller('VendorController', function ($scope,  $timeout,VendorServi
         reader.readAsArrayBuffer(file);
     });
 
-    $scope.Remove = function (index) {
-        $scope.UploadQuotationFiles.splice(index, 1);
-    }
-
+      $scope.Remove = function (index) {
+       $scope.UploadQuotationFiles.splice(index, 1);
+}
     $scope.Save = function () {
-
-      //  var v = $scope.ngddlState;
-     
         var Items = {
             VendorCompany: $scope.ngVendorCompany,
             VendorName: $scope.ngVendorname,
@@ -186,16 +205,21 @@ VendorApp.controller('VendorController', function ($scope,  $timeout,VendorServi
             GstNo: $scope.ngGSTno,
             Remark: $scope.ngRemark,
         }
-     
-         VendorService.Postdata(Items, $scope.UploadQuotationFiles, "/Vendor/SaveInfo").then(function (response) {
 
+       
+        VendorService.Postdata(Items, $scope.UploadQuotationFiles, "/Vendor/SaveInfo").then(function (response) {
+            
+                $("#global-loader").hide();
+                $('#modaldemo4').modal('show');
+           
         });
     } 
 
-   /* $scope.Update = function () {
+    $scope.Update = function () {
+      
         $scope.VendorID = $scope.VendorInfo[0].ID;
-        var Items = {
-                    ID:$scope.VendorID,
+        var data = {
+                 ID:$scope.VendorID,
                  VendorCompany: $scope.ngVendorCompany,
                  VendorName: $scope.ngVendorname,
                  MobileNo: $scope.ngtxtmobile,
@@ -211,10 +235,16 @@ VendorApp.controller('VendorController', function ($scope,  $timeout,VendorServi
                  GstNo: $scope.ngGSTno,
                  Remark: $scope.ngRemark,
         }
-        VendorService.Postdata(Items, $scope.UploadQuotationFiles, "/Vendor/UpdateInfo").then(function (response) {
+        VendorService.Postdata(data, $scope.UploadQuotationFiles, "/Vendor/UpdateInfo").then(function (response) {
+            
+                $("#global-loader").hide();
+                $('#modaldemo4').modal('show');
+           
 
         });
-    } */
-
+    } 
+    $scope.PerformAction = function () {
+        Pageredirect("/Vendor");
+    }
     
 });

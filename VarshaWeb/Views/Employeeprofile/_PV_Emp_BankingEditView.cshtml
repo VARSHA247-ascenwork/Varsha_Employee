@@ -1,0 +1,64 @@
+﻿@model WizrrWeb.Models.EmployeeManagement.ViewModels.VM_EmployeeProfileModel
+
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Bank_name">Bank Name</label>
+                @Html.EditorFor(model => model.emp_Bankings.BankName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Bank Name", @id = "Bankname" } })
+            </div>
+            <div class="form-group">
+                <label for="Country">Country</label>
+                <div class="form-group">
+                    @Html.DropDownListFor(model => model.SelectedCountryId, new SelectList(Model.emp_Countries, "Id", "CountryName"), "Choose one", new { @class = "form-control select2 getCountryId", @id = "ddlbankCountry"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">City</label>
+                @Html.EditorFor(model => model.emp_Bankings.City, new { htmlAttributes = new { @class = "form-control", @placeholder = "City", @id = "txtCity" } })
+            </div>
+            <div class="form-group">
+                <label for="Account_type">Account Type</label>
+                <div class="form-group">
+                    @Html.DropDownListFor(model=>model.emp_Bankings.AccountType, new List<SelectListItem>{
+                       new SelectListItem{ Text="Current", Value="Current"},
+                       new SelectListItem{ Text="Saving", Value="Saving"},
+                       new SelectListItem{ Text="Joint", Value="Joint"}
+                   }, "Choose One", new { @class = "form-control select2", @id = "ddlAccountType"})
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="Branch">Branch</label>
+                @Html.EditorFor(model => model.emp_Bankings.Branch, new { htmlAttributes = new { @class = "form-control", @placeholder = "Branch", @id = "txtBranch" } })
+            </div>
+            <div class="form-group">
+                <label for="State">State</label>
+                <div class="form-group">
+                    @if (Model.SelectedStateID > 0)
+                    {
+                        @Html.DropDownListFor(model => model.SelectedStateID, new SelectList(Model.emp_States, "Id", "StateName"), "Choose one", new { @class = "form-control select2 getStates", @id = "ddlbankState", @placeholder = "Choose one" })
+                    }
+                    else
+                    {
+                        @Html.DropDownList("State", new SelectList(string.Empty, "Value", "Text"), "Choose one", new { @class = "form-control select2 getStates", @id = "ddlbankState", @placeholder = "Choose one" })  
+                    }
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Account_Number">Account Number</label>
+                    @Html.EditorFor(model => model.emp_Bankings.AccountNumber, new { htmlAttributes = new { @class = "form-control", @id = "txtAccount_Number", @placeholder = "Account Number" } })
+            </div>
+            <div class="form-group">
+                <label for="Routing_Number">Routing Number</label>
+                @Html.EditorFor(model => model.emp_Bankings.RoutingNumber, new { htmlAttributes = new { @class = "form-control", @id = "txtRouting_Number", @placeholder = "Routing Number" } })
+            </div>
+
+        </div>
+    </div>
+}

@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace VarshaWeb.Models.EmployeeManagement
+namespace WizrrWeb.Models.EmployeeManagement
 {
     public class Emp_AwardsDetailsModel
     {
         public int ID { get; set; }
-        public string EmployeeName { get; set; }
-        public string Emp_Code { get; set; }
+        public string EmpCode { get; set; }
         public string Award { get; set; }
         public string AwardedBy { get; set; }
         public string AwardedOn { get; set; }

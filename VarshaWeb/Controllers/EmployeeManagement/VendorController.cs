@@ -9,6 +9,7 @@ using VarshaWeb.DAL;
 using VarshaWeb.Models;
 using VarshaWeb.BAL;
 using Newtonsoft.Json;
+using System.Runtime.InteropServices;
 
 namespace VarshaWeb.Controllers.EmployeeManagement
 {
@@ -59,7 +60,31 @@ namespace VarshaWeb.Controllers.EmployeeManagement
                 vendor_Doc = vendorDocument.GetVendorDocumentById(clientContext, VId, path);
 
             }
+            Session["vendorID"] = VId;
             return Json(vendorModel, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult DeleteDocument(string DId)
+        {
+        
+    string id = Session["vendorID"].ToString();
+
+       
+           // int DocId = vendor[0].ID;
+            //  string returnId ="0";
+            //    DId = empdoc.ID.ToString();
+            var spContext = SharePointContextProvider.Current.GetSharePointContext(HttpContext);
+            using (var clientContext = spContext.CreateUserClientContextForSPHost())
+            {
+
+                 vendorDocument.DeleteVendorDocument(clientContext, DId);
+               // vendorDocument.DeleteVendorDocument(clientContext, DId);
+              var path = spContext.SPHostUrl.Scheme + "://" + spContext.SPHostUrl.Host.ToString();
+               vendor_Doc = vendorDocument.GetVendorDocumentById(clientContext, id, path);
+
+            }
+            return Json(vendor_Doc, JsonRequestBehavior.AllowGet); 
         }
 
         public ActionResult getVendorDocument(string VId)
@@ -131,16 +156,17 @@ namespace VarshaWeb.Controllers.EmployeeManagement
 
         }
 
-    /*  [SharePointContextFilter]
+              [SharePointContextFilter]
              public ActionResult UpdateInfo(FormCollection formCollection)
              {
                  string returnID = "0";
                  var name = formCollection["VendorDetails"];
                  vendorModel = JsonConvert.DeserializeObject<List<Emp_VendorMasterDetailsModel>>(name);
               string ID = vendorModel[0].ID.ToString();
+        
 
-              // string EditVendorID = Request.Cookies["EditVendorID"].Value;
-              var spContext = SharePointContextProvider.Current.GetSharePointContext(HttpContext);
+            // string EditVendorID = Request.Cookies["EditVendorID"].Value;
+            var spContext = SharePointContextProvider.Current.GetSharePointContext(HttpContext);
                  using (var clientContext = spContext.CreateUserClientContextForSPHost())
                  {
                      string itemdata = "'VendorCompany': '" + vendorModel[0].VendorCompany + "',";
@@ -151,7 +177,7 @@ namespace VarshaWeb.Controllers.EmployeeManagement
                      itemdata += "'DesignationId': '" + vendorModel[0].Designation + "',";
                      itemdata += "'VendorAddress': '" + vendorModel[0].VendorAddress + "',";
                      itemdata += "'City': '" + vendorModel[0].City + "',";
-                     itemdata += "'StatesId':" + vendorModel[0].VendorStateId + ",";
+                     itemdata += "'VendorStateId': " + vendorModel[0].VendorState + ",";
                      itemdata += "'CountryId':" + vendorModel[0].Country + ",";
                      itemdata += "'PanCardNo': '" + vendorModel[0].PanCardNo + "',";
                      itemdata += "'GstNo': '" + vendorModel[0].GstNo + "',";
@@ -163,15 +189,18 @@ namespace VarshaWeb.Controllers.EmployeeManagement
                          HttpFileCollectionBase files = Request.Files;
                          for (int i = 0; i < files.Count; i++)
                          {
-                             var postedFile = files[i];
-                             string docdata = "'libraryIdId' : " + returnID;
-                             docdata += ",'DocumentPath' : '" + files[i].FileName + "'";
-                             vendorBal.UploadDocument(clientContext, postedFile, docdata);
-                         }
+                       
+                            var postedFile = files[i];
+                            string docdata = "'libraryIdId' : " + ID;
+                            docdata += ",'DocumentPath' : '" + files[i].FileName + "'";
+                            vendorBal.UploadDocument(clientContext, postedFile, docdata);
+                        }
+                      
+                         
                      }
                  }
                  return Json(returnID, JsonRequestBehavior.AllowGet);
-             }   */
+             }   
 
     }
 }

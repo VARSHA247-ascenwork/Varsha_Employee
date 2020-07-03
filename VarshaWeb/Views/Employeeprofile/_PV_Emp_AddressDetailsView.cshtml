@@ -1,0 +1,43 @@
+﻿@model WizrrWeb.Models.EmployeeManagement.Emp_AddressModel
+
+
+<form role="form">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="form-group">
+                <label for="Type">Type</label>
+                <p><b> @Html.DisplayFor(model => model.AddressType)</b></p>
+            </div>
+            <div class="form-group">
+                <label for="Address">Address</label>
+                <p><b> @Html.DisplayFor(model => model.Address)</b></p>
+            </div>
+            <div class="form-group">
+                <label for="HomeCountry">Country</label>
+                <p><b> @Html.DisplayFor(model => model.Country)</b></p>
+            </div>
+            <div class="form-group">
+                <label for="HomeState">State</label>
+                <p><b> @Html.DisplayFor(model => model.State)</b></p>
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <div class="form-group">
+                <label for="HomeCity">City</label>
+                <p><b> @Html.DisplayFor(model => model.City)</b></p>
+            </div>
+            <div class="form-group">
+                <label for="HomeResidingSince">Residing Since</label>
+                <p><b> @Html.DisplayFor(model => model.ResidingSince)</b></p>
+            </div>
+            <div class="form-group">
+                <label for="Landmark">Landmark</label>
+                <p><b> @Html.DisplayFor(model => model.Landmark)</b></p>
+            </div>
+            <div class="form-group">
+                <label for="HomePostalcode">Postal Code</label>
+                <p><b> @Html.DisplayFor(model => model.PostalCode)</b></p>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,27 @@
+﻿@model WizrrWeb.Models.EmployeeManagement.ViewModels.VM_EmployeeProfileModel
+
+<form role="form">
+    <div class="col-lg-12" style="margin-right:60px;">
+        <div class="form-group">
+            <label for="Country">Country</label>
+            <div class="form-group">
+                @Html.DropDownListFor(model => model.SelectedCountryId, new SelectList(Model.emp_Countries, "Id", "CountryName"), new { @class = "form-control select2", @id = "ddlVisaCountry", @placeholder= "Choose one" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Visa_type">Visa Type</label>
+            @Html.EditorFor(model => model.emp_Visa.VisaType, new { htmlAttributes = new { @class = "form-control", @id = "txtVisaType" } })
+        </div>
+        <div class="form-group">
+            <label for="Valid_Until">Valid Until</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+                    </div>
+                </div>
+                @Html.EditorFor(model => model.emp_Visa.ValidUntil, new { htmlAttributes = new { @class = "form-control", @placeholder = "DD/MM/YYYY", @id = "txt_Visa_date" } })
+            </div>
+        </div>
+    </div>
+</form>

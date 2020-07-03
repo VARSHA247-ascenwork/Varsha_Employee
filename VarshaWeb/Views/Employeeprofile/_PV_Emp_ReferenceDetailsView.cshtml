@@ -1,0 +1,41 @@
+﻿@model WizrrWeb.Models.EmployeeManagement.Emp_ReferenceDetailsModel
+
+<form role="form">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="form-group">
+                <label for="Person">Person</label>
+            <p><b> @Html.DisplayFor(model => model.Person)</b></p>
+            </div>
+            <div class="form-group">
+                <label for="Company">Company</label>
+            <p><b> @Html.DisplayFor(model => model.Company)</b></p>
+            </div>
+            <div class="form-group">
+                <label for="Phone">Phone</label>
+            <p><b> @Html.DisplayFor(model => model.Phone)</b></p>
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <div class="form-group">
+                <label for="Designation">Designation</label>
+                <p><b> @Html.DisplayFor(model => model.Designation)</b></p>
+            </div>
+        <div class="form-group">
+               <label for="Email">Email</label>
+        <p><b> @Html.DisplayFor(model => model.Email)</b></p>
+            </div>
+        <div class="form-group">
+                <label for="knowPerson">How Do You Know Person</label>
+        <p><b> @Html.DisplayFor(model => model.HowDoYouKnowPerson)</b></p>
+            </div><div class="form-group">
+        <label for="Address">Address</label>
+        <p><b> @Html.DisplayFor(model => model.Address)</b></p>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Notes">Notes</label>
+        <p><b>@Html.DisplayFor(model => model.Notes)</b></p>
+    </div>
+</form>

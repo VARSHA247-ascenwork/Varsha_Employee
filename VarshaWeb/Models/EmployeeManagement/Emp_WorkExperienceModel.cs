@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace VarshaWeb.Models.EmployeeManagement
+namespace WizrrWeb.Models.EmployeeManagement
 {
     public class Emp_WorkExperienceModel
     {
@@ -20,6 +20,7 @@ namespace VarshaWeb.Models.EmployeeManagement
         public string DutiesResponsibilities { get; set; }
         public string Time { get; set; }
         public string EmpCode { get; set; }
+        public string Industry { get; set; }
 
     }
 }

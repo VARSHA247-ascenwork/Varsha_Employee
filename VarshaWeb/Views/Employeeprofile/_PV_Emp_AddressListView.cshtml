@@ -1,0 +1,43 @@
+﻿@model IEnumerable<WizrrWeb.Models.EmployeeManagement.Emp_AddressModel>
+
+<div class="col-xl-12">
+    <div class="table-responsive">
+
+        <table class="tables" style="width:100%">
+            <thead>
+                <tr>
+                    <th scope="col">Type</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Country</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Postal Code</th>
+                    <th scope="col">Residing Since</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Count() > 0)
+                {
+                    foreach (var a in Model)
+                    {
+                        <tr>
+                            <td scope="row" data-label="Type">@a.AddressType</td>
+                            <td data-label="Address">@a.Address</td>
+                            <td data-label="Country">@a.Country</td>
+                            <td data-label="City">@a.City</td>
+                            <td data-label="Postal Code">@a.PostalCode</td>
+                            <td data-label="Residing Since">@a.ResidingSince</td>
+                            <td data-label="Action">
+                                <div class="btn-icon-list center">
+                                    <button class="btn" style="padding:0px 5px 0px 5px;margin:0px;" onclick="AddressView('Edit',@a.ID)"><i class="si si-pencil text-primary mr-2" data-toggle="tooltip" title="" data-placement="top" data-original-title="Edit"></i></button>
+                                    <button class="btn" style="padding:0px 5px 0px 5px;margin:0px;" onclick="AddressView('View',@a.ID)"><i class="si si-eye text-success mr-2" data-toggle="tooltip" title="" data-placement="top" data-original-title="View"></i></button>
+                                    <button class="btn" style="padding:0px;margin:0px;" onclick="DeleteAddress(@a.ID)"><i class="si si-trash text-danger mr-2" data-toggle="tooltip" title="" data-placement="top" data-original-title="Delete"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

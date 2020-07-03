@@ -1,0 +1,43 @@
+﻿@model IEnumerable<WizrrWeb.Models.EmployeeManagement.Emp_EmergencyContactModel>
+
+
+
+    <div class="col-xl-12">
+        <div class="table-responsive">
+
+            <table class="tables" style="width:100%">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Relationship</th>
+                        <th scope="col">Primary No</th>
+                        <th scope="col">Alternate No</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count() > 0)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td scope="row" data-label="Person Name">@item.PersonName</td>
+                                <td data-label="Relationship">@item.Relationship</td>
+                                <td data-label="Primary Phone">@item.PrimaryPhoneNumber</td>
+                                <td data-label="Alternate Phone No">@item.AlternatePhoneNumber</td>
+                                <td data-label="Address in detail">@item.Address</td>
+                                <td data-label="Action">
+                                    <div class="btn-icon-list center">
+                                        <button class="btn" style="padding:0px 5px 0px 30px;margin:0px;" onclick="EmergencyContactAddEdit('Edit',@item.ID)"><i class="si si-pencil text-primary mr-2" data-toggle="tooltip" title="" data-placement="top" data-original-title="Edit"></i></button>
+                                        @*<button class="btn" style="padding:0px;margin:0px;" onclick="EmergencyContactAddEdit('View',@item.ID)"><i class="si si-eye text-primary mr-2" data-toggle="tooltip" title="" data-placement="top" data-original-title="View"></i></button>*@
+                                        <button class="btn" style="padding:0px;margin:0px;" onclick="DeleteEmergencyContact(@item.ID)"><i class="si si-trash text-danger mr-2" data-toggle="tooltip" title="" data-placement="top" data-original-title="Delete"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>

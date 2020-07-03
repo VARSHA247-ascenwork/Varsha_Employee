@@ -1,0 +1,1592 @@
+﻿@model WizrrWeb.Models.EmployeeManagement.ViewModels.VM_EmployeeProfileModel
+
+@section style
+{
+    <!--- Internal Select2 css-->
+    <link href="~/assets/plugins/select2/css/select2.min.css" rel="stylesheet">
+
+    <!--Internal  Datetimepicker-slider css -->
+    <link href="~/assets/plugins/amazeui-datetimepicker/css/amazeui.datetimepicker.css" rel="stylesheet">
+
+    <!--Internal  Datetimepicker-slider css -->
+    <link href="~/assets/plugins/amazeui-datetimepicker/css/amazeui.datetimepicker.css" rel="stylesheet">
+    <link href="~/assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.css" rel="stylesheet">
+    <link href="~/assets/plugins/pickerjs/picker.min.css" rel="stylesheet">
+
+    <link href="~/assets/css/basictable.css" rel="stylesheet">
+    <link href="~/assets/css/basictable2.css" rel="stylesheet">
+    <link href="~/assets/css/ProfileStyleSheet.css" rel="stylesheet" />
+}
+
+
+
+
+
+<!-- breadcrumb -->
+<div class="breadcrumb-header justify-content-between">
+    <div class="my-auto">
+        <div class="d-flex">
+            <h4 class="content-title mb-0 my-auto">Employee Management</h4><span class="text-muted mt-1 tx-13 ml-2 mb-0">/ Employee Profile page</span>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb -->
+<!-- row -->
+<div class="row">
+    <div class="col-xl-12 col-lg-12">
+
+        <!--Entry Code start-->
+        <div class="card custom-card">
+            <div class="card-body">
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="main-profile-overview">
+                                <div class="main-img-user profile-user" style="width:200px; height:200px; margin-top:25px;margin-left:25px;">
+                                    <img alt="" src="@Model.empProfilePic.Name"><a class="fas fa-camera profile-edit" href="JavaScript:void(0);" style="margin:12px;"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="row bd-t pd-t-10">
+                                <div class="col-lg-12">
+                                    <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">@Model.emp_BasicInfo.FullName</h2>
+                                </div>
+                            </div>
+                            <div class="row pd-t-10">
+                                <div class="col-lg-3">
+                                    <i class="fas fa-map-marker-alt"></i>&nbsp;@Model.emp_CompanyMaster.CompanyName | @Model.emp_CompanyMaster.City, @Model.emp_CompanyMaster.Country
+                                </div>
+                                <div class="col-lg-3">
+                                    <i class="fa fa-envelope-square" aria-hidden="true"></i>&nbsp;<a href="#">@Model.emp_BasicInfo.OfficeEmail</a>
+                                </div>
+                                <div class="col-lg-3">
+                                    <i class="fa fa-phone" aria-hidden="true"></i>&nbsp;@Model.emp_BasicInfo.ContactNumber
+                                </div>
+                                <div class="col-lg-3">
+                                    <i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp;@Model.emp_BasicInfo.Designation
+                                </div>
+                            </div><br />
+                            <div class="row bd-t pd-t-30">
+                                <div class="col-lg-3">
+                                    <b>Employee Code</b><br />@Model.emp_BasicInfo.EmpCode
+                                </div>
+                                <div class="col-lg-3">
+                                    <b>Department</b><br />@Model.emp_BasicInfo.Department
+                                </div>
+                                <div class="col-lg-3">
+                                    <b>Manager</b><br />@Model.emp_BasicInfo.Manager
+                                </div>
+                                <div class="col-lg-3">
+                                    <b>Marital Status</b><br />@Model.emp_BasicInfo.MaritalStatus
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row bd-t pd-t-30">
+
+                                <div class="col-lg-3">
+                                    <b>Date of Birth</b><br />@Model.emp_BasicInfo.DOB
+                                </div>
+                                <div class="col-lg-3">
+                                    <b>Date of Joining</b><br />@Model.emp_BasicInfo.JoiningDate
+                                </div>
+                                <div class="col-lg-3">
+                                    <b>Employee Status</b><br />@Model.emp_BasicInfo.EmpStatus
+                                </div>
+                                <div class="col-lg-3">
+                                    <b>Probation Status</b><br />@Model.emp_BasicInfo.ProbationStatus
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Entry Code End-->
+    </div>
+</div>
+<!-- row closed -->
+<!-- /div -->
+<div class="row" ng-app="EmployeeProfileApp" ng-controller="EmployeeProfileController">
+    <div class="col-lx-12 col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="tabs-menu ">
+                    <!-- Tabs -->
+                    <ul class="nav nav-tabs profile navtab-custom panel-tabs">
+                        <li class="active">
+                            <a href="#education" data-toggle="tab" aria-expanded="true"> <span class="visible-xs"><i class="las la-user-circle tx-16 mr-1"></i></span> <span class="hidden-xs">PROFESSIONAL SUMMARY</span> </a>
+                        </li>
+                        <li class="">
+                            <a href="#personal" data-toggle="tab" aria-expanded="false"> <span class="visible-xs"><i class="las la-images tx-15 mr-1"></i></span> <span class="hidden-xs">PERSONAL SUMMARY</span> </a>
+                        </li>
+                        <li class="">
+                            <a href="#others" data-toggle="tab" aria-expanded="false"> <span class="visible-xs"><i class="las la-cog tx-16 mr-1"></i></span> <span class="hidden-xs">OTHER DETAILS</span> </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content border-left border-bottom border-right border-top-0 p-4">
+                    <div class="tab-pane active" id="education">
+                        <div class="panel panel-primary">
+                            <div class="tab_wrapper left_tab1" id="left_tab1">
+                                <ul class="tab_list">
+                                    <li class="active">Educational Details</li>
+                                    <li>Work Experience</li>
+                                    <li>Award Details</li>
+                                    <li>Publication Details</li>
+                                    <li>Reference Details</li>
+                                    <li>Disciplinary Details</li>
+                                    <li>Visa Information</li>
+                                    <li>Banking Details</li>
+                                </ul>
+                                <div class="content_wrapper">
+                                    <div class="tab_content active card-body">
+                                        <div class="row pd-t-10">
+                                            <div class="col-lg-10">
+                                                <h2 class="main-content-title tx-20 mg-b-1 mg-b-lg-1">&nbsp;Educational Details</h2>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <button type="button" class="btn btn-primary float-right" onclick="FillModalHTML('Education')">Add</button>
+                                            </div>
+                                        </div>
+                                        <div class="row bd-t pd-t-10 pd-l-10" id="EducationalDetailsModel">
+                                            @Html.Partial("_PV_Emp_EducationDetailsListView", Model.emp_EducationalDetails)
+                                        </div>
+                                    </div>
+
+                                    <div class="tab_content card-body">
+                                        <div class="row pd-t-10">
+                                            <div class="col-lg-10">
+                                                <h2 class="main-content-title tx-20 mg-b-1 mg-b-lg-1">&nbsp;Work-Experience Details</h2>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <button type="button" class="btn btn-primary float-right" onclick="FillModalHTML('WorkExperience')">Add</button>
+                                            </div>
+                                        </div>
+                                        <div class="row bd-t pd-t-10 pd-l-10" id="WorkExperienceModel">
+                                            @Html.Partial("_PV_Emp_WorkExperienceListView", Model.emp_WorkExperienceModels)
+                                        </div>
+                                    </div>
+                                    <div class="tab_content card-body">
+                                        <div class="row pd-b-10">
+                                            <div class="col-lg-10">
+                                                <h2 class="main-content-title tx-20 mg-b-1 mg-b-lg-1">&nbsp;Award Details</h2>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <button type="button" class="btn btn-primary float-right" onclick="FillModalHTML('Award')">Add</button>
+                                            </div>
+                                        </div>
+                                        <div class="row bd-t pd-t-10 pd-l-10" id="AwardDetails">
+                                            @Html.Partial("_PV_Emp_AwardsDetailsListView", Model.emp_AwardsDetails)
+                                        </div>
+                                    </div>
+                                    <div class="tab_content card-body">
+                                        <div class="row pd-b-10">
+                                            <div class="col-lg-10">
+                                                <h2 class="main-content-title tx-20 mg-b-1 mg-b-lg-1">&nbsp;Publication Details</h2>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <button type="button" class="btn btn-primary float-right" onclick="FillModalHTML('Publication')">Add</button>
+                                            </div>
+                                        </div>
+                                        <div class="row bd-t pd-t-10 pd-l-10" id="emp_PublicationDetails">
+                                            @Html.Partial("_PV_Emp_PublicationListView", Model.emp_PublicationDetails)
+                                        </div>
+                                    </div>
+                                    <div class="tab_content card-body">
+                                        <div class="row pd-b-10">
+                                            <div class="col-lg-10">
+                                                <h2 class="main-content-title tx-20 mg-b-1 mg-b-lg-1">&nbsp;Reference Details</h2>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <button type="button" class="btn btn-primary float-right" onclick="FillModalHTML('Reference')">Add</button>
+                                            </div>
+                                        </div>
+                                        <div class="row bd-t pd-t-10 pd-l-10" id="Reference">
+                                            @Html.Partial("_PV_Emp_ReferenceListView",Model.emp_ReferenceDetails)
+                                        </div>
+                                    </div>
+                                    <div class="tab_content card-body">
+                                        <div class="row pd-b-10">
+                                            <div class="col-lg-10">
+                                                <h2 class="main-content-title tx-20 mg-b-1 mg-b-lg-1">&nbsp;Disciplinary Details</h2>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <button type="button" class="btn btn-primary float-right" onclick="DisciplinaryAddEdit('Add','AddView')">Add</button>
+                                            </div>
+                                        </div>
+                                        <div class="row bd-t pd-t-10 pd-l-10" id="Disciplinary">
+                                            @Html.Partial("_PV_Emp_DisciplinaryListView", Model.emp_DisciplinaryDetails)
+                                        </div>
+                                    </div>
+                                    <div class="tab_content card-body">
+                                        <div class="row pd-b-10">
+                                            <div class="col-lg-10">
+                                                <h2 class="main-content-title tx-20 mg-b-1 mg-b-lg-1">&nbsp;Visa Details</h2>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <button type="button" class="btn btn-primary float-right" onclick="VisaAddEdit('Add','AddVisaView')">Add</button>
+                                            </div>
+                                        </div>
+                                        <div class="row bd-t pd-t-10 pd-l-10" id="VisaDetails">
+                                            @Html.Partial("_PV_Emp_VisaListView",Model.emp_VisaInformation)
+                                        </div>
+                                    </div>
+                                    <div class="tab_content card-body">
+                                        <div class="row pd-b-10">
+                                            <div class="col-lg-10">
+                                                <h2 class="main-content-title tx-20 mg-b-1 mg-b-lg-1">&nbsp;Banking Details</h2>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <button type="button" class="btn btn-primary float-right" onclick="BankingAddEdit('Add','BankDetails')">Add</button>
+                                            </div>
+                                        </div>
+                                        <div class="row bd-t pd-t-10 pd-l-10" id="emp_BankDetails">
+                                            @Html.Partial("_PV_Emp_BankingListView", Model.emp_BankingDetails)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!---------------- Personal Tabl  ------------------------>
+                    <div class="tab-pane" id="personal">
+                        <div class="panel panel-primary">
+                            <div class="tab_wrapper left_tab2">
+                                <ul class="tab_list">
+                                    <li class="active">Address</li>
+                                    <!--<li>Permanent Address</li>
+                                    <li>Office Address</li>-->
+                                    <li>Emergency Contact</li>
+                                    <li>Family Details</li>
+                                    <li>Medical Information</li>
+                                    <li>Insurance Details</li>
+                                    <li>Languages Details</li>
+                                    <li>Social Profile</li>
+                                    <li>Government Details</li>
+                                </ul>
+                                <div class="content_wrapper">
+                                    <div class="tab_content active card-body">
+                                        <div class="row pd-t-10">
+                                            <div class="col-lg-10">
+                                                <h2 class="main-content-title tx-20 mg-b-1 mg-b-lg-1">&nbsp;Address</h2>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <button type="button" class="btn btn-primary float-right" onclick="AddressView('Add','AddAddress')">Add</button>
+                                            </div>
+                                        </div>
+                                        <div class="row bd-t pd-t-10 pd-l-10" id="Address">
+                                            @Html.Partial("_PV_Emp_AddressListView", Model.emp_Addresses)
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="tab_content  card-body">
+                                        <div class="row pd-t-10">
+                                            <div class="col-lg-10">
+                                                <h2 class="main-content-title tx-20 mg-b-1 mg-b-lg-1">&nbsp;Emergency Contact</h2>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <button type="button" class="btn btn-primary float-right" onclick="EmergencyContactAddEdit('Add','AddEmergencyContact')">Add</button>
+                                            </div>
+                                        </div>
+                                        <div class="row bd-t pd-t-10 pd-l-10" id="emp_emergencyContactModels">
+                                            @Html.Partial("_PV_Emp_EmergencyContactListView", Model.emp_emergencyContactModels)
+                                        </div>
+                                    </div> <!-- card close -->
+
+                                    <div class="tab_content card-body">
+                                        <div class="row pd-b-10">
+                                            <div class="col-lg-10">
+                                                <h2 class="main-content-title tx-20 mg-b-1 mg-b-lg-1">&nbsp;Family Details</h2>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <button type="button" class="btn btn-primary float-right" onclick="FamilyView('Add','FamilyDetails')">Add</button>
+                                            </div>
+                                        </div>
+                                        <div class="row bd-t pd-t-10 pd-l-10" id="emp_FamilyDetails">
+                                            @Html.Partial("_PV_Emp_FamilyListView", Model.emp_FamilyDetails)
+                                        </div>
+                                    </div> <!-- card close -->
+                                    <div class="tab_content  card-body">
+                                        <div class="row pd-b-10">
+                                            <div class="col-lg-10">
+                                                <h2 class="main-content-title tx-20 mg-b-1 mg-b-lg-1">&nbsp;Medical Information</h2>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <button type="button" class="btn btn-primary float-right" onclick="MedicalInformationView('Add','Medical')">Add</button>
+                                            </div>
+                                        </div>
+                                        <div class="row bd-t pd-t-10 pd-l-10" id="emp_MedicalInformation">
+                                            @Html.Partial("_PV_Emp_MedicalInformationListView", Model.emp_MedicalInformation)
+                                        </div>
+                                    </div> <!-- card close -->
+                                    <div class="tab_content  card-body">
+                                        <div class="row pd-b-10">
+                                            <div class="col-lg-10">
+                                                <h2 class="main-content-title tx-20 mg-b-1 mg-b-lg-1">&nbsp;Insurance Details</h2>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <button type="button" class="btn btn-primary float-right" onclick="FillModalHTML('Insurance')">Add</button>
+                                            </div>
+                                        </div>
+                                        <div class="row bd-t pd-t-10 pd-l-10">
+                                            <div class="col-xl-12">
+                                                <div class="table-responsive">
+                                                    <table class="tables" style="width:100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">Name</th>
+                                                                <th scope="col">Until</th>
+                                                                <th scope="col">Company</th>
+                                                                <th scope="col">Amount</th>
+                                                                <th scope="col">Balance</th>
+                                                                <th scope="col">Policy No</th>
+                                                                <th scope="col">Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td data-label="Name">Sushil</td>
+                                                                <td data-label="Until">12-02-2021</td>
+                                                                <td data-label="Company">ICICI</td>
+                                                                <td data-label="Amount">150000</td>
+                                                                <td data-label="Balance">100000</td>
+                                                                <td data-label="Policy No">65711</td>
+                                                                <td data-label="Action">
+                                                                    <div class="btn-icon-list center">
+                                                                        <button class="btn" style="padding:0px 5px 0px 30px;margin:0px;" onclick="FillModalEditHTML('Insurance')"><i class="si si-pencil text-primary mr-2" data-toggle="tooltip" title="" data-placement="top" data-original-title="Edit"></i></button>
+                                                                        <button class="btn" style="padding:0px;margin:0px;"><i class="si si-trash text-danger mr-2" data-toggle="tooltip" title="" data-placement="top" data-original-title="Delete"></i></button>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div><!-- bd -->
+                                            </div>
+                                        </div>
+                                    </div> <!-- card close -->
+                                    <div class="tab_content  card-body">
+                                        <div class="row pd-b-10">
+                                            <div class="col-lg-10">
+                                                <h2 class="main-content-title tx-20 mg-b-1 mg-b-lg-1">&nbsp;Languages Details</h2>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <button type="button" class="btn btn-primary float-right" onclick="FillModalHTML('Languages')">Add</button>
+                                            </div>
+                                        </div>
+                                        <div class="row bd-t pd-t-10 pd-l-10">
+                                            <div class="col-xl-12">
+                                                <div class="table-responsive">
+                                                    <table class="tables" style="width:100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">Language</th>
+                                                                <th scope="col">Can Speak</th>
+                                                                <th scope="col">Can Read</th>
+                                                                <th scope="col">Can Write</th>
+                                                                <th scope="col">Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td data-label="Language">Marathi</td>
+                                                                <td data-label="Can Speak">Yes</td>
+                                                                <td data-label="Can Read">Yes</td>
+                                                                <td data-label="Can Write">No</td>
+                                                                <td data-label="Action">
+                                                                    <div class="btn-icon-list center">
+                                                                        <button class="btn" style="padding:0px 5px 0px 43px;margin:0px;" onclick="FillModalEditHTML('Languages')"><i class="si si-pencil text-primary mr-2" data-toggle="tooltip" title="" data-placement="top" data-original-title="Edit"></i></button>
+                                                                        <button class="btn" style="padding:0px;margin:0px;"><i class="si si-trash text-danger mr-2" data-toggle="tooltip" title="" data-placement="top" data-original-title="Delete"></i></button>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div><!-- bd -->
+                                            </div>
+                                        </div>
+                                    </div> <!-- card close -->
+                                    <div class="tab_content  card-body">
+                                        <div class="row pd-b-10">
+                                            <div class="col-lg-10">
+                                                <h2 class="main-content-title tx-20 mg-b-1 mg-b-lg-1">&nbsp;Social Profile</h2>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <button type="button" class="btn btn-primary float-right" onclick="FillModalHTML('Social')">Add</button>
+                                            </div>
+                                        </div>
+                                        <div class="row bd-t pd-t-10 pd-l-10">
+                                            <div class="col-xl-12">
+                                                <div class="table-responsive">
+                                                    <table class="tables" style="width:100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">Facebook</th>
+                                                                <th scope="col">Google</th>
+                                                                <th scope="col">LinkedIn</th>
+                                                                <th scope="col">Twitter</th>
+                                                                <th scope="col">Instagram</th>
+                                                                <th scope="col">Tiktok</th>
+                                                                <th scope="col">Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td data-label="Facebook">FB123</td>
+                                                                <td data-label="Google">Google123</td>
+                                                                <td data-label="LinkedIn">Link123</td>
+                                                                <td data-label="Twitter">twitt123</td>
+                                                                <td data-label="Instagram">Insta123</td>
+                                                                <td data-label="Tiktok">Tik123</td>
+                                                                <td data-label="Action">
+                                                                    <div class="btn-icon-list center">
+                                                                        <button class="btn" style="padding:0px 5px 0px 25px;margin:0px;" onclick="FillModalEditHTML('Social')"><i class="si si-pencil text-primary mr-2" data-toggle="tooltip" title="" data-placement="top" data-original-title="Edit"></i></button>
+                                                                        <button class="btn" style="padding:0px;margin:0px;"><i class="si si-trash text-danger mr-2" data-toggle="tooltip" title="" data-placement="top" data-original-title="Delete"></i></button>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div><!-- bd -->
+                                            </div>
+                                        </div>
+                                    </div> <!-- card close -->
+                                    <div class="tab_content  card-body">
+                                        <div class="row pd-b-10">
+                                            <div class="col-lg-10">
+                                                <h2 class="main-content-title tx-20 mg-b-1 mg-b-lg-1">&nbsp;Government Details</h2>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <button type="button" class="btn btn-primary float-right" onclick="FillModalHTML('Government')">Add</button>
+                                            </div>
+                                        </div>
+                                        <div class="row bd-t pd-t-10 pd-l-10">
+                                            <div class="col-xl-12">
+                                                <div class="table-responsive">
+                                                    <table class="tables" style="width:100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">Pan No</th>
+                                                                <th scope="col">Passport No</th>
+                                                                <th scope="col">Driving License No</th>
+                                                                <th scope="col">Tax Identification No</th>
+                                                                <th scope="col">Aadhaar Card No</th>
+                                                                <th scope="col">Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td data-label="Pan No">PAN123</td>
+                                                                <td data-label="Passport No">PASS123</td>
+                                                                <td data-label="Driving License No">DL123</td>
+                                                                <td data-label="Tax Identification No">TAX123</td>
+                                                                <td data-label="Aadhaar Card No">AC123</td>
+                                                                <td data-label="Action">
+                                                                    <div class="btn-icon-list center">
+                                                                        <button class="btn" style="padding:0px 5px 0px 30px;margin:0px;" onclick="FillModalEditHTML('Government')"><i class="si si-pencil text-primary mr-2" data-toggle="tooltip" title="" data-placement="top" data-original-title="Edit"></i></button>
+                                                                        <button class="btn" style="padding:0px 5px;margin:0px;" onclick="FillModalViewHTML('Government')"><i class="si si-eye text-success mr-2" data-toggle="tooltip" title="" data-placement="top" data-original-title="View"></i></button>
+                                                                        <button class="btn" style="padding:0px;margin:0px;"><i class="si si-trash text-danger mr-2" data-toggle="tooltip" title="" data-placement="top" data-original-title="Delete"></i></button>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div><!-- bd -->
+                                            </div>
+                                        </div>
+                                    </div> <!-- card close -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="others">
+                        <div class="panel panel-primary">
+                            <div class="tab_wrapper left_tab3">
+                                <ul class="tab_list">
+                                    <li class="active">More Information</li>
+                                    <li class="active">Additional Information</li>
+                                </ul>
+                                <div class="content_wrapper">
+
+                                    <div class="tab_content active card-body">
+                                        <div class="col-lg-12">
+
+                                            <div class="row pd-t-10">
+                                                <div class="col-lg-3">
+                                                    <b>Role</b><br />Manager
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <b>Grade</b><br />A+
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <b>Employee Skill</b><br />Developer
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <b>Business Segment</b><br />Manager
+                                                </div>
+                                            </div><br />
+                                            <div class="row bd-t pd-t-30">
+                                                <div class="col-lg-3">
+                                                    <b>Product</b><br />Tech
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <b>Business Vertical</b><br />Tech
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <b>Cost Centre</b><br />ABC
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <b>Time Zone</b><br />10.00am-7.00pm
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="row bd-t pd-t-30">
+                                                <div class="col-lg-3">
+                                                    <b>Payment Mode</b><br />BankTranfer
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <b>PF Number</b><br />12051987
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <b>Office Phone</b><br />22345678908
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <b>Home Phone</b><br />01293874656
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="row bd-t pd-t-30">
+                                                <div class="col-lg-3">
+                                                    <b>Mobile Phone</b><br />01293874656
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <b>Other Phone</b><br />01293874656
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <b>Personal Email</b><br />shripal@ascenwork.com
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <b>Other Email</b><br />Ascenwork@gmailcom
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="row bd-t pd-t-30">
+                                                <div class="col-lg-3">
+                                                    <b>Employement Type</b><br />Manager
+                                                </div>
+                                                <!--<div class="col-lg-3">
+                                                          <b>Mobile Number</b><br/>01293874656
+                                                </div>-->
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="tab_content  card-body">
+                                        <div class="row bd-t pd-t-30">
+                                            <div class="col-lg-3">
+                                                <b>ESIC #</b><br />44
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <b>Monthly Variable Applicable</b><br />55
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <b>AnniversaryDate</b><br />12-09-2011
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /div -->
+    <!--new row -->
+    <!-- end new row -->
+    <!-- modal pop up -->
+    <!-- Full Height Modal Right -->
+
+
+    <div class="modal left fade" id="ModalPopUp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static"
+         aria-hidden="true">
+
+        <!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title w-100" id="myModalLabel"></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer justify-content-center">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container closed -->
+<!-- main-content closed -->
+
+
+<!-- Footer closed -->
+<!-- Back-to-top -->
+<a href="#top" id="back-to-top"><i class="las la-angle-double-up"></i></a>
+
+@section scripts
+{
+
+    <!--Internal   Notify -->
+    <link href="../assets/plugins/notify/css/notifIt.css" rel="stylesheet" />
+    <!-- Internal Select2.min js -->
+    <script src="~/assets/plugins/select2/js/select2.min.js"></script>
+    <script src="~/assets/js/select2.js"></script>
+
+    <!-- Internal Jquery.steps js -->
+    <script src="~/assets/plugins/jquery-steps/jquery.steps.min.js"></script>
+    <script src="~/assets/plugins/parsleyjs/parsley.min.js"></script>
+
+
+    <!--Internal  jquery-simple-datetimepicker js -->
+    <script src="~/assets/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js"></script>
+
+    <!--Internal  Datepicker js -->
+    <script src="~/assets/plugins/jquery-ui/ui/widgets/datepicker.js"></script>
+
+    <!-- Ionicons js -->
+    <script src="~/assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.js"></script>
+
+    <!--Internal  pickerjs js -->
+    <script src="~/assets/plugins/pickerjs/picker.min.js"></script>
+
+    <script src="~/assets/plugins/notify/js/notifIt.js"></script>
+
+    <script src="~/assets/plugins/tabs/jquery.multipurpose_tabcontent.js"></script>
+    <script src="~/assets/js/tabs.js"></script>
+    <script src="~/Scripts/Angular/EmployeeManagement/Services/EmployeeProfileServices.js"></script>
+    <script src="~/Scripts/Angular/EmployeeManagement/JS/EmployeeProfileController.js"></script>
+    <script>
+
+        function FillModalHTML(data) {
+            var html = "";
+            var btnhtml = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
+
+            if (data == 'Education') {
+                btnhtml += '<button type="submit" onclick="SaveEducation()" class="btn btn-primary">Save changes</button>';
+                html = '<form role="form" id="emp"><div class="col-lg-12" style="margin-right:60px;"><div class="form-group"><label for="Institute">Institute/University</label><input type="text" value="" id="Institute" class="form-control" required="">' +
+                    '</div><div class="form-group"><label for="Degree">Degree</label><input type="text" value="" id="Degree" class="form-control"></div><div class="form-group">' +
+                    '<label for="Percentage">Percentage/CGPA</label><input type="text" value="" id="Percentage" class="form-control"></div><div class="form-group" style="left: 1090px;z-index: 100002;display: block;top: 659px;">' +
+                    '<label for="Education_From_Date">From Date</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control fc-datepicker" id="txtEducatinalfromdate" type="text" value=""></div></div><div class="form-group">' +
+                    '<label for="Education_To_Date">To Date</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="txtEducatinalTodate" type="text" value=""></div></div>' +
+                    '<div class="form-group"><label for="Subject">Subject</label><input type="text" value="" id="txtSubject" class="form-control"></div></div></form>';
+                $(".modal-title").html('Educational Details');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('.date');
+                $('#txtEducatinalfromdate').datetimepicker({
+                    minView: 4,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+                $('#txtEducatinalTodate').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+                $("#txtEducatinalTodate").on('change', function () {
+                    var start = moment(angular.element("#txtEducatinalfromdate").val(), 'DD/MM/YYYY');
+                    var end = moment($(this).val(), 'DD/MM/YYYY');
+                    if (end < start) {
+                        alert('Please should ');
+                        $(this).val('');
+                    }
+                });
+            }
+            else if (data == 'WorkExperience') {
+                btnhtml += '<button type="button" onclick="SaveWorkExperience()" class="btn btn-primary">Save changes</button>';
+                html = '<form role="form"><div class="row"><div class="col-lg-6"><div class="form-group"><label for="Organazation_name">Organisation Name</label><input type="text" value="" id="Organazation_name" class="form-control">' +
+
+                    '</div><div class="form-group"><label for="Designation">Designation</label><input type="text" value="" id="Designation" class="form-control"></div><div class="form-group">' +
+                    '<label for="From_Date">From Date</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="txtfromdate" type="text" value=""></div></div><div class="form-group">' +
+                    '<label for="From_Date">To Date</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="To_Date" type="text" value=""></div></div>' +
+                    '</div>' +
+                    '<div class="col-lg-6"><div class="form-group"><label for="Industry">Industry</label><div class="form-group"><select id="ddlIndustry" style="width:100%" class="form-control"><option value="IT">IT</option>' +
+                    '</select ></div > ' +
+                    '</div>' +
+                    '<div class="form-group"><label for="Annual_Salary">Annual Salary</label><input type="text" placeholder="Annual Salary" id="txtAnnual_Salary" class="form-control"></div>' +
+                    '<div class="form-group"><label for="Contact_no">Contact No</label><input type="text" placeholder="Contact No" id="txtContact" class="form-control">' +
+                    '</div>' +
+                    '<div class="form-group"><label for="To">Notes</label><textarea type="text" placeholder="Notes" id="txtWorkNotes" class="form-control" row="2"></textarea>' +
+                    '</div>' +
+                    '</div></div></form>';
+                $(".modal-title").html('Work Experience');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#ddlWorktime').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#txtfromdate').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+                $('#To_Date').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+                $("#To_Date").on('change', function () {
+                    var start = moment(angular.element("#txtfromdate").val(), 'DD/MM/YYYY');
+                    var end = moment($(this).val(), 'DD/MM/YYYY');
+                    if (end < start) {
+                        alert('Please should ');
+                        $(this).val('');
+                    }
+                });
+            }
+            else if (data == 'Award') {
+                btnhtml += '<button type="button" class="btn btn-primary" onclick="SaveAwardDetails()">Save changes</button>';
+                html = '<form role="form" class="emp"><div class="col-lg-12" style="margin-right:60px;"><div class="form-group"><label for="Award">Award</label><input type="text" value="" id="Award" class="form-control">' +
+                    '</div><div class="form-group"><label for="Awarded_By">Awarded By</label><input type="text" value="" id="txtAwarded_By" class="form-control"></div><div class="form-group">' +
+                    '<label for="Awarded_on">Awarded On</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="txtAwarded_on" type="text" value=""></div></div><div class="form-group"><label for="Description">Description</label>' +
+                    '<textarea type="text" placeholder="Description" id="Description" class="form-control" row="2"></textarea></div></div></form>';
+                $(".modal-title").html('Award Details');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#txtAwarded_on').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+            }
+            else if (data == 'Publication') {
+                btnhtml += '<button type="button" class="btn btn-primary" onclick="SavePublication()">Save changes</button>';
+                html = '<form role="form"><div class="col-lg-12" style="margin-right:60px;"><div class="form-group">' +
+                    '<label for="Publication_on">Publication On</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="txt_Publication_date" type="text" value="" placeholder="DD/MM/YYYY"></div></div><div class="form-group"><label for="Publication_on">Publication</label><input type="text" value="" id="txtPublication_on" class="form-control"></div><div class="form-group"><label for="Description">Description</label>' +
+                    '<textarea type="text" placeholder="Description" id="Description" class="form-control" row="2"></textarea></div><div class="form-group">' +
+                    '<label for="url">URL</label><input type="text" id="url" class="form-control"></div></div></form>';
+                $(".modal-title").html('Publication Details');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#txt_Publication_date').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+            }
+            else if (data == 'Reference') {
+                btnhtml += '<button type="button" class="btn btn-primary" onclick="SaveReference()">Save changes</button>';
+                html = '<form role="form"><div class="row"><div class="col-lg-6"><div class="form-group"><label for="Person">Person</label><input type="text" value="" id="txtPerson" class="form-control"></div><div class="form-group">' +
+                    '<label for="Company">Company</label><input type="text" placeholder="Company" id="txtCompany" class="form-control"></div><div class="form-group">' +
+                    '<label for="Phone">Phone</label><input type="text" id="Phone" class="form-control"></div><div class="form-group">' +
+                    '<label for="Notes">Notes</label><textarea type="text" id="txtNotes" class="form-control" row="2"></textarea></div></div><div class="col-lg-6"><div class="form-group">' +
+                    '<label for="Designation">Designation</label><input type="text" id="Designation" class="form-control"></div><div class="form-group">' +
+                    '<label for="Email">Email</label><input type="text" id="Email" class="form-control"></div><div class="form-group">' +
+                    '<label for="knowPerson">How Do You Know Person</label><input type="text" id="txtknowPerson" class="form-control"></div><div class="form-group">' +
+                    '<label for="Address">Address</label><textarea type="text" id="txtAddress" class="form-control" row="2"></textarea></div></div></div></form>';
+                $(".modal-title").html('Reference Details');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+            }
+            else if (data == 'Disciplinary') {
+                btnhtml += '<button type="button" class="btn btn-primary" onclick="SaveDisciplinaryDetails()">Save changes</button>';
+                html = '<form role="form"><div class="col-lg-12" style="margin-right:60px;"><div class="form-group"><label for="Description">Description</label>' +
+                    '<input type="text" placeholder="Description" id="Description" class="form-control"></div><div class="form-group">' +
+                    '<label for="Action_on">Action On</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="txt_Displinary_date" type="text" value="" placeholder="DD/MM/YYYY"></div></div></div></form>';
+                $(".modal-title").html('Disciplinary Details');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#txt_Displinary_date').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+            }
+            else if (data == 'Visa') {
+                btnhtml += '<button type="button" class="btn btn-primary" onclick="SaveVisaDetails()">Save changes</button>';
+                html = '<form role="form"><div class="col-lg-12" style="margin-right:60px;"><div class="form-group"><label for="Country">Country</label><div class="form-group"><select style="width:100%"  id="ddlVisaCountry" class="form-control">@if (Model.emp_Countries.Count() > 0) { foreach (var item in Model.emp_Countries) {<option value="@item.ID">@item.CountryName</option>} }</select></div>' +
+                    '</div><div class="form-group"><label for="Visa_type">Visa Type</label>' +
+                    '<input type="text" placeholder="Visa Type" id="txtVisaType" class="form-control"></div><div class="form-group">' +
+                    '<label for="Valid_Until">Valid Until</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="txt_Visa_date" type="text" placeholder="DD/MM/YYYY" value=""></div></div></div></form>';
+                $(".modal-title").html('Visa Details');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#ddlVisaCountry').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#txt_Visa_date').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+            }
+            else if (data == 'Bank') {
+                btnhtml += '<button type="button" class="btn btn-primary" onclick="SaveBankingDetails()">Save changes</button>';
+                html = '<form role="form"><div class="row"><div class="col-lg-6"><div class="form-group"><label for="Bank_name">Bank Name</label><input type="text" placeholder="Bank Name" id="Bankname" class="form-control"></div>' +
+                    '<div class="form-group"><label for="Country">Country</label><div class="form-group"><select id="ddlbankCountry" ng-change="getState()" style="width:100%" class="form-control"><option value=""></option>@if (Model.emp_Countries.Count()>0) { foreach(var item in Model.emp_Countries){<option value="@item.ID">@item.CountryName</option>} }</select></div> </div><div class="form-group"><label for="exampleInputPassword1">City</label>' +
+                    '<input type="text" id="txtCity" class="form-control"></div><div class="form-group"><label for="Account_type">Account Type</label><div class="form-group"><select id="ddlAccountType" style="width:100%" class="form-control"><option value="Current">Current</option><option value="Saving">Saving</option><option value="Joint">Joint</option></select></div> </div>' +
+                    '</div>' +
+                    '<div class="col-lg-6"><div class="form-group"><label for="Branch">Branch</label><input type="text" placeholder="Branch" id="txtBranch" class="form-control"></div><div class="form-group"><label for="State">State</label><div class="form-group"><select  id="ddlbankState" style="width:100%" class="form-control" ng-options="a.ID as a.State for a in State"><option value=""> </option></select></div></div>' +
+                    '<div class="form-group"><label for="Account_Number">Account Number</label><input type="text" id="txtAccount_Number" class="form-control"></div>' +
+                    '<div class="form-group"><label for="Routing_Number">Routing Number</label><input type="text" id="txtRouting_Number" class="form-control"></div>' +
+                    '</div>' +
+                    '</form>';
+
+                $(".modal-title").html('Banking Details');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#ddlbankState').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#ddlbankCountry').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#ddlAccountType').select2({ dropdownParent: $('#ModalPopUp') });
+            }
+
+            else if (data == 'Address') {
+                btnhtml += '<button type="button" class="btn btn-primary">Save changes</button>';
+                html = '<form role="form"><div class="row"><div class="col-lg-6"><div class="form-group"><label for="Type">Type</label><div class="form-group"><select  id="ddlType" style="width:100%" class="form-control"><option value="Home">Home</option><option value="Home">Village</option><option value="Office">Office</option></select></div>' +
+                    '</div><div class="form-group"><label for="HomeState">State</label><div class="form-group"><select id="ddlHomeState" style="width:100%" class="form-control"><option value="Firefox">US</option><option value="Chrome">India</option><option value="Chrome">Canada</option></select></div>' +
+                    '</div><div class="form-group"><label for="Landmark">Landmark</label>' +
+                    '<input type="text" placeholder="Landmark" id="txtHomeLandmark" class="form-control"></div><div class="form-group">' +
+                    '<label for="HomeResidingSince">Residing Since</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="txtHomeResidingSince" type="text" value="2018-12-20"></div></div></div>' +
+                    '<div class="col-lg-6"><div class="form-group"><label for="Address">Address</label>' +
+                    '<textarea type="text" placeholder="Address" id="txtAddress" class="form-control" row="2"></textarea></div><div class="form-group"><label for="HomeCountry">Country</label><div class="form-group"><select  id="ddlHomeCountry" style="width:100%" class="form-control"><option value="Firefox">US</option><option value="Chrome">India</option><option value="Chrome">Canada</option></select></div>' +
+                    '</div><div class="form-group"><label for="HomeCity">City</label><div class="form-group"><select id="ddlHomeCity" style="width:100%" class="form-control"><option value="Firefox">US</option><option value="Chrome">India</option><option value="Chrome">Canada</option></select></div>' +
+                    '</div><div class="form-group"><label for="HomePostalcode">Postal Code</label>' +
+                    '<input type="text" placeholder="Postal Code" id="txtPostalcode" class="form-control"></div></div></div></form>';
+                $(".modal-title").html('HomeAddress');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#ddlType').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#ddlHomeCountry').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#ddlHomeState').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#ddlHomeCity').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#txtHomeResidingSince').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+            }
+
+            else if (data == 'Emergency') {
+                btnhtml += '<button type="button" class="btn btn-primary">Save changes</button>';
+                html = '<form role="form"><div class="form-group"><label for="Person Name">Person Name</label>' +
+                    '<input type="text" placeholder="Person Name" id="txtEMRPersonname" class="form-control"></div><div class="form-group"><label for="Relationship">Relationship</label>' +
+                    '<div class="form-group"><select id="ddlRelationship" style="width:100%"  class="form-control"><option value="Father">Father</option><option value="Mother">Mother</option><option value="Brother">Brother</option><option value="Brother">Brother</option><option value="Sister">Sister</option><option value="Other">Other</option></select></div></div><div class="form-group"><label for="Primary_Phone">Primary Phone</label>' +
+                    '<input type="text" placeholder="Primary Phone" id="txtPrimary_Phone" class="form-control"></div><div class="form-group"><label for="Alternate Phone Number">Alternate Phone Number</label>' +
+                    '<input type="text" placeholder="Alternate Phone Number" id="txtAlternate_Phone" class="form-control"></div><div class="form-group"><label for="Address in Detail">Address in Detail</label>' +
+                    '<textarea type="text" placeholder="Address in Detail" id="txtAddress_in_Detail" class="form-control" row="2"></textarea></div></form>';
+                $(".modal-title").html('Emergency');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#ddlRelationship').select2({ dropdownParent: $('#ModalPopUp') });
+            }
+            else if (data == 'FamilyDetails') {
+                btnhtml += '<button type="button" class="btn btn-primary">Save changes</button>';
+                html = '<form role="form"><div class="row"><div class="col-lg-6"><div class="form-group"><label for="Person Name">Person Name</label>' +
+                    '<input type="text" placeholder="Person Name" id="txtFamilyPersonname" class="form-control"></div><div class="form-group"><label for="Relationship">Relationship</label>' +
+                    '<div class="form-group"><select id="ddlRelationship" style="width:100%"  class="form-control"><option value="Father">Father</option><option value="Mother">Mother</option><option value="Brother">Brother</option><option value="Brother">Brother</option><option value="Sister">Sister</option><option value="Other">Other</option></select></div></div><div class="form-group">' +
+                    '<label for="BirthDate">Date Of Birth</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="txtBirthDate" type="text" value="2018-12-20"></div></div><div class="form-group"><label for="Age">Age</label>' +
+                    '<input type="text" placeholder="Age" id="txtAge" class="form-control"></div></div><div class="col-lg-6"><div class="form-group"><label for="Gender">Gender</label><div class="form-group"><select id="ddlgender" style="width:100%" class="form-control"><option value="Male">Male</option><option value="Female">Female</option></select></div>' +
+                    '</div><div class="form-group"><label for="Mediclaim_Covered">Mediclaim Covered</label><div class="form-group"><select id="ddlMediclaim" style="width:100%"  class="form-control"><option value="Yes">Yes</option><option value="No">No</option></select></div>' +
+                    '</div><div class="form-group"><label for="Birth Place">Birth Place</label>' +
+                    '<input type="text" placeholder="Birth Place" id="txtBirth_Place" class="form-control"></div><div class="form-group"><label for="Contact Number">Contact Number</label>' +
+                    '<input type="text" placeholder="Contact Number" id="txtContact_Number" class="form-control"></div></div></div></form>';
+                $(".modal-title").html('FamilyDetails');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#ddlgender').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#ddlRelationship').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#ddlMediclaim').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#txtBirthDate').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+
+            }
+            else if (data == 'Medical') {
+                btnhtml += '<button type="button" class="btn btn-primary">Save changes</button>';
+                html = '<form role="form"><div class="form-group"><label for="Disease Name">Disease Name</label>' +
+                    '<select id="ddlDiseaseName" style="width:100%"  class="form-control"><option value="Diabetes">Diabetes</option><option value="Flu">Flu</option><option value="Other">Other</option></select></div><div class="form-group"><label for="Disease From">Disease From</label>' +
+                    '<select id="ddlDisease" style="width:100%"  class="form-control"><option value="2009">2009</option><option value="2010">2010</option><option value="2011">2011</option><option value="2012">2012</option><option value="2013">2013</option><option value="2014">2014</option></select></div><div class="form-group"><label for="Currently Active">Currently Active</label>' +
+                    '<div class="form-group"><div class="row"><div class="col-lg-6"><label class="rdiobox"><input type="radio" name="radioWrite"><span>Yes</span></label></div><div class="col-lg-6 mg-t-20 mg-lg-t-0"><label class="rdiobox"><input checked type="radio" name="radioWrite"><span>No</span></label></div></div></div></div><div class="form-group"><label for="Need Special Attention">Need Special Attention</label>' +
+                    '<div class="form-group"><div class="row"><div class="col-lg-6"><label class="rdiobox"><input type="radio" name="radioWrite"><span>Yes</span></label></div><div class="col-lg-6 mg-t-20 mg-lg-t-0"><label class="rdiobox"><input checked type="radio" name="radiWrite"><span>No</span></label></div></div></div></div><div class="form-group"><label for="Notes">Notes</label>' +
+                    '<textarea type="text" placeholder="Notes" id="txtMedicalNotes" class="form-control" row="2"></textarea></div></form>';
+                $(".modal-title").html('Medical');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#ddlDiseaseName').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#ddlDisease').select2({ dropdownParent: $('#ModalPopUp') });
+            }
+            else if (data == 'Insurance') {
+                btnhtml += '<button type="button" class="btn btn-primary">Save changes</button>';
+                html = '<form role="form"><div class="col-lg-12" style="margin-right:60px;"><div class="form-group"><label for="Insurance_Company">Insurance Company</label>' +
+                    '<input type="text" placeholder="Insurance Company" id="txtInsurance_Company" class="form-control"></div><div class="form-group"><label for="Policy Number">Policy Number</label>' +
+                    '<input type="text" placeholder="Policy Number" id="txtPolicy_Number" class="form-control"></div><div class="form-group"><label for="Insurance Amount">Insurance Amount</label>' +
+                    '<input type="text" placeholder="Insurance Amount" id="txtInsurance_Amount" class="form-control"></div><div class="form-group"><label for="Balance">Balance</label>' +
+                    '<input type="text" placeholder="Balance" id="txtBalance" class="form-control"></div><div class="form-group">' +
+                    '<label for="Insured_Until">Insured Until</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="txtInsured_Until" type="text" value="2018-12-20"></div></div><div class="form-group"><label for="Notes">Notes</label>' +
+                    '<textarea type="text" placeholder="Notes" id="txtMedicalNotes" class="form-control" row="2"></textarea></div></div></form>';
+                $(".modal-title").html('Insurance');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#txtInsured_Until').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+            }
+            else if (data == 'Languages') {
+                btnhtml += '<button type="button" class="btn btn-primary">Save changes</button>';
+                html = '<form role="form"><div class="form-group"><label for="Language">Language</label>' +
+                    '<input type="text" placeholder="Language" id="txtLanguage" class="form-control"></div><div class="form-group"><label for="Can Speak">Can Speak</label><div class="form-group"><div class="row"><div class="col-lg-6"><label class="rdiobox"><input type="radio" name="rdio"><span>Yes</span></label></div><div class="col-lg-6 mg-t-20 mg-lg-t-0"><label class="rdiobox"><input checked type="radio" name="rdio"><span>No</span></label></div></div>' +
+                    '</div><div class="form-group"><label for="Can Read">Can Read</label><div class="form-group"><div class="row"><div class="col-lg-6"><label class="rdiobox"><input type="radio" name="radio"><span>Yes</span></label></div><div class="col-lg-6 mg-t-20 mg-lg-t-0"><label class="rdiobox"><input checked type="radio" name="radio"><span>No</span></label></div></div></div>' +
+                    '</div><div class="form-group"><label for="Can Write">Can Write</label><div class="form-group"><div class="row"><div class="col-lg-6"><label class="rdiobox"><input type="radio" name="radioWrite"><span>Yes</span></label></div><div class="col-lg-6 mg-t-20 mg-lg-t-0"><label class="rdiobox"><input checked type="radio" name="radioWrite"><span>No</span></label></div></div></div>' +
+                    '</div></form>';
+                $(".modal-title").html('Languages');
+                $(".modal-body").html(html);
+                $('#ddlCanSpeak').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#ddlCanRead').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#ddlCanWrite').select2({ dropdownParent: $('#ModalPopUp') });
+                $(".modal-footer").html(btnhtml);
+            }
+            else if (data == 'Social') {
+                btnhtml += '<button type="button" class="btn btn-primary">Save changes</button>';
+                html = '<form role="form"><div class="form-group"><label for="Facebook">Facebook</label>' +
+                    '<input type="text" placeholder="Facebook" id="txtFacebook" class="form-control"></div><div class="form-group"><label for="Google">Google</label>' +
+                    '<input type="text" placeholder="Google" id="txtGoogle" class="form-control"></div><div class="form-group"><label for="LinkedIn">LinkedIn</label>' +
+                    '<input type="text" placeholder="LinkedIn" id="txtLinkedIn" class="form-control"></div><div class="form-group"><label for="Twitter">Twitter</label>' +
+                    '<input type="text" placeholder="Twitter" id="txtTwitter" class="form-control"></div><div class="form-group"><label for="Instagram">Instagram</label>' +
+                    '<input type="text" placeholder="Instagram" id="txtInstagram" class="form-control"></div><div class="form-group"><label for="Tiktok">Tiktok</label>' +
+                    '<input type="text" placeholder="Tiktok" id="txtTiktok" class="form-control"></div></form>';
+                $(".modal-title").html('Social');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+            }
+            else if (data == 'Government') {
+
+                btnhtml += '<button type="button" class="btn btn-primary">Save changes</button>';
+                html = '<form role="form"><div class="form-group"><label for="PAN Number">PAN Number</label>' +
+                    '<input type="text" placeholder="PAN Number" id="txtPAN_Number" class="form-control"></div><div class="form-group"><label for="Passport Number">Passport Number</label>' +
+                    '<input type="text" placeholder="Passport Number" id="txtPassport_Number" class="form-control"></div><div class="form-group"><label for="Driving License Number">Driving License Number</label>' +
+                    '<input type="text" placeholder="Driving License Number" id="txtDriving_License_Number" class="form-control"></div><div class="form-group"><label for="Tax Identification Number">Tax Identification Number</label>' +
+                    '<input type="text" placeholder="Tax Identification Number" id="txtTax_Identification_Number" class="form-control"></div><div class="form-group"><label for="Tiktok">Aadhaar Card Number</label>' +
+                    '<input type="text" placeholder="Aadhaar Card Number" id="txtAadhaar_Card_Number" class="form-control"></div><div class="form-group"><label for="Document">Upload Document</label><div class="col-sm-12 col-md-12 col-lg-12">' +
+                    '<input class="custom-file-input form-control" id="customFile" type="file"><label class="custom-file-label" for="customFile">Choose file</label></div></div></form>';
+                $(".modal-title").html('Government');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+            }
+
+            $("#ModalPopUp").modal("show");
+
+        }
+    </script>
+
+    <script>
+
+        function FillModalEditHTML(data, id) {
+            var html = "";
+            var btnhtml = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
+
+            if (data == 'Education') {
+                btnhtml += '<button type="button" class="btn btn-primary">Save changes</button>';
+                html = '<form role="form"><div class="col-lg-12" style="margin-right:60px;"><div class="form-group"><label for="Institute">Institute/University</label><input type="text" value="RTMNU" id="Institute" class="form-control">' +
+                    '</div><div class="form-group"><label for="Degree">Degree</label><input type="text" value="MCA" id="Degree" class="form-control"></div><div class="form-group">' +
+                    '<label for="Percentage">Percentage/CGPA</label><input type="text" value="A+" id="Percentage" class="form-control"></div><div class="form-group">' +
+                    '<label for="Education_From_Date">From Date</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="txtEducatinalfromdate" type="text" value="2018-12-20 21:05"></div></div><div class="form-group">' +
+                    '<label for="Education_To_Date">To Date</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="txtEducatinalTodate" type="text" value="2018-12-20 21:05"></div></div>' +
+                    '<div class="form-group"><label for="Subject">Subject</label><input type="text" value="Computer Science" id="txtSubject" class="form-control"></div></div></form>';
+                $(".modal-title").html('Educational Details');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#txtEducatinalfromdate').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+                $('#txtEducatinalTodate').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+            }
+            else if (data == 'WorkExperience') {
+                btnhtml += '<button type="button" class="btn btn-primary">Save changes</button>';
+                html = '<form role="form"><div class="row"><div class="col-lg-6"><div class="form-group"><label for="Organazation_name">Organisation Name</label><input type="text" value="CAM" id="Organazation_name" class="form-control">' +
+                    '</div><div class="form-group"><label for="Designation">Designation</label><input type="text" value="MCA" id="Designation" class="form-control"></div><div class="form-group">' +
+                    '<label for="From_Date">From Date</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="txtfromdate" type="text" value="2018-12-20"></div></div><div class="form-group">' +
+                    '<label for="From_Date">To Date</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="To_Date" type="text" value="2018-12-20"></div></div>' +
+                    '</div>' +
+                    '<div class="col-lg-6"><div class="form-group"><label for="Annual_Salary">Annual Salary</label><input type="text" placeholder="Annual Salary" id="txtAnnual_Salary" class="form-control"></div>' +
+                    '<div class="form-group"><label for="Contact_no">Contact No</label><input type="text" placeholder="Contact No" id="txtContact" class="form-control">' +
+                    '</div>' +
+                    '<div class="form-group"><label for="To">Notes</label><textarea type="text" placeholder="Notes" id="txtWorkNotes" class="form-control" row="2"></textarea>' +
+                    '</div>' +
+                    '</div></div></form>';
+                $(".modal-title").html('Work Experience');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#ddlWorktime').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#txtfromdate').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+                $('#To_Date').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+            }
+            else if (data == 'Award') {
+                btnhtml += '<button type="button" class="btn btn-primary">Save changes</button>';
+                html = '<form role="form"><div class="col-lg-12" style="margin-right:60px;"><div class="form-group"><label for="Award">Award</label><input type="text" value="Award" id="Award" class="form-control">' +
+                    '</div><div class="form-group"><label for="Awarded_By">Awarded By</label><input type="text" value="varsha" id="txtAwarded_By" class="form-control"></div><div class="form-group">' +
+                    '<label for="Awarded_on">Awarded On</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="txtAwarded_on" type="text" value="2018-12-20 21:05"></div></div><div class="form-group"><label for="Description">Description</label>' +
+                    '<textarea type="text" placeholder="Description" id="Description" class="form-control" row="2"></textarea></div></div></form>';
+                $(".modal-title").html('Award Details');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#txtAwarded_on').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+            }
+            else if (data == 'Publication') {
+                btnhtml += '<button type="button" class="btn btn-primary">Save changes</button>';
+                html = '<form role="form"><div class="col-lg-12" style="margin-right:60px;"><div class="form-group">' +
+                    '<label for="Publication_on">Publication On</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="txt_Publication_date" type="text" value="2018-12-20 21:05"></div></div><div class="form-group"><label for="Publication_on">Publication</label><input type="text" value="varsha" id="txtPublication_on" class="form-control"></div><div class="form-group"><label for="Description">Description</label>' +
+                    '<textarea type="text" placeholder="Description" id="Description" class="form-control" row="2"></textarea></div><div class="form-group">' +
+                    '<label for="url">URL</label><input type="text" id="url" class="form-control"></div></div></form>';
+                $(".modal-title").html('Publication Details');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#txt_Publication_date').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+            }
+            else if (data == 'Reference') {
+                btnhtml += '<button type="button" class="btn btn-primary">Save changes</button>';
+                html = '<form role="form"><div class="row"><div class="col-lg-6"><div class="form-group"><label for="Person">Person</label><input type="text" value="varsha" id="txtPerson" class="form-control"></div><div class="form-group">' +
+                    '<label for="Company">Company</label><input type="text" placeholder="Company" id="txtCompany" class="form-control"></div><div class="form-group">' +
+                    '<label for="Phone">Phone</label><input type="text" id="Phone" class="form-control"></div><div class="form-group">' +
+                    '<label for="Notes">Notes</label><textarea type="text" id="txtNotes" class="form-control" row="2"></textarea></div></div><div class="col-lg-6"><div class="form-group">' +
+                    '<label for="Designation">Designation</label><input type="text" id="Designation" class="form-control"></div><div class="form-group">' +
+                    '<label for="Email">Email</label><input type="text" id="Email" class="form-control"></div><div class="form-group">' +
+                    '<label for="knowPerson">How Do You Know Person</label><input type="text" id="txtknowPerson" class="form-control"></div><div class="form-group">' +
+                    '<label for="Address">Address</label><textarea type="text" id="txtAddress" class="form-control" row="2"></textarea></div></div></div></form>';
+                $(".modal-title").html('Reference Details');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+            }
+            else if (data == 'Disciplinary') {
+                btnhtml += '<button type="button" class="btn btn-primary">Save changes</button>';
+                html = '<form role="form"><div class="col-lg-12" style="margin-right:60px;"><div class="form-group"><label for="Description">Description</label>' +
+                    '<input type="text" placeholder="Description" id="Description" class="form-control"></div><div class="form-group">' +
+                    '<label for="Action_on">Action On</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="txt_Displinary_date" type="text" value="2018-12-20 21:05"></div></div></div></form>';
+                $(".modal-title").html('Disciplinary Details');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#txt_Displinary_date').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+            }
+            else if (data == 'Visa') {
+                btnhtml += '<button type="button" class="btn btn-primary">Save changes</button>';
+                html = '<form role="form"><div class="col-lg-12" style="margin-right:60px;"><div class="form-group"><label for="Country">Country</label><div class="form-group"><select style="width:100%"  id="ddlVisaCountry" class="form-control"><option value="Firefox">US</option><option value="Chrome">India</option><option value="Chrome">Canada</option></select></div>' +
+                    '</div><div class="form-group"><label for="Visa_type">Visa Type</label>' +
+                    '<input type="text" placeholder="Visa Type" id="txtVisaType" class="form-control"></div><div class="form-group">' +
+                    '<label for="Valid_Until">Valid Until</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="txt_Visa_date" type="text" value="2018-12-20 21:05"></div></div></div></form>';
+                $(".modal-title").html('Visa Details');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#ddlVisaCountry').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#txt_Visa_date').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+            }
+            else if (data == 'Bank') {
+                btnhtml += '<button type="button" class="btn btn-primary">Save changes</button>';
+                html = '<form role="form"><div class="row"><div class="col-lg-6"><div class="form-group"><label for="Bank_name">Bank Name</label><input type="text" placeholder="Bank_name" id="Bank name" class="form-control"></div>' +
+                    '<div class="form-group"><label for="Country">Country</label><div class="form-group"><select id="ddlbankCountryEdit" style="width:100%" class="form-control"><option value="Firefox">US</option><option value="Chrome">India</option><option value="Chrome">Canada</option></select></div> </div><div class="form-group"><label for="exampleInputPassword1">City</label><select style="width:100%" id="ddlbankcity" class="form-control">' +
+                    '<option label="Choose one"></option><option value="Firefox">Firefox</option><option value="Chrome">Chrome</option><option value="Safari">Safari</option><option value="Opera">Opera</option><option value="Internet Explorer">Internet Explorer</option></select></div><div class="form-group"><label for="Account_type">Account Type</label><div class="form-group"><select id="ddlAccountType" style="width:100%" class="form-control"><option value="Firefox">Current</option><option value="Chrome">Saving</option><option value="Chrome">Joint</option></select></div> </div>' +
+                    '</div>' +
+                    '<div class="col-lg-6"><div class="form-group"><label for="Branch">Branch</label><input type="text" placeholder="Branch" id="txtBranch" class="form-control"></div><div class="form-group"><label for="State">State</label><div class="form-group"><select  id="ddlbankStateEdit" style="width:100%" class="form-control"><option value="Firefox">Maharashtra</option><option value="Chrome">Keral</option><option value="Chrome">Delhi</option></select></div></div>' +
+                    '<div class="form-group"><label for="Account_Number">Account Number</label><input type="text" id="txtAccount_Number" class="form-control"></div>' +
+                    '<div class="form-group"><label for="Routing_Number">Routing Number</label><input type="text" id="txtRouting_Number" class="form-control"></div>' +
+                    '</div>' +
+                    '</form>';
+
+                $(".modal-title").html('Banking Details');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#ddlbankcity').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#ddlbankStateEdit').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#ddlbankCountryEdit').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#ddlAccountType').select2({ dropdownParent: $('#ModalPopUp') });
+            }
+
+            else if (data == 'Address') {
+                btnhtml += '<button type="button" class="btn btn-primary">Save changes</button>';
+                html = '<form role="form"><div class="row"><div class="col-lg-6"><div class="form-group"><label for="Type">Type</label><div class="form-group"><select  id="ddlType" style="width:100%" class="form-control"><option value="Home">Home</option><option value="Home">Village</option><option value="Office">Office</option></select></div>' +
+                    '</div><div class="form-group"><label for="HomeState">State</label><div class="form-group"><select id="ddlHomeState" style="width:100%" class="form-control"><option value="Firefox">US</option><option value="Chrome">India</option><option value="Chrome">Canada</option></select></div>' +
+                    '</div><div class="form-group"><label for="Landmark">Landmark</label>' +
+                    '<input type="text" placeholder="Landmark" id="txtHomeLandmark" class="form-control"></div><div class="form-group">' +
+                    '<label for="HomeResidingSince">Residing Since</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="txtHomeResidingSince" type="text" value="2018-12-20"></div></div></div>' +
+                    '<div class="col-lg-6"><div class="form-group"><label for="Address">Address</label>' +
+                    '<textarea type="text" placeholder="Address" id="txtAddress" class="form-control" row="2"></textarea></div><div class="form-group"><label for="HomeCountry">Country</label><div class="form-group"><select  id="ddlHomeCountry" style="width:100%" class="form-control"><option value="Firefox">US</option><option value="Chrome">India</option><option value="Chrome">Canada</option></select></div>' +
+                    '</div><div class="form-group"><label for="HomeCity">City</label><div class="form-group"><select id="ddlHomeCity" style="width:100%" class="form-control"><option value="Firefox">US</option><option value="Chrome">India</option><option value="Chrome">Canada</option></select></div>' +
+                    '</div><div class="form-group"><label for="HomePostalcode">Postal Code</label>' +
+                    '<input type="text" placeholder="Postal Code" id="txtPostalcode" class="form-control"></div></div></div></form>';
+                $(".modal-title").html('HomeAddress');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#ddlType').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#ddlHomeCountry').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#ddlHomeState').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#ddlHomeCity').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#txtHomeResidingSince').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+            }
+
+            else if (data == 'Emergency') {
+                btnhtml += '<button type="button" class="btn btn-primary">Save changes</button>';
+                html = '<form role="form"><div class="form-group"><label for="Person Name">Person Name</label>' +
+                    '<input type="text" placeholder="Person Name" id="txtEMRPersonname" class="form-control"></div><div class="form-group"><label for="Relationship">Relationship</label>' +
+                    '<div class="form-group"><select id="ddlRelationship" style="width:100%"  class="form-control"><option value="Father">Father</option><option value="Mother">Mother</option><option value="Brother">Brother</option><option value="Brother">Brother</option><option value="Sister">Sister</option><option value="Other">Other</option></select></div></div><div class="form-group"><label for="Primary_Phone">Primary Phone</label>' +
+                    '<input type="text" placeholder="Primary Phone" id="txtPrimary_Phone" class="form-control"></div><div class="form-group"><label for="Alternate Phone Number">Alternate Phone Number</label>' +
+                    '<input type="text" placeholder="Alternate Phone Number" id="txtAlternate_Phone" class="form-control"></div><div class="form-group"><label for="Address in Detail">Address in Detail</label>' +
+                    '<textarea type="text" placeholder="Address in Detail" id="txtAddress_in_Detail" class="form-control" row="2"></textarea></div></form>';
+                $(".modal-title").html('Emergency');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#ddlRelationship').select2({ dropdownParent: $('#ModalPopUp') });
+            }
+            else if (data == 'FamilyDetails') {
+                btnhtml += '<button type="button" class="btn btn-primary">Save changes</button>';
+                html = '<form role="form"><div class="row"><div class="col-lg-6"><div class="form-group"><label for="Person Name">Person Name</label>' +
+                    '<input type="text" placeholder="Person Name" id="txtFamilyPersonname" class="form-control"></div><div class="form-group"><label for="Relationship">Relationship</label>' +
+                    '<div class="form-group"><select id="ddlRelationship" style="width:100%"  class="form-control"><option value="Father">Father</option><option value="Mother">Mother</option><option value="Brother">Brother</option><option value="Brother">Brother</option><option value="Sister">Sister</option><option value="Other">Other</option></select></div></div><div class="form-group">' +
+                    '<label for="BirthDate">Date Of Birth</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="txtBirthDate" type="text" value="2018-12-20"></div></div><div class="form-group"><label for="Age">Age</label>' +
+                    '<input type="text" placeholder="Age" id="txtAge" class="form-control"></div></div><div class="col-lg-6"><div class="form-group"><label for="Gender">Gender</label><div class="form-group"><select id="ddlgender" style="width:100%" class="form-control"><option value="Male">Male</option><option value="Female">Female</option></select></div>' +
+                    '</div><div class="form-group"><label for="Mediclaim_Covered">Mediclaim Covered</label><div class="form-group"><select id="ddlMediclaim" style="width:100%"  class="form-control"><option value="Yes">Yes</option><option value="No">No</option></select></div>' +
+                    '</div><div class="form-group"><label for="Birth Place">Birth Place</label>' +
+                    '<input type="text" placeholder="Birth Place" id="txtBirth_Place" class="form-control"></div><div class="form-group"><label for="Contact Number">Contact Number</label>' +
+                    '<input type="text" placeholder="Contact Number" id="txtContact_Number" class="form-control"></div></div></div></form>';
+                $(".modal-title").html('FamilyDetails');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#ddlgender').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#ddlRelationship').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#ddlMediclaim').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#txtBirthDate').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+
+            }
+            else if (data == 'Medical') {
+                btnhtml += '<button type="button" class="btn btn-primary">Save changes</button>';
+                html = '<form role="form"><div class="form-group"><label for="Disease Name">Disease Name</label>' +
+                    '<select id="ddlDiseaseName" style="width:100%"  class="form-control"><option value="Diabetes">Diabetes</option><option value="Flu">Flu</option><option value="Other">Other</option></select></div><div class="form-group"><label for="Disease From">Disease From</label>' +
+                    '<select id="ddlDisease" style="width:100%"  class="form-control"><option value="2009">2009</option><option value="2010">2010</option><option value="2011">2011</option><option value="2012">2012</option><option value="2013">2013</option><option value="2014">2014</option></select></div><div class="form-group"><label for="Currently Active">Currently Active</label>' +
+                    '<div class="form-group"><div class="row"><div class="col-lg-6"><label class="rdiobox"><input type="radio" name="radioWrite"><span>Yes</span></label></div><div class="col-lg-6 mg-t-20 mg-lg-t-0"><label class="rdiobox"><input checked type="radio" name="radioWrite"><span>No</span></label></div></div></div></div><div class="form-group"><label for="Need Special Attention">Need Special Attention</label>' +
+                    '<div class="form-group"><div class="row"><div class="col-lg-6"><label class="rdiobox"><input type="radio" name="radioWrite"><span>Yes</span></label></div><div class="col-lg-6 mg-t-20 mg-lg-t-0"><label class="rdiobox"><input checked type="radio" name="radiWrite"><span>No</span></label></div></div></div></div><div class="form-group"><label for="Notes">Notes</label>' +
+                    '<textarea type="text" placeholder="Notes" id="txtMedicalNotes" class="form-control" row="2"></textarea></div></form>';
+                $(".modal-title").html('Medical');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#ddlDiseaseName').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#ddlDisease').select2({ dropdownParent: $('#ModalPopUp') });
+            }
+            else if (data == 'Insurance') {
+                btnhtml += '<button type="button" class="btn btn-primary">Save changes</button>';
+                html = '<form role="form"><div class="col-lg-12" style="margin-right:60px;"><div class="form-group"><label for="Insurance_Company">Insurance Company</label>' +
+                    '<input type="text" placeholder="Insurance Company" id="txtInsurance_Company" class="form-control"></div><div class="form-group"><label for="Policy Number">Policy Number</label>' +
+                    '<input type="text" placeholder="Policy Number" id="txtPolicy_Number" class="form-control"></div><div class="form-group"><label for="Insurance Amount">Insurance Amount</label>' +
+                    '<input type="text" placeholder="Insurance Amount" id="txtInsurance_Amount" class="form-control"></div><div class="form-group"><label for="Balance">Balance</label>' +
+                    '<input type="text" placeholder="Balance" id="txtBalance" class="form-control"></div><div class="form-group">' +
+                    '<label for="Insured_Until">Insured Until</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="txtInsured_Until" type="text" value="2018-12-20 21:05"></div></div><div class="form-group"><label for="Notes">Notes</label>' +
+                    '<textarea type="text" placeholder="Notes" id="txtMedicalNotes" class="form-control" row="2"></textarea></div></div></form>';
+                $(".modal-title").html('Insurance');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#txtInsured_Until').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+            }
+            else if (data == 'Languages') {
+                btnhtml += '<button type="button" class="btn btn-primary">Save changes</button>';
+                html = '<form role="form"><div class="form-group"><label for="Language">Language</label>' +
+                    '<input type="text" placeholder="Language" id="txtLanguage" class="form-control"></div><div class="form-group"><label for="Can Speak">Can Speak</label><div class="form-group"><div class="row"><div class="col-lg-6"><label class="rdiobox"><input type="radio" name="rdio"><span>Yes</span></label></div><div class="col-lg-6 mg-t-20 mg-lg-t-0"><label class="rdiobox"><input checked type="radio" name="rdio"><span>No</span></label></div></div>' +
+                    '</div><div class="form-group"><label for="Can Read">Can Read</label><div class="form-group"><div class="row"><div class="col-lg-6"><label class="rdiobox"><input type="radio" name="radio"><span>Yes</span></label></div><div class="col-lg-6 mg-t-20 mg-lg-t-0"><label class="rdiobox"><input checked type="radio" name="radio"><span>No</span></label></div></div></div>' +
+                    '</div><div class="form-group"><label for="Can Write">Can Write</label><div class="form-group"><div class="row"><div class="col-lg-6"><label class="rdiobox"><input type="radio" name="radioWrite"><span>Yes</span></label></div><div class="col-lg-6 mg-t-20 mg-lg-t-0"><label class="rdiobox"><input checked type="radio" name="radioWrite"><span>No</span></label></div></div></div>' +
+                    '</div></form>';
+                $(".modal-title").html('Languages');
+                $(".modal-body").html(html);
+                $('#ddlCanSpeak').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#ddlCanRead').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#ddlCanWrite').select2({ dropdownParent: $('#ModalPopUp') });
+                $(".modal-footer").html(btnhtml);
+            }
+            else if (data == 'Social') {
+                btnhtml += '<button type="button" class="btn btn-primary">Save changes</button>';
+                html = '<form role="form"><div class="form-group"><label for="Facebook">Facebook</label>' +
+                    '<input type="text" placeholder="Facebook" id="txtFacebook" class="form-control"></div><div class="form-group"><label for="Google">Google</label>' +
+                    '<input type="text" placeholder="Google" id="txtGoogle" class="form-control"></div><div class="form-group"><label for="LinkedIn">LinkedIn</label>' +
+                    '<input type="text" placeholder="LinkedIn" id="txtLinkedIn" class="form-control"></div><div class="form-group"><label for="Twitter">Twitter</label>' +
+                    '<input type="text" placeholder="Twitter" id="txtTwitter" class="form-control"></div><div class="form-group"><label for="Instagram">Instagram</label>' +
+                    '<input type="text" placeholder="Instagram" id="txtInstagram" class="form-control"></div><div class="form-group"><label for="Tiktok">Tiktok</label>' +
+                    '<input type="text" placeholder="Tiktok" id="txtTiktok" class="form-control"></div></form>';
+                $(".modal-title").html('Social');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+            }
+            else if (data == 'Government') {
+
+                btnhtml += '<button type="button" class="btn btn-primary">Save changes</button>';
+                html = '<form role="form"><div class="form-group"><label for="PAN Number">PAN Number</label>' +
+                    '<input type="text" placeholder="PAN Number" id="txtPAN_Number" class="form-control"></div><div class="form-group"><label for="Passport Number">Passport Number</label>' +
+                    '<input type="text" placeholder="Passport Number" id="txtPassport_Number" class="form-control"></div><div class="form-group"><label for="Driving License Number">Driving License Number</label>' +
+                    '<input type="text" placeholder="Driving License Number" id="txtDriving_License_Number" class="form-control"></div><div class="form-group"><label for="Tax Identification Number">Tax Identification Number</label>' +
+                    '<input type="text" placeholder="Tax Identification Number" id="txtTax_Identification_Number" class="form-control"></div><div class="form-group"><label for="Tiktok">Aadhaar Card Number</label>' +
+                    '<input type="text" placeholder="Aadhaar Card Number" id="txtAadhaar_Card_Number" class="form-control"></div><div class="form-group"><label for="Document">Upload Document</label><div class="col-sm-12 col-md-12 col-lg-12">' +
+                    '<input class="custom-file-input form-control" id="customFile" type="file"><label class="custom-file-label" for="customFile">Choose file</label></div></div></form>';
+                $(".modal-title").html('Government');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+            }
+
+            $("#ModalPopUp").modal('show');
+
+        }
+    </script>
+
+    <script>
+
+        function FillModalViewHTML(data) {
+            var html = "";
+            var btnhtml = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
+
+            if (data == 'Education') {
+                html = '<form role="form"><div class="form-group"><label for="Institute">Institute/University</label><input type="text" value="RTMNU" id="Institute" class="form-control">' +
+                    '</div><div class="form-group"><label for="Degree">Degree</label><input type="text" value="MCA" id="Degree" class="form-control"></div><div class="form-group">' +
+                    '<label for="Percentage">Percentage/CGPA</label><input type="text" value="A+" id="Percentage" class="form-control"></div><div class="form-group">' +
+                    '<label for="Education_From_Date">From Date</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="txtEducatinalfromdate" type="text" value="2018-12-20 21:05"></div></div><div class="form-group">' +
+                    '<label for="Education_To_Date">To Date</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="txtEducatinalTodate" type="text" value="2018-12-20 21:05"></div></div>' +
+                    '<div class="form-group"><label for="Subject">Subject</label><input type="text" value="Computer Science" id="txtSubject" class="form-control"></div></form>';
+                $(".modal-title").html('Educational Details');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#txtEducatinalfromdate').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+                $('#txtEducatinalTodate').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+            }
+            else if (data == 'WorkExperience') {
+                html = '<form role="form"><div class="row"><div class="col-lg-9"><div class="form-group"><label for="Organazation_name">Organisation 		Name</label><p><b>AscenWork</b></p>' +
+                    '</div><div class="form-group"><label for="Designation">Designation</label><p><b>Owner</b></p></div><div class="form-group">' +
+                    '<label for="From_Date">From Date</label><p><b>2018-12-20</b></p></div><div class="form-group">' +
+                    '<label for="From_Date">To Date</label><p><b>2018-12-20</b></p></div>' +
+                    '</div>' +
+                    '<div class="col-lg-9"><div class="form-group"><label for="Annual_Salary">Annual Salary</label><p><b>Above</b></p></div>' +
+                    '<div class="form-group"><label for="Contact_no">Contact No</label><p><b>123457890</b></p>' +
+                    '</div>' +
+                    '<div class="form-group"><label for="To">Notes</label><p><b>Thank You!</b></p>' +
+                    '</div>' +
+                    '</div></div></form>';
+                $(".modal-title").html('Work Experience');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#ddlWorktime').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#txtfromdate').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+                $('#To_Date').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+            }
+            else if (data == 'Award') {
+                html = '<form role="form"><div class="form-group"><label for="Award">Award</label><input type="text" value="Award" id="Award" class="form-control">' +
+                    '</div><div class="form-group"><label for="Awarded_By">Awarded By</label><input type="text" value="varsha" id="txtAwarded_By" class="form-control"></div><div class="form-group">' +
+                    '<label for="Awarded_on">Awarded On</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="txtAwarded_on" type="text" value="2018-12-20 21:05"></div></div><div class="form-group"><label for="Description">Description</label>' +
+                    '<textarea type="text" placeholder="Description" id="Description" class="form-control" row="2"></textarea></div></form>';
+                $(".modal-title").html('Award Details');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#txtAwarded_on').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+            }
+            else if (data == 'Publication') {
+                html = '<form role="form"><div class="form-group">' +
+                    '<label for="Publication_on">Publication On</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="txt_Publication_date" type="text" value="2018-12-20 21:05"></div></div><div class="form-group"><label for="Publication_on">Publication</label><input type="text" value="varsha" id="txtPublication_on" class="form-control"></div><div class="form-group"><label for="Description">Description</label>' +
+                    '<textarea type="text" placeholder="Description" id="Description" class="form-control" row="2"></textarea></div><div class="form-group">' +
+                    '<label for="url">URL</label><input type="text" id="url" class="form-control"></div></form>';
+                $(".modal-title").html('Publication Details');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#txt_Publication_date').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+            }
+            else if (data == 'Reference') {
+                html = '<form role="form"><div class="row"><div class="col-lg-9"><div class="form-group"><label for="Person">Person</label><p><b>Varsha</b></p></div><div class="form-group">' +
+                    '<label for="Company">Company</label><p><b>Ascenwork</b></p></div><div class="form-group">' +
+                    '<label for="Phone">Phone</label><p><b>1234567890</b></p></div></div><div class="col-lg-9"><div class="form-group">' +
+                    '<label for="Designation">Designation</label><p><b>Developer</b></p></div><div class="form-group">' +
+                    '<label for="Email">Email</label><p><b>Varsha@ascenwork.com</b></p></div><div class="form-group">' +
+                    '<label for="knowPerson">How Do You Know Person</label><p><b>Friend</b></p></div><div class="form-group">' +
+                    '<label for="Address">Address</label><p><b>Vikroli</b></p></div></div></div><div class="form-group">' +
+                    '<label for="Notes">Notes</label><p><b>Thank You!</b></p></div></form>';
+                $(".modal-title").html('Reference Details');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+            }
+            else if (data == 'Disciplinary') {
+                html = '<form role="form"><div class="form-group"><label for="Description">Description</label>' +
+                    '<input type="text" placeholder="Description" id="Description" class="form-control"></div><div class="form-group">' +
+                    '<label for="Action_on">Action On</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="txt_Displinary_date" type="text" value="2018-12-20 21:05"></div></div></form>';
+                $(".modal-title").html('Disciplinary Details');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#txt_Displinary_date').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+            }
+            else if (data == 'Visa') {
+                html = '<form role="form"><div class="form-group"><label for="Country">Country</label><div class="form-group"><select style="width:100%"  id="ddlVisaCountry" class="form-control"><option value="Firefox">US</option><option value="Chrome">India</option><option value="Chrome">Canada</option></select></div>' +
+                    '</div><div class="form-group"><label for="Visa_type">Visa Type</label>' +
+                    '<input type="text" placeholder="Visa Type" id="txtVisaType" class="form-control"></div><div class="form-group">' +
+                    '<label for="Valid_Until">Valid Until</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="txt_Visa_date" type="text" value="2018-12-20 21:05"></div></div></form>';
+                $(".modal-title").html('Visa Details');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#ddlVisaCountry').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#txt_Visa_date').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+            }
+            else if (data == 'Bank') {
+                html = '<form role="form"><div class="row"><div class="col-lg-9"><div class="form-group"><label for="Bank_name">Bank Name</label><p><b>SBI</b></p></div>' +
+                    '<div class="form-group"><label for="Country">Country</label><p><b>India</b></p></div><div class="form-group"><label for="exampleInputPassword1">City</label><p><b>Mumbai</b></p></div><div class="form-group"><label for="Account_type">Account Type</label><div class="form-group"><p><b>Saving</b></p></div> </div>' +
+                    '</div>' +
+                    '<div class="col-lg-9"><div class="form-group"><label for="Branch">Branch</label><p><b>Vikroli</b></p></div><div class="form-group"><label for="State">State</label><p><b>Maharashtra</b></p></div>' +
+                    '<div class="form-group"><label for="Account_Number">Account Number</label><p><b>1234509876123</b></p></div>' +
+                    '<div class="form-group"><label for="Routing_Number">Routing Number</label><p><b>0987654321</b></p></div>' +
+                    '</div>' +
+                    '</form>';
+
+                $(".modal-title").html('Banking Details');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+            }
+
+            else if (data == 'Address') {
+                html = '<form role="form"><div class="row"><div class="col-lg-9"><div class="form-group"><label for="Type">Type</label>' +
+                    '<p><b>Home</b></p></div><div class="form-group"><label for="Address">Address</label>' +
+                    '<p><b>Khar</b></p></div><div class="form-group"><label for="HomeCountry">Country</label><p><b>India</b></p>' +
+                    '</div><div class="form-group"><label for="HomeState">State</label><p><b>Maharashtra</b></p></div>' +
+                    '</div>' +
+                    '<div class="col-lg-9"><div class="form-group"><label for="HomeCity">City</label><p><b>Mumbai</b></p></div>' +
+                    '<div class="form-group">' +
+                    '<label for="HomeResidingSince">Residing Since</label><p><b>20-12-2018</b></p></div><div class="form-group"><label for="Landmark">Landmark</label>' +
+                    '<p><b>Mandir</b></p></div><div class="form-group"><label for="HomePostalcode">Postal Code</label>' +
+                    '<p><b>400055</b></p></div></div></div></form>';
+                $(".modal-title").html('HomeAddress');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#ddlHomeCountry').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#ddlHomeState').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#ddlHomeCity').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#txtHomeResidingSince').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+            }
+
+            else if (data == 'Emergency') {
+                html = '<form role="form"><div class="form-group"><label for="Person Name">Person Name</label>' +
+                    '<input type="text" placeholder="Person Name" id="txtEMRPersonname" class="form-control"></div><div class="form-group"><label for="Relationship">Relationship</label>' +
+                    '<input type="text" placeholder="Relationship" id="txtRelationship" class="form-control"></div><div class="form-group"><label for="Primary_Phone">Primary Phone</label>' +
+                    '<input type="text" placeholder="Primary Phone" id="txtPrimary_Phone" class="form-control"></div><div class="form-group"><label for="Alternate Phone Number">Alternate Phone Number</label>' +
+                    '<input type="text" placeholder="Alternate Phone Number" id="txtAlternate_Phone" class="form-control"></div><div class="form-group"><label for="Address in Detail">Address in Detail</label>' +
+                    '<textarea type="text" placeholder="Address in Detail" id="txtAddress_in_Detail" class="form-control" row="2"></textarea></div></form>';
+                $(".modal-title").html('Emergency');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+            }
+            else if (data == 'FamilyDetails') {
+                html = '<form role="form"><div class="row"><div class="col-lg-6"><div class="form-group"><label for="Person Name">Person Name</label>' +
+                    '<input type="text" placeholder="Person Name" id="txtFamilyPersonname" class="form-control"></div><div class="form-group"><label for="Relationship">Relationship</label>' +
+                    '<input type="text" placeholder="Relationship" id="txtFamilyRelationship" class="form-control"></div><div class="form-group">' +
+                    '<label for="BirthDate">Birth Date</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="txtBirthDate" type="text" value="2018-12-20 21:05"></div></div><div class="form-group"><label for="Age">Age</label>' +
+                    '<input type="text" placeholder="Age" id="txtAge" class="form-control"></div></div><div class="col-lg-6"><div class="form-group"><label for="Gender">Gender</label><div class="form-group"><select id="ddlgender" style="width:100%" class="form-control"><option value="Male">Male</option><option value="Female">Female</option></select></div>' +
+                    '</div><div class="form-group"><label for="Mediclaim_Covered">Mediclaim Covered</label><div class="form-group"><select id="ddlMediclaim" style="width:100%"  class="form-control"><option value="Yes">Yes</option><option value="No">No</option></select></div>' +
+                    '</div><div class="form-group"><label for="Birth Place">Birth Place</label>' +
+                    '<input type="text" placeholder="Birth Place" id="txtBirth_Place" class="form-control"></div><div class="form-group"><label for="Contact Number">Contact Number</label>' +
+                    '<input type="text" placeholder="Contact Number" id="txtContact_Number" class="form-control"></div></div></div></form>';
+                $(".modal-title").html('FamilyDetails');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#ddlgender').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#ddlMediclaim').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#txtBirthDate').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+
+            }
+            else if (data == 'Medical') {
+                html = '<form role="form"><div class="form-group"><label for="Notes">Notes</label>' +
+                    '<textarea type="text" placeholder="Notes" id="txtMedicalNotes" class="form-control" row="2"></textarea></div></form>';
+                $(".modal-title").html('Medical');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+            }
+            else if (data == 'Insurance') {
+                html = '<form role="form"><div class="form-group"><label for="Notes">Notes</label>' +
+                    '<textarea type="text" placeholder="Notes" id="txtMedicalNotes" class="form-control" row="2"></textarea></div><div class="form-group">' +
+                    '<label for="Insured_Until">Insured Until</label><div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i></div></div>' +
+                    '<input class="form-control" id="txtInsured_Until" type="text" value="2018-12-20 21:05"></div></div><div class="form-group"><label for="Insurance_Company">Insurance Company</label>' +
+                    '<input type="text" placeholder="Insurance Company" id="txtInsurance_Company" class="form-control"></div><div class="form-group"><label for="Insurance Amount">Insurance Amount</label>' +
+                    '<input type="text" placeholder="Insurance Amount" id="txtInsurance_Amount" class="form-control"></div><div class="form-group"><label for="Balance">Balance</label>' +
+                    '<input type="text" placeholder="Balance" id="txtBalance" class="form-control"></div><div class="form-group"><label for="Policy Number">Policy Number</label>' +
+                    '<input type="text" placeholder="Policy Number" id="txtPolicy_Number" class="form-control"></div></form>';
+                $(".modal-title").html('Insurance');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+                $('#txtInsured_Until').datetimepicker({
+                    minView: 2,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true
+                });
+            }
+            else if (data == 'Languages') {
+                html = '<form role="form"><div class="form-group"><label for="Language">Language</label>' +
+                    '<input type="text" placeholder="Language" id="txtLanguage" class="form-control"></div><div class="form-group"><label for="Can Speak">Can Speak</label><div class="form-group"><select id="ddlCanSpeak" style="width:100%" class="form-control"><option value="Yes">Yes</option><option value="No">No</option></select></div>' +
+                    '</div><div class="form-group"><label for="Can Read">Can Read</label><div class="form-group"><select id="ddlCanRead" style="width:100%" class="form-control"><option value="Yes">Yes</option><option value="No">No</option></select></div>' +
+                    '</div><div class="form-group"><label for="Can Write">Can Write</label><div class="form-group"><select id="ddlCanWrite" style="width:100%" class="form-control"><option value="Yes">Yes</option><option value="No">No</option></select></div>' +
+                    '</div></form>';
+                $(".modal-title").html('Languages');
+                $(".modal-body").html(html);
+                $('#ddlCanSpeak').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#ddlCanRead').select2({ dropdownParent: $('#ModalPopUp') });
+                $('#ddlCanWrite').select2({ dropdownParent: $('#ModalPopUp') });
+                $(".modal-footer").html(btnhtml);
+            }
+            else if (data == 'Social') {
+                html = '<form role="form"><div class="form-group"><label for="Facebook">Facebook</label>' +
+                    '<input type="text" placeholder="Facebook" id="txtFacebook" class="form-control"></div><div class="form-group"><label for="Google">Google</label>' +
+                    '<input type="text" placeholder="Google" id="txtGoogle" class="form-control"></div><div class="form-group"><label for="LinkedIn">LinkedIn</label>' +
+                    '<input type="text" placeholder="LinkedIn" id="txtLinkedIn" class="form-control"></div><div class="form-group"><label for="Twitter">Twitter</label>' +
+                    '<input type="text" placeholder="Twitter" id="txtTwitter" class="form-control"></div><div class="form-group"><label for="Instagram">Instagram</label>' +
+                    '<input type="text" placeholder="Instagram" id="txtInstagram" class="form-control"></div><div class="form-group"><label for="Tiktok">Tiktok</label>' +
+                    '<input type="text" placeholder="Tiktok" id="txtTiktok" class="form-control"></div></form>';
+                $(".modal-title").html('Social');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+            }
+            else if (data == 'Government') {
+                html = '<form role="form"><div class="row"><div class="col-lg-9"><div class="form-group"><label for="PAN Number">PAN Number</label>' +
+                    '<p><b>AO123456</b></p></div><div class="form-group"><label for="Passport Number">Passport Number</label>' +
+                    '<p><b>AO123456</b></p></div><div class="form-group"><label for="Driving License Number">Driving License Number</label>' +
+                    '<p><b>AO123456</b></p></div></div><div class="col-lg-9"><div class="form-group"><label for="Tax Identification Number">Tax Identification Number</label>' +
+                    '<p><b>AO123456</b></p></div><div class="form-group"><label for="Aadhaar">Aadhaar Card Number</label>' +
+                    '<p><b>AO123456</b></p></div><div class="form-group"><label for="Upload Document">Upload Document</label>' + '<p><b><a>Document.pdf</a></b></p></div></div></div></form>';
+                $(".modal-title").html('Government');
+                $(".modal-body").html(html);
+                $(".modal-footer").html(btnhtml);
+            }
+
+            $("#ModalPopUp").modal('show');
+
+        }
+    </script>
+    <script>
+        //$(function () {
+        //    'use strict'
+        //    //validation
+        //    $('#emp').parsley().on('field:validated', function () {
+        //        var ok = $('.parsley-error').length === 0;
+        //        $('.bs-callout-info').toggleClass('hidden', !ok);
+        //        $('.bs-callout-warning').toggleClass('hidden', ok);
+        //    })
+        //        .on('form:submit', function () {
+        //            Save();
+        //        });
+        //});
+
+    </script>
+}

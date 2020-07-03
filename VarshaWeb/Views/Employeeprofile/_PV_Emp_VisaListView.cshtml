@@ -1,0 +1,35 @@
+﻿@model IEnumerable<WizrrWeb.Models.EmployeeManagement.Emp_VisaInformationModel>
+
+    <div class="col-xl-12">
+        <div class="table-responsive">
+            <table class="tables" style="width:100%">
+                <thead>
+                    <tr>
+                        <th scope="col">Country</th>
+                        <th scope="col">Visa Type</th>
+                        <th scope="col">Valid Until</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count() > 0)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td scope="row" data-label="Country">@item.Country</td>
+                                <td data-label="Visa Type">@item.VisaType</td>
+                                <td data-label="Valid Until">@item.ValidUntil</td>
+                                <td data-label="Action">
+                                    <div class="btn-icon-list center">
+                                        <button class="btn" style="padding:0px 5px 0px 65px;margin:0px;" onclick="VisaAddEdit('Edit',@item.ID)"><i class="si si-pencil text-primary mr-2" data-toggle="tooltip" title="" data-placement="top" data-original-title="Edit"></i></button>
+                                        <button class="btn" style="padding:0px;margin:0px;" onclick="DeleteVisaDetails(@item.ID)"><i class="si si-trash text-danger mr-2" data-toggle="tooltip" title="" data-placement="top" data-original-title="Delete"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>

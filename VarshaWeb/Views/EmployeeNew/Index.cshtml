@@ -8,7 +8,8 @@
 {
     <!-- Internal Select2 css -->
     <link href="~/assets/plugins/select2/css/select2.min.css" rel="stylesheet">
-
+    <!--Internal  TelephoneInput css-->
+    <link rel="stylesheet" href="../assets/plugins/telephoneinput/telephoneinput.css">
     <!--Internal  Datetimepicker-slider css -->
     <link href="~/assets/plugins/amazeui-datetimepicker/css/amazeui.datetimepicker.css" rel="stylesheet">
 
@@ -88,7 +89,7 @@
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table class="table text-md-nowrap" id="Employeetable">
+                    <table class="table key-buttons text-md-nowrap" id="Employeetable">
                         <thead>
                             <tr>
                                 <th class="wd-15p border-bottom-0">FirstName</th>
@@ -159,9 +160,9 @@
 
                                     <div class="card-body">
                                         <!--<div>
-                                        <h6 class="card-title mb-1">Entry Page</h6>
-                                        <p class="text-muted card-sub-title">Entry Page</p>
-                                    </div> -->
+                                            <h6 class="card-title mb-1">Entry Page</h6>
+                                            <p class="text-muted card-sub-title">Entry Page</p>
+                                        </div> -->
                                         <div class="card-body pt-0">
                                             <div class="">
                                                 <div class="row row-sm">
@@ -261,7 +262,9 @@
                                                             <label for="exampleInputPassword1">Gender</label>
                                                             <div id="slWrapper" class="parsley-select">
                                                                 <select required="" class="form-control select2" id="ddlGender" ng-model="ngddlGender" data-parsley-class-handler="#slWrapper" data-parsley-errors-container="#slErrorContainer">
-
+                                                                    <option value="">
+                                                                        Choose one
+                                                                    </option>
                                                                     <option value="Male">
                                                                         Male
                                                                     </option>
@@ -279,7 +282,9 @@
                                                             <label for="exampleInputPassword1">Marial Status</label>
                                                             <div id="slWrapperMarrial" class="parsley-select">
                                                                 <select required="" class="form-control select2" ng-model="ngdddlMarialstatus" id="dddlMarialStatus" data-parsley-class-handler="#slWrapperMarrial" data-parsley-errors-container="#slErrorContainermarrial">
-
+                                                                    <option value="">
+                                                                        Choose one
+                                                                    </option>
                                                                     <option value="Married">
                                                                         Married
                                                                     </option>
@@ -311,7 +316,9 @@
                                                         <label for="exampleInputPassword1">Probation Status</label>
                                                         <div id="slWrapperProbation" class="parsley-select">
                                                             <select required="" class="form-control select2" id="ddlProbationStatus" ng-model="ngddlProbationstatus" data-parsley-class-handler="#slWrapperProbation" data-parsley-errors-container="#slErrorContainerProbation">
-
+                                                                <option value="">
+                                                                    Choose one
+                                                                </option>
                                                                 <option value="Probation">
                                                                     Probation
                                                                 </option>
@@ -375,7 +382,6 @@
                                                             <select required="" class="form-control select2" id="ddlManager" name="EmployeeName" ng-model="ngddlManager" data-parsley-class-handler="#slWrapperManagerview" data-parsley-errors-container="#slErrorContainermanagerview">
                                                                 @foreach (var obj in ViewBag.emp)
                                                                 {
-
                                                                     if (obj.ID == obj.ManagerId)
                                                                     {
                                                                         <option value="@obj.ManagerId" selected="selected">
@@ -413,6 +419,9 @@
                                                         </label>
                                                         <div id="slWrapperCompany" class="parsley-select">
                                                             <select class="form-control select2" ng-model="ngddlcompany" id="ddlCompany" data-parsley-class-handler="#slWrapperDesignation" data-parsley-errors-container="#slErrorContainerDesignation">
+                                                                <option value="">
+                                                                    Choose One
+                                                                </option>
                                                                 @foreach (var arr in ViewBag.company)
                                                                 {
                                                                     <option value="@arr.ID">
@@ -429,9 +438,10 @@
                                                     <div class="form-group">
                                                         <label for="exampleInputPassword1">Designation</label>
                                                         <div id="slWrapperDesignation" class="parsley-select">
-
-
                                                             <select class="form-control select2" ng-model="ngddlDesignation" id="ddlDesignation" data-parsley-class-handler="#slWrapperDesignation" data-parsley-errors-container="#slErrorContainerDesignation">
+                                                                <option value="">
+                                                                    Choose One
+                                                                </option>
                                                                 @foreach (var arr in ViewBag.designation)
                                                                 {
                                                                     <option value="@arr.ID">
@@ -453,6 +463,9 @@
                                                         <label for="exampleInputPassword1">Department</label>
                                                         <div id="slWrapperDepartment" class="parsley-select">
                                                             <select required="" class="form-control select2" id="ddlDepartment" ng-model="ngddlDepartment" data-parsley-class-handler="#slWrapperDepartment" data-parsley-errors-container="#slErrorContainerDepartment">
+                                                                <option value="">
+                                                                    Choose One
+                                                                </option>
                                                                 @foreach (var department in ViewBag.department)
                                                                 {
                                                                     <option value="@department.ID">
@@ -469,7 +482,9 @@
                                                         <label for="exampleInputPassword1">Division</label>
                                                         <div id="slWrapperDivision" class="parsley-select">
                                                             <select required="" class="form-control select2" id="ddlDivision" ng-model="ngddlDivision" data-parsley-class-handler="#slWrapperDivision" data-parsley-errors-container="#slErrorContainerDivision">
-
+                                                                <option value="">
+                                                                    Choose One
+                                                                </option>
                                                                 @foreach (var obj in ViewBag.division)
                                                                 {
                                                                     <option value="@obj.ID">
@@ -489,7 +504,9 @@
                                                         <label for="exampleInputPassword1">Region</label>
                                                         <div id="slWrapperRegion" class="parsley-select">
                                                             <select required="" class="form-control select2" id="ddlRegion" ng-model="ngddlRegion" data-parsley-class-handler="#slWrapperRegion" data-parsley-errors-container="#slErrorContainerRegion">
-
+                                                                <option value="">
+                                                                    Choose One
+                                                                </option>
                                                                 @foreach (var region in ViewBag.Region)
                                                                 {
                                                                     <option value="@region.ID">
@@ -506,7 +523,9 @@
                                                         <label for="exampleInputPassword1">Branch</label>
                                                         <div id="slWrapperBranch" class="parsley-select">
                                                             <select required="" class="form-control select2" id="ddlBranch" ng-model="ngddlBranch" data-parsley-class-handler="#slWrapperBranch" data-parsley-errors-container="#slErrorContainerBranch">
-
+                                                                <option value="">
+                                                                    Choose One
+                                                                </option>
                                                                 @foreach (var arr in ViewBag.Branch)
                                                                 {
                                                                     <option value="@arr.ID">
@@ -528,14 +547,14 @@
 
                                     </div>
                                 </div>
-                               
+
                             </div>
                         </div>
 
 
                     </div>
                     <div class="modal-footer justify-content-center">
-                        <button type="submit" class="btn btn-primary" id="btnProjectCreation" ng-show="addEmployee">Submit</button>
+                        <button type="submit" class="btn btn-primary" id="btnsave" ng-show="addEmployee">Submit</button>
                         <button type="submit" class="btn btn-primary" id="btnUpdate" ng-show="editEmployee">Save Changes</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
@@ -653,7 +672,9 @@
 
     <!--Internal  pickerjs js -->
     <script src="../assets/plugins/pickerjs/picker.min.js"></script>
-
+    <!-- Internal TelephoneInput js-->
+    <script src="../assets/plugins/telephoneinput/telephoneinput.js"></script>
+    <script src="../assets/plugins/telephoneinput/inttelephoneinput.js"></script>
     <!--Internal  jquery-simple-datetimepicker js -->
     <script src="~/assets/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js"></script>
     <script src="~/assets/js/datePicker.js"></script>
@@ -666,7 +687,7 @@
     <script src="~/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
     <script src="~/assets/plugins/datatable/js/dataTables.dataTables.min.js"></script>
     <script src="~/assets/plugins/datatable/js/dataTables.responsive.min.js"></script>
-    <script src="~/assets/plugins/datatable/js/responsive.dataTables.min.js"></script>
+
     <script src="~/assets/plugins/datatable/js/jquery.dataTables.js"></script>
     <script src="~/assets/plugins/datatable/js/dataTables.bootstrap4.js"></script>
     <script src="~/assets/plugins/datatable/js/dataTables.buttons.min.js"></script>
@@ -677,7 +698,8 @@
     <script src="~/assets/plugins/datatable/js/buttons.html5.min.js"></script>
     <script src="~/assets/plugins/datatable/js/buttons.print.min.js"></script>
     <script src="~/assets/plugins/datatable/js/buttons.colVis.min.js"></script>
-    <script src="~/assets/plugins/datatable/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/assets/plugins/datatable/js/responsive.dataTables.min.js"></script>
+    @*<script src="~/assets/plugins/datatable/js/responsive.bootstrap4.min.js"></script>*@
     <script>
         function restrictCharacters(evt) {
 

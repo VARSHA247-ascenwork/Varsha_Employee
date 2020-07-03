@@ -1,0 +1,44 @@
+﻿@model WizrrWeb.Models.EmployeeManagement.Emp_BankingDetailsModel
+
+<form role="form">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="form-group">
+                <label for="Bank_name">Bank Name</label>
+                <p><b>@Html.DisplayFor(model => model.BankName)</b></p>
+            </div>
+            <div class="form-group">
+                <label for="Country">Country</label>
+                <p><b>@Html.DisplayFor(model => model.Country)</b></p>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">City</label>
+                <p><b> @Html.DisplayFor(model => model.City)</b></p>
+            </div>
+            <div class="form-group">
+                <label for="Account_type">Account Type</label>
+                <div class="form-group">
+                    <p><b> @Html.DisplayFor(model => model.AccountType)</b></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <div class="form-group">
+                <label for="Branch">Branch</label>
+                <p><b> @Html.DisplayFor(model => model.Branch)</b></p>
+            </div>
+            <div class="form-group">
+                <label for="State">State</label>
+                <p><b> @Html.DisplayFor(model => model.State)</b></p>
+            </div>
+            <div class="form-group">
+                <label for="Account_Number">Account Number</label>
+                <p><b> @Html.DisplayFor(model => model.AccountNumber)</b></p>
+            </div>
+            <div class="form-group">
+                <label for="Routing_Number">Routing Number</label>
+                <p><b> @Html.DisplayFor(model => model.RoutingNumber)</b></p>
+            </div>
+        </div>
+    </div>
+</form>

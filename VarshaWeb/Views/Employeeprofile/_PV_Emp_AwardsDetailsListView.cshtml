@@ -1,0 +1,38 @@
+﻿@model IEnumerable<WizrrWeb.Models.EmployeeManagement.Emp_AwardsDetailsModel>
+
+<div class="col-xl-12">
+    <div class="table-responsive">
+        <table class="tables" style="width:100%">
+            <thead>
+                <tr>
+                    <th scope="col">Award</th>
+                    <th scope="col">Awarded By</th>
+                    <th scope="col">Awarded On</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Count() > 0)
+                {
+                    foreach (var a in Model)
+                    {
+                        <tr>
+                            <td scope="row" data-label="Award">@a.Award</td>
+                            <td data-label="Awarded By">@a.AwardedBy</td>
+                            <td data-label="Awarded On">@a.AwardedOn</td>
+                            <td data-label="Description">@a.Description</td>
+                            <td data-label="Action">
+                                <div class="btn-icon-list center">
+                                    <button class="btn" style="padding:0px 5px 0px 45px;margin:0px;" onclick="EditAwardDetails(@a.ID)"><i class="si si-pencil text-primary mr-2" data-toggle="tooltip" title="" data-placement="top" data-original-title="Edit"></i></button>
+                                    <button class="btn" style="padding:0px;margin:0px;" onclick="DeleteAwardDetails(@a.ID)"><i class="si si-trash text-danger mr-2" data-toggle="tooltip" title="" data-placement="top" data-original-title="Delete"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div><!-- bd -->
+</div>

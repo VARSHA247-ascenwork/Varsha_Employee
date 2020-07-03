@@ -1,0 +1,43 @@
+﻿@model WizrrWeb.Models.EmployeeManagement.Emp_FamilyDetailsModel
+
+<form role="form">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="form-group">
+                <label for="Person">Person Name</label>
+                <p><b> @Html.DisplayFor(model => model.PersonName)</b></p>
+            </div>
+            <div class="form-group">
+                <label for="Gender">Gender</label>
+                <p><b> @Html.DisplayFor(model => model.Gender)</b></p>
+            </div>
+            <div class="form-group">
+                <label for="Relationship">Relationship</label>
+                <p><b> @Html.DisplayFor(model => model.Relationship)</b></p>
+            </div>
+            <div class="form-group">
+                <label for="Mediclaim_Covered">Mediclaim Covered</label>
+                <p><b> @Html.DisplayFor(model => model.MediclaimCovered)</b></p>
+            </div>
+        </div>
+        <div class="col-lg-9">
+            
+            <div class="form-group">
+                <label for="BirthDate">Date of Birth</label>
+                <p><b> @Html.DisplayFor(model => model.BirthDate)</b></p>
+            </div>
+            <div class="form-group">
+                <label for="BirthPlace">Birth Place</label>
+                <p><b> @Html.DisplayFor(model => model.BirthPlace)</b></p>
+            </div>
+            <div class="form-group">
+                <label for="Age">Age</label>
+                <p><b> @Html.DisplayFor(model => model.Age)</b></p>
+            </div>
+            <div class="form-group">
+                <label for="ContactNumber">Contact Number</label>
+                <p><b> @Html.DisplayFor(model => model.ContactNumber)</b></p>
+            </div>
+        </div>
+    </div>
+</form>

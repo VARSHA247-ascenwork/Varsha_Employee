@@ -1,5 +1,7 @@
 ﻿@using VarshaWeb.Models.EmployeeManagement;
 
+<!------------Vendor Dashboard   ----------------->
+
 @{
     ViewBag.Title = "Index";
 }
@@ -170,7 +172,7 @@
                                                     <div class="form-group">
                                                         <label for="exampleInputPassword1">Mobile Number</label>
                                                         <div class="input-group">
-                                                            <input class="form-control" onkeypress="return restrictCharacters(event);" maxlength="10" ng-model="ngtxtmobile" id="phone" name="phone" type="tel">
+                                                            <input required="" class="form-control" onkeypress="return restrictCharacters(event);" maxlength="10" ng-model="ngtxtmobile" id="phone" name="phone" type="tel">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -195,6 +197,7 @@
                                                         <label for="exampleInputPassword1">Designation</label>
                                                         <div id="slWrapperDesignation" class="parsley-select">
                                                             <select required="" class="form-control select2" id="ddlDesignation" ng-model="ngddlDesignation" data-parsley-class-handler="#slWrapperDesignation" data-parsley-errors-container="#slErrorContainerDesignation">
+                                                                <option value="">Choose One</option>
                                                                 @foreach (var arr in ViewBag.designation)
                                                                 {
                                                                     <option value="@arr.ID">
@@ -228,7 +231,7 @@
                                                         <label for="Country"> Country</label>
                                                         <div id="slWrapperCountry" class="parsley-select">
                                                             <select required="" class="form-control select2" ng-change="getState()" id="ddlCountry" ng-model="ngddlCountry" data-parsley-class-handler="#slWrapperCountry" data-parsley-errors-container="#slErrorContainerCountry">
-
+                                                                <option value="">Choose One</option>
                                                                 @foreach (var obj in ViewBag.country)
                                                                 {
                                                                     <option value="@obj.ID">
@@ -245,7 +248,8 @@
                                                     <div class="form-group">
                                                         <label for="state"> State</label>
                                                         <div id="slWrapperState" class="parsley-select">
-                                                            <select id="ddlState" style="width:100%" class="form-control select2" ng-options="a.ID as a.StateName for a in State" ng-model="ngddlState" data-parsley-class-handler="#slWrapperCountry" data-parsley-errors-container="#slErrorContainerCountry">
+                                                            <select required="" id="ddlState" style="width:100%" class="form-control select2" ng-options="a.ID as a.StateName for a in State" ng-model="ngddlState" data-parsley-class-handler="#slWrapperState" data-parsley-errors-container="#slErrorContainerState">
+                                                                <option label="Choose One"></option>
                                                             </select>
                                                         </div>
                                                         <div id="slErrorContainerState"></div>
@@ -289,8 +293,10 @@
                                                         {{i.Name}}&nbsp;
                                                         <button type="button" class="btn btn-warning badge" ng-click="Remove($index)"><i class="fa fa-times"></i></button>
                                                     </div>
-                                                    <div ng-repeat="i in VendorDoc">
-                                                        <a href="i.Name" target="_blank">{{i.DocumentPath}}</a>
+
+                                                    <div ng-repeat="i in VendorDoc" ng-show="viewdocument">
+                                                        {{i.DocumentPath}}&nbsp;
+                                                        <button type="button" class="btn btn-warning badge" ng-click="DeleteDocument(i.ID)"><i class="fa fa-times"></i></button>
                                                     </div>
                                                     <div>
 
@@ -305,7 +311,7 @@
                         </div>
                     </div>
                     <div class="modal-footer justify-content-center">
-                        <button type="submit" class="btn btn-primary" id="btnProjectCreation" ng-show="addVendor">Submit</button>
+                        <button type="submit" class="btn btn-primary" id="btnSave" ng-show="addVendor">Submit</button>
                         <button type="submit" class="btn btn-primary" id="btnUpdate" ng-show="editVendor">Save Changes</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
@@ -356,23 +362,25 @@
                                                     <div class="form-group"><label for="Mobile">State</label><p><b>{{VD.VendorState}}</b></p></div>
                                                     <div class="form-group"><label for="Designation">Gst No</label><p><b>{{VD.GstNo}}</b></p></div>
                                                     <div class="form-group"><label for="Designation">Remark</label><p><b>{{VD.Remark}}</b></p></div>
-                                                    <div ng-repeat="i in VendorDoc">
-                                                        Document
-                                                        <a href="i.Name" target="_blank">{{i.DocumentPath}}</a>
-                                                    </div>
-                                                </div><div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <label for="Name">Contact Person</label><p><b>{{VD.VendorName}}</b></p>
-                                                        <div class="form-group"><label for="Department">Email Id </label><p><b>{{VD.VendormailID}}</b></p></div>
-                                                        <div class="form-group"><label for="ProbationT">Designation</label><p><b>{{VD.Designation}}</b></p></div>
-                                                        <div class="form-group"><label for="PStatus">City</label><p><b>{{VD.City}}</b></p></div>
-                                                        <div class="form-group"><label for="Office">Country</label><p><b>{{VD.Country}}</b></p></div>
-                                                        <div class="form-group"><label for="Designation">Pan Card No</label><p><b>{{VD.PanCardNo}}</b></p></div>
+                                                        Document
+                                                        <div ng-repeat="i in VendorDoc">
+                                                            <a href="i.Name" target="_blank">{{i.DocumentPath}}</a>
+                                                        </div>
+                                                        </div>
+                                                    </div><div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label for="Name">Contact Person</label><p><b>{{VD.VendorName}}</b></p>
+                                                            <div class="form-group"><label for="Department">Email Id </label><p><b>{{VD.VendormailID}}</b></p></div>
+                                                            <div class="form-group"><label for="ProbationT">Designation</label><p><b>{{VD.Designation}}</b></p></div>
+                                                            <div class="form-group"><label for="PStatus">City</label><p><b>{{VD.City}}</b></p></div>
+                                                            <div class="form-group"><label for="Office">Country</label><p><b>{{VD.Country}}</b></p></div>
+                                                            <div class="form-group"><label for="Designation">Pan Card No</label><p><b>{{VD.PanCardNo}}</b></p></div>
 
+                                                        </div>
                                                     </div>
-                                                </div>
 
-                                            </div>
+                                                </div>
 
                                             <div class="row row-sm text-center justify-content-center">
 
@@ -423,9 +431,6 @@
     <script src="../assets/plugins/telephoneinput/telephoneinput.js"></script>
     <script src="../assets/plugins/telephoneinput/inttelephoneinput.js"></script>
 
-    <!--Internal  Parsley.min js -->
-    <script src="../assets/plugins/parsleyjs/parsley.min.js"></script>
-
     <!-- Internal Data tables -->
     <script src="~/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
     <script src="~/assets/plugins/datatable/js/dataTables.dataTables.min.js"></script>
@@ -442,6 +447,10 @@
     <script src="~/assets/plugins/datatable/js/buttons.print.min.js"></script>
     <script src="~/assets/plugins/datatable/js/buttons.colVis.min.js"></script>
     <script src="~/assets/plugins/datatable/js/responsive.bootstrap4.min.js"></script>
+
+    <!--Internal  Parsley.min js -->
+    <script src="../assets/plugins/parsleyjs/parsley.min.js"></script>
+
     <script>
         function restrictCharacters(evt) {
 

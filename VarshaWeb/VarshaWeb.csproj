@@ -181,6 +181,15 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BAL\EmployeeManagement\Emp_EmployementTypeBal.cs" />
+    <Compile Include="BAL\EmployeeManagement\Emp_RoleBal.cs" />
+    <Compile Include="BAL\EmployeeManagement\Emp_ProductBal.cs" />
+    <Compile Include="BAL\EmployeeManagement\Emp_CostCentreBal.cs" />
+    <Compile Include="BAL\EmployeeManagement\Emp_GradeBal.cs" />
+    <Compile Include="BAL\EmployeeManagement\Emp_BusinessSegmentBal.cs" />
+    <Compile Include="BAL\EmployeeManagement\Emp_BusinessVerticalBal.cs" />
+    <Compile Include="BAL\EmployeeManagement\Emp_ClientMasterDetailsBal.cs" />
+    <Compile Include="BAL\EmployeeManagement\Emp_Client_DocumentBal.cs" />
     <Compile Include="BAL\EmployeeManagement\Emp_CountryBal.cs" />
     <Compile Include="BAL\EmployeeManagement\Emp_StateMasterBal.cs" />
     <Compile Include="BAL\EmployeeManagement\Emp_Vendor_DocumentBal.cs" />
@@ -195,6 +204,7 @@
     <Compile Include="BAL\EmployeeManagement\Emp_RegionBal.cs" />
     <Compile Include="BAL\NavigationBal.cs" />
     <Compile Include="BAL\UsersGroup.cs" />
+    <Compile Include="Controllers\EmployeeManagement\ClientController.cs" />
     <Compile Include="Controllers\EmployeeManagement\EmployeeController.cs" />
     <Compile Include="Controllers\EmployeeManagement\EmployeeDashboardController.cs" />
     <Compile Include="Controllers\EmployeeManagement\EmployeeNewController.cs" />
@@ -214,8 +224,10 @@
     <Compile Include="Models\EmployeeManagement\Emp_BankingDetailsModel.cs" />
     <Compile Include="Models\EmployeeManagement\Emp_BasicInfoModel.cs" />
     <Compile Include="Models\EmployeeManagement\Emp_BranchModel.cs" />
+    <Compile Include="Models\EmployeeManagement\Emp_BusinessSegmentModel.cs" />
     <Compile Include="Models\EmployeeManagement\Emp_BusinessVerticalModel.cs" />
     <Compile Include="Models\EmployeeManagement\Emp_ClientMasterDetailsModel.cs" />
+    <Compile Include="Models\EmployeeManagement\Emp_Client_DocumentModel.cs" />
     <Compile Include="Models\EmployeeManagement\Emp_CompanyMasterModel.cs" />
     <Compile Include="Models\EmployeeManagement\Emp_CostCentreModel.cs" />
     <Compile Include="Models\EmployeeManagement\Emp_StateMasterModel.cs" />
@@ -8210,10 +8222,12 @@
     <Content Include="Scripts\Angular\DAL\DAL.js" />
     <Content Include="Scripts\Angular\DAL\Navigation.js" />
     <Content Include="Scripts\Angular\EmployeeManagement\JS\EmployeeRequestNew.js" />
+    <Content Include="Scripts\Angular\EmployeeManagement\JS\ClientRequest.js" />
     <Content Include="Scripts\Angular\EmployeeManagement\JS\VendorRequest.js" />
     <Content Include="Scripts\Angular\EmployeeManagement\JS\EmployeeRequest.js" />
     <Content Include="Scripts\Angular\EmployeeManagement\JS\ViewEmployee.js" />
     <Content Include="Scripts\Angular\EmployeeManagement\Services\EmployeeRequestService.js" />
+    <Content Include="Scripts\Angular\EmployeeManagement\Services\ClientRequestService.js" />
     <Content Include="Scripts\Angular\EmployeeManagement\Services\VendorRequestServices.js" />
     <Content Include="Scripts\Angular\EmployeeManagement\Services\EmployeeRequestServices.js" />
     <Content Include="Scripts\Angular\EmployeeManagement\Services\ViewEmployeeDetailService.js" />
@@ -9219,6 +9233,7 @@
     <Content Include="Views\Employee\_PV_Emp_Basic_Info.cshtml" />
     <Content Include="Views\EmployeeNew\Index.cshtml" />
     <Content Include="Views\Vendor\Index.cshtml" />
+    <Content Include="Views\Client\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
